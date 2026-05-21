@@ -1,0 +1,6 @@
+# Ignore everything
+*
+
+# Except the grammar guide
+!Japanese_Grammar_Guide.md
+!.gitignore
