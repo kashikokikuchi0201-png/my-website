@@ -39,17 +39,6 @@
       line-height: 1.7;
     }
 
-    /* ── Floating deco blobs ── */
-    body::before {
-      content: '';
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFB7C5' fill-opacity='0.12'%3E%3Cpath d='M30 30m-8 0a8 8 0 1 1 16 0a8 8 0 1 1-16 0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── Header ── */
     header {
       background: linear-gradient(135deg, #FF8FAB 0%, #C17FE8 50%, #89C4F4 100%);
       color: white;
@@ -58,7 +47,6 @@
       position: relative;
       overflow: hidden;
     }
-
     header::before {
       content: '🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸';
       position: absolute; top: 12px; left: 0; right: 0;
@@ -69,60 +57,33 @@
       position: absolute; bottom: 12px; left: 0; right: 0;
       font-size: 0.85rem; opacity: 0.5; letter-spacing: 6px;
     }
-
     header h1 {
       font-family: 'M PLUS Rounded 1c', sans-serif;
-      font-size: 2.6rem;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-size: 2.6rem; font-weight: 800; letter-spacing: 1px;
       text-shadow: 0 2px 12px rgba(120,60,160,0.25);
     }
-
     header .jp-title {
       font-family: 'M PLUS Rounded 1c', sans-serif;
-      font-size: 1.15rem;
-      margin-top: 10px;
-      opacity: 0.92;
-      font-weight: 500;
+      font-size: 1.15rem; margin-top: 10px; opacity: 0.92; font-weight: 500;
     }
+    header .subtitle { font-size: 0.88rem; margin-top: 6px; opacity: 0.78; }
 
-    header .subtitle {
-      font-size: 0.88rem;
-      margin-top: 6px;
-      opacity: 0.78;
-      letter-spacing: 0.5px;
-    }
+    main { max-width: 880px; margin: 44px auto; padding: 0 20px 80px; position: relative; z-index: 1; }
 
-    /* ── Main layout ── */
-    main {
-      max-width: 880px;
-      margin: 44px auto;
-      padding: 0 20px 80px;
-      position: relative; z-index: 1;
-    }
-
-    /* ── Card ── */
     .card {
       background: rgba(255,255,255,0.88);
       backdrop-filter: blur(8px);
-      border-radius: 24px;
-      padding: 34px 32px;
-      margin-bottom: 32px;
+      border-radius: 24px; padding: 34px 32px; margin-bottom: 32px;
       box-shadow: 0 6px 28px var(--shadow), 0 1px 4px rgba(200,160,220,0.1);
       border: 2px solid rgba(255,183,213,0.4);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
-
     .card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
+      content: ''; position: absolute; top: 0; left: 0;
       width: 8px; height: 100%;
       background: linear-gradient(180deg, var(--pink) 0%, var(--lav) 100%);
       border-radius: 24px 0 0 24px;
     }
-
-    /* card accent colors per grammar point */
     .card:nth-child(2)::before  { background: linear-gradient(180deg, #FFB86C, #FF8FAB); }
     .card:nth-child(3)::before  { background: linear-gradient(180deg, #B89FE8, #89C4F4); }
     .card:nth-child(4)::before  { background: linear-gradient(180deg, #7DD9B8, #89C4F4); }
@@ -133,214 +94,116 @@
     .card:nth-child(9)::before  { background: linear-gradient(180deg, #FFAC81, #FF8FAB); }
     .card:nth-child(10)::before { background: linear-gradient(180deg, #FFD97D, #7DD9B8); }
 
-    /* ── Card header ── */
-    .card-header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 22px;
-    }
-
+    .card-header { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
     .num {
       background: linear-gradient(135deg, var(--pink), var(--lav));
-      color: white;
-      width: 48px; height: 48px;
-      border-radius: 50%;
+      color: white; width: 48px; height: 48px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 1.1rem;
-      flex-shrink: 0;
+      font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
       box-shadow: 0 4px 12px rgba(180,140,210,0.35);
       font-family: 'M PLUS Rounded 1c', sans-serif;
     }
-
     .card-title h2 {
       font-family: 'M PLUS Rounded 1c', sans-serif;
       font-size: 1.45rem; font-weight: 800;
       background: linear-gradient(90deg, #C060B0, #7040C0);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
+    .card-title p { font-size: 0.87rem; color: var(--text-sm); margin-top: 2px; }
 
-    .card-title p {
-      font-size: 0.87rem; color: var(--text-sm); margin-top: 2px;
-    }
-
-    /* ── Lang blocks ── */
-    .lang-block {
-      border-radius: 16px;
-      padding: 16px 20px;
-      margin-bottom: 14px;
-    }
-
+    .lang-block { border-radius: 16px; padding: 16px 20px; margin-bottom: 14px; }
     .lang-block.en { background: var(--lav-lt); border: 1.5px solid #D4C4F5; }
     .lang-block.jp { background: var(--pink-bg); border: 1.5px solid var(--pink-lt); }
-
-    .lang-label {
-      font-size: 0.72rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 1.5px;
-      margin-bottom: 6px;
-    }
-
+    .lang-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
     .lang-block.en .lang-label { color: var(--lav); }
     .lang-block.jp .lang-label { color: var(--pink); }
-
     .lang-block p { font-size: 0.96rem; }
 
-    /* ── Table ── */
-    table {
-      width: 100%; border-collapse: separate; border-spacing: 0;
-      margin-top: 18px; font-size: 0.92rem;
-      border-radius: 14px; overflow: hidden;
-      box-shadow: 0 2px 10px rgba(200,160,220,0.12);
-    }
-
-    th {
-      background: linear-gradient(90deg, #C060B0, #8050D0);
-      color: white; padding: 11px 16px; text-align: left;
-      font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 700;
-    }
-
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 18px; font-size: 0.92rem; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(200,160,220,0.12); }
+    th { background: linear-gradient(90deg, #C060B0, #8050D0); color: white; padding: 11px 16px; text-align: left; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 700; }
     td { padding: 10px 16px; border-bottom: 1px solid #F3E6FF; background: white; }
     tr:last-child td { border-bottom: none; }
     tr:nth-child(even) td { background: #FCF5FF; }
 
-    /* ── Tip ── */
-    .tip {
-      background: var(--yel-lt);
-      border: 1.5px solid #FFE0A0;
-      border-left: 5px solid var(--yellow);
-      padding: 13px 18px; border-radius: 14px;
-      margin-top: 16px; font-size: 0.91rem;
-    }
+    .tip { background: var(--yel-lt); border: 1.5px solid #FFE0A0; border-left: 5px solid var(--yellow); padding: 13px 18px; border-radius: 14px; margin-top: 16px; font-size: 0.91rem; }
     .tip strong { color: #C07000; }
 
-    /* ══════════════════════════════
-       Quiz Section
-    ══════════════════════════════ */
-    .quiz-section {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 2px dashed var(--pink-lt);
-    }
-
+    /* ── Quiz ── */
+    .quiz-section { margin-top: 28px; padding-top: 24px; border-top: 2px dashed var(--pink-lt); }
     .quiz-section h3 {
       font-family: 'M PLUS Rounded 1c', sans-serif;
-      font-size: 0.88rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 2px;
-      color: var(--lav);
-      margin-bottom: 18px;
+      font-size: 0.88rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--lav); margin-bottom: 18px;
       display: flex; align-items: center; gap: 8px;
     }
-
     .quiz-section h3::before { content: '✏️'; font-size: 1rem; }
 
-    .quiz-item {
-      margin-bottom: 14px;
-      padding: 16px 18px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 16px;
-      border: 1.5px solid #EDE4FF;
-      transition: border-color 0.2s;
-    }
-
+    .quiz-item { margin-bottom: 14px; padding: 16px 18px; background: rgba(255,255,255,0.7); border-radius: 16px; border: 1.5px solid #EDE4FF; transition: border-color 0.2s; }
     .quiz-item:hover { border-color: var(--lav); }
-
-    .q-text {
-      font-size: 0.93rem; margin-bottom: 10px;
-      line-height: 1.8;
-    }
-
+    .q-text { font-size: 0.93rem; margin-bottom: 10px; line-height: 1.8; }
     .q-text strong { color: #A030A0; font-weight: 800; }
 
     .quiz-item input[type="text"] {
-      border: 2px solid #E0D0F0; border-radius: 10px;
-      padding: 5px 12px; font-size: 0.9rem;
-      width: 140px; font-family: 'M PLUS Rounded 1c', sans-serif;
-      background: #FAF5FF; color: var(--text);
-      vertical-align: middle; transition: border-color 0.2s;
+      border: 2px solid #E0D0F0; border-radius: 10px; padding: 5px 12px; font-size: 0.9rem;
+      width: 140px; font-family: 'M PLUS Rounded 1c', sans-serif; background: #FAF5FF;
+      color: var(--text); vertical-align: middle; transition: border-color 0.2s;
     }
-
-    .quiz-item input[type="text"]:focus {
-      outline: none; border-color: var(--lav);
-      background: white;
-    }
+    .quiz-item input[type="text"]:focus { outline: none; border-color: var(--lav); background: white; }
 
     .choices { margin: 6px 0 10px; }
-
-    .choices label {
-      display: flex; align-items: center; gap: 8px;
-      margin: 6px 0; cursor: pointer; font-size: 0.91rem;
-      padding: 6px 10px; border-radius: 10px;
-      transition: background 0.15s;
-    }
-
+    .choices label { display: flex; align-items: center; gap: 8px; margin: 6px 0; cursor: pointer; font-size: 0.91rem; padding: 6px 10px; border-radius: 10px; transition: background 0.15s; }
     .choices label:hover { background: var(--lav-lt); }
-
-    .choices input[type="radio"] {
-      accent-color: var(--lav); cursor: pointer;
-      width: 16px; height: 16px;
-    }
+    .choices input[type="radio"] { accent-color: var(--lav); cursor: pointer; width: 16px; height: 16px; }
 
     .btn-check {
       background: linear-gradient(135deg, var(--pink), var(--lav));
-      color: white; border: none;
-      padding: 7px 18px; border-radius: 20px;
+      color: white; border: none; padding: 7px 18px; border-radius: 20px;
       cursor: pointer; font-size: 0.87rem; font-weight: 700;
-      font-family: 'Nunito', sans-serif;
-      margin-top: 6px;
-      box-shadow: 0 3px 10px rgba(180,130,220,0.3);
-      transition: transform 0.1s, box-shadow 0.1s;
+      font-family: 'Nunito', sans-serif; margin-top: 6px;
+      box-shadow: 0 3px 10px rgba(180,130,220,0.3); transition: transform 0.1s, box-shadow 0.1s;
     }
-
-    .btn-check:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 5px 14px rgba(180,130,220,0.4);
-    }
-
+    .btn-check:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(180,130,220,0.4); }
     .btn-check:active { transform: translateY(0); }
 
     .btn-reveal {
-      background: transparent;
-      color: var(--lav);
-      border: 2px solid var(--lav);
-      padding: 6px 16px; border-radius: 20px;
-      cursor: pointer; font-size: 0.87rem; font-weight: 700;
-      font-family: 'Nunito', sans-serif;
-      margin-top: 6px;
-      transition: background 0.15s, color 0.15s;
+      background: transparent; color: var(--lav); border: 2px solid var(--lav);
+      padding: 6px 16px; border-radius: 20px; cursor: pointer;
+      font-size: 0.87rem; font-weight: 700; font-family: 'Nunito', sans-serif;
+      margin-top: 6px; transition: background 0.15s, color 0.15s;
     }
-
     .btn-reveal:hover { background: var(--lav); color: white; }
 
-    .feedback {
-      display: inline-flex; align-items: center;
-      margin-left: 12px; font-weight: 800; font-size: 0.9rem;
-      vertical-align: middle;
-    }
-
+    .feedback { display: inline-flex; align-items: center; margin-left: 12px; font-weight: 800; font-size: 0.9rem; vertical-align: middle; }
     .correct { color: #2DB87A; }
     .wrong   { color: #E0407A; }
 
+    /* ── Explanation box (shown after check) ── */
+    .expl {
+      display: none; margin-top: 12px; padding: 11px 15px;
+      background: linear-gradient(135deg, #F5F0FF, #FFF0FA);
+      border: 1.5px solid #D4B8F0; border-left: 4px solid var(--lav);
+      border-radius: 12px; font-size: 0.88rem; color: #5A3080; line-height: 1.65;
+    }
+    .expl::before { content: '💡 '; }
+
+    /* ── Reveal answer (translation Qs) ── */
     .answer-reveal {
-      display: none; margin-top: 12px;
-      padding: 12px 16px;
+      display: none; margin-top: 12px; padding: 12px 16px;
       background: linear-gradient(135deg, #E8FFF4, #F0FFEA);
-      border: 1.5px solid #90DDB8;
-      border-radius: 14px;
+      border: 1.5px solid #90DDB8; border-radius: 14px;
       font-size: 0.93rem; color: #1A6840;
       font-family: 'M PLUS Rounded 1c', sans-serif;
     }
-
-    .answer-reveal small {
-      display: block; margin-top: 4px;
-      color: #5A9070; font-size: 0.84rem;
+    .answer-reveal small { display: block; margin-top: 3px; color: #5A9070; font-size: 0.84rem; }
+    .answer-reveal .expl-inner {
+      margin-top: 10px; padding: 9px 13px;
+      background: rgba(255,255,255,0.6); border-radius: 10px;
+      font-size: 0.86rem; color: #5A3080; font-family: 'Nunito', sans-serif;
+      border-left: 3px solid var(--lav);
     }
+    .answer-reveal .expl-inner::before { content: '💡 '; }
 
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 32px 24px;
-      color: var(--text-sm); font-size: 0.85rem;
-      position: relative; z-index: 1;
-    }
-
+    footer { text-align: center; padding: 32px 24px; color: var(--text-sm); font-size: 0.85rem; position: relative; z-index: 1; }
     footer span { margin: 0 6px; opacity: 0.6; }
   </style>
 </head>
@@ -354,620 +217,771 @@
 
 <main>
 
-  <!-- ══════════════════ 1. です ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">1</div>
-      <div class="card-title">
-        <h2>です (desu) — "To Be"</h2>
-        <p>Polite sentence ending &nbsp;·&nbsp; 丁寧な断定</p>
+<!-- ════════════════════════════════════════════
+     1. です
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">1</div>
+    <div class="card-title">
+      <h2>です (desu) — "To Be"</h2>
+      <p>Polite sentence ending &nbsp;·&nbsp; 丁寧な断定</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p><strong>です</strong> works like "am / is / are." It always comes at the <em>end</em> of a sentence and makes speech polite.</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「です」は文の最後につける丁寧な表現です。英語の「is / am / are」にあたります。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>私は学生です。</td><td>Watashi wa gakusei desu.</td><td>I am a student.</td></tr>
+    <tr><td>これはペンです。</td><td>Kore wa pen desu.</td><td>This is a pen.</td></tr>
+    <tr><td>彼女は先生です。</td><td>Kanojo wa sensei desu.</td><td>She is a teacher.</td></tr>
+  </table>
+  <div class="tip"><strong>Negative:</strong> ではありません (dewa arimasen) = "is not" &nbsp;→&nbsp; 私は学生ではありません。</div>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Fill in the blank: 私は医者 <input type="text" id="q1_1" placeholder="？"> 。(I am a doctor.)</p>
+      <button class="btn-check" onclick="checkFill('q1_1',['です'],'fb1_1','expl1_1')">Check ✓</button>
+      <span class="feedback" id="fb1_1"></span>
+      <div class="expl" id="expl1_1">Pattern: [Noun] は + [Noun] + <strong>です</strong>。です always comes at the end and means "am/is/are." 文の最後に必ずつけます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the blank: これはペン <input type="text" id="q1_2" placeholder="？"> ありません。(This is not a pen.)</p>
+      <button class="btn-check" onclick="checkFill('q1_2',['では','じゃ'],'fb1_2','expl1_2')">Check ✓</button>
+      <span class="feedback" id="fb1_2"></span>
+      <div class="expl" id="expl1_2">The full negative form is <strong>ではありません</strong>. In casual speech, じゃありません is also used. では = "is not" (formal particle combination). 丁寧な否定形です。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> Choose the correct sentence for "She is a doctor."</p>
+      <div class="choices">
+        <label><input type="radio" name="g1q3" value="a"> a) 医者は彼女です。</label>
+        <label><input type="radio" name="g1q3" value="b"> b) 彼女は医者です。</label>
+        <label><input type="radio" name="g1q3" value="c"> c) 彼女医者はです。</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g1q3','b','fb1_3','expl1_3')">Check ✓</button>
+      <span class="feedback" id="fb1_3"></span>
+      <div class="expl" id="expl1_3">Japanese word order is <strong>[Subject] は + [Predicate] + です</strong>. The subject (彼女) comes first, then the predicate (医者). 主語が先、述語が後です。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Fill in the blank: 田中さんは日本人 <input type="text" id="q1_4" placeholder="？"> 。(Mr. Tanaka is Japanese.)</p>
+      <button class="btn-check" onclick="checkFill('q1_4',['です'],'fb1_4','expl1_4')">Check ✓</button>
+      <span class="feedback" id="fb1_4"></span>
+      <div class="expl" id="expl1_4">です ends any noun-predicate sentence politely. Without です, the sentence sounds incomplete or rude. 丁寧な文にするため、必ずです/ますで終えましょう。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate into Japanese: <em>"I am not a student."</em></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev1_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev1_5">
+        私は学生ではありません。
+        <small>Watashi wa gakusei dewa arimasen.</small>
+        <div class="expl-inner">私は (I, topic) ＋ 学生 (student) ＋ ではありません (polite negative of です). The negative always goes at the very end, just like です. 否定形もです同様、文末に来ます。</div>
       </div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p><strong>です</strong> works like "am / is / are." It always comes at the <em>end</em> of a sentence and makes speech polite.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     2. は
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">2</div>
+    <div class="card-title">
+      <h2>は (wa) — Topic Marker</h2>
+      <p>As for ~ &nbsp;·&nbsp; 話題を示す助詞</p>
     </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「です」は文の最後につける丁寧な表現です。英語の「is / am / are」にあたります。</p>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p><strong>は</strong> (pronounced "wa") marks what the sentence is <em>about</em>. Think of it as "As for ~" or "Speaking of ~."</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「は」は文の話題（トピック）を示す助詞です。「〜について言えば」というニュアンスです。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>私は田中です。</td><td>Watashi wa Tanaka desu.</td><td>I am Tanaka.</td></tr>
+    <tr><td>東京は大きいです。</td><td>Tōkyō wa ōkii desu.</td><td>Tokyo is big.</td></tr>
+    <tr><td>猫はかわいいです。</td><td>Neko wa kawaii desu.</td><td>Cats are cute.</td></tr>
+  </table>
+  <div class="tip"><strong>Tip:</strong> は is pronounced "wa," not "ha," when used as a particle!</div>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Fill in the particle: 私 <input type="text" id="q2_1" placeholder="？"> 田中です。</p>
+      <button class="btn-check" onclick="checkFill('q2_1',['は'],'fb2_1','expl2_1')">Check ✓</button>
+      <span class="feedback" id="fb2_1"></span>
+      <div class="expl" id="expl2_1">は marks <strong>the topic</strong> of the sentence — here, 私 (I) is what we're talking about. It comes directly after the topic word. 話題の直後に置きます。</div>
     </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>私は学生です。</td><td>Watashi wa gakusei desu.</td><td>I am a student.</td></tr>
-      <tr><td>これはペンです。</td><td>Kore wa pen desu.</td><td>This is a pen.</td></tr>
-      <tr><td>彼女は先生です。</td><td>Kanojo wa sensei desu.</td><td>She is a teacher.</td></tr>
-    </table>
-    <div class="tip">
-      <strong>Negative:</strong> ではありません (dewa arimasen) = "is not"<br>
-      私は学生ではありません。= I am not a student.
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> How is は pronounced as a particle?</p>
+      <div class="choices">
+        <label><input type="radio" name="g2q2" value="a"> a) "ha"</label>
+        <label><input type="radio" name="g2q2" value="b"> b) "wa"</label>
+        <label><input type="radio" name="g2q2" value="c"> c) "ba"</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g2q2','b','fb2_2','expl2_2')">Check ✓</button>
+      <span class="feedback" id="fb2_2"></span>
+      <div class="expl" id="expl2_2">は is normally "ha" in words like はな (flower), but <strong>as a particle it is always read "wa."</strong> This is a special rule. 助詞として使うときだけ「わ」と読みます。</div>
     </div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Fill in the blank: 私は医者 <input type="text" id="q1_1" placeholder="？"> 。(I am a doctor.)</p>
-        <button class="btn-check" onclick="checkFill('q1_1',['です'],'fb1_1')">Check ✓</button>
-        <span class="feedback" id="fb1_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the blank: これはペン <input type="text" id="q1_2" placeholder="？"> ありません。(This is not a pen.)</p>
-        <button class="btn-check" onclick="checkFill('q1_2',['では','じゃ'],'fb1_2')">Check ✓</button>
-        <span class="feedback" id="fb1_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> Choose the correct sentence for "She is a doctor."</p>
-        <div class="choices">
-          <label><input type="radio" name="g1q3" value="a"> a) 医者は彼女です。</label>
-          <label><input type="radio" name="g1q3" value="b"> b) 彼女は医者です。</label>
-          <label><input type="radio" name="g1q3" value="c"> c) 彼女医者はです。</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g1q3','b','fb1_3')">Check ✓</button>
-        <span class="feedback" id="fb1_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Fill in the blank: 田中さんは日本人 <input type="text" id="q1_4" placeholder="？"> 。(Mr. Tanaka is Japanese.)</p>
-        <button class="btn-check" onclick="checkFill('q1_4',['です'],'fb1_4')">Check ✓</button>
-        <span class="feedback" id="fb1_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate into Japanese: <em>"I am not a student."</em></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev1_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev1_5">
-          私は学生ではありません。
-          <small>Watashi wa gakusei dewa arimasen.</small>
-        </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> Fill in the particle: 東京 <input type="text" id="q2_3" placeholder="？"> 大きいです。</p>
+      <button class="btn-check" onclick="checkFill('q2_3',['は'],'fb2_3','expl2_3')">Check ✓</button>
+      <span class="feedback" id="fb2_3"></span>
+      <div class="expl" id="expl2_3">東京は = "As for Tokyo, …" — は sets 東京 as the topic and the rest of the sentence describes it. 東京について述べる文です。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Fill in the blank: <input type="text" id="q2_4" placeholder="？"> はどこですか？<br><small>💡 Where is the restroom? (restroom = トイレ)</small></p>
+      <button class="btn-check" onclick="checkFill('q2_4',['トイレ'],'fb2_4','expl2_4')">Check ✓</button>
+      <span class="feedback" id="fb2_4"></span>
+      <div class="expl" id="expl2_4"><strong>[Topic] は + どこ + ですか？</strong> = "Where is [topic]?" The topic (the thing you're asking about) goes before は. 聞きたい物をはの前に置きます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"As for cats, they are cute."</em></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev2_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev2_5">
+        猫はかわいいです。
+        <small>Neko wa kawaii desu.</small>
+        <div class="expl-inner">猫は (cats, topic) ＋ かわいい (cute, い-adjective) ＋ です (polite ending). は sets 猫 as the topic; everything after describes it. 猫について「かわいい」と述べています。</div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     3. が
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">3</div>
+    <div class="card-title">
+      <h2>が (ga) — Subject Marker</h2>
+      <p>Emphasis & subject &nbsp;·&nbsp; 主語・強調を示す助詞</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p><strong>が</strong> marks the grammatical subject with emphasis. Use it for new information, focus, or with verbs like "like," "can," and "want."</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「が」は文の主語を強調して示す助詞です。新しい情報や「好き・できる・ほしい」などの動詞と一緒に使います。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
+    <tr><td>私が田中です。</td><td>Watashi ga Tanaka desu.</td><td><em>I</em> am Tanaka. (emphasis)</td></tr>
+    <tr><td>猫が好きです。</td><td>Neko ga suki desu.</td><td>I like cats.</td></tr>
+  </table>
+  <div class="tip"><strong>は vs が:</strong> 私は学生です = I am a student (general). &nbsp;私が学生です = <em>I</em> am the student (emphasis).</div>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Fill in the particle: 雨 <input type="text" id="q3_1" placeholder="？"> 降っています。(It is raining.)</p>
+      <button class="btn-check" onclick="checkFill('q3_1',['が'],'fb3_1','expl3_1')">Check ✓</button>
+      <span class="feedback" id="fb3_1"></span>
+      <div class="expl" id="expl3_1">Natural phenomena (rain, snow, wind) typically use <strong>が</strong> to mark the subject: 雨が降る, 雪が降る, 風が吹く. 自然現象の主語にはがを使います。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the particle: 猫 <input type="text" id="q3_2" placeholder="？"> 好きです。(I like cats.)</p>
+      <button class="btn-check" onclick="checkFill('q3_2',['が'],'fb3_2','expl3_2')">Check ✓</button>
+      <span class="feedback" id="fb3_2"></span>
+      <div class="expl" id="expl3_2">With 好き (like), 嫌い (dislike), 上手 (good at), 下手 (bad at), and 欲しい (want), the <strong>object takes が</strong>, not を. This is a key rule! 好き・嫌い・上手・下手・欲しいの前にはがを使います。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> Which sentence means "<em>I</em> (not someone else) am the teacher"?</p>
+      <div class="choices">
+        <label><input type="radio" name="g3q3" value="a"> a) 私は先生です。</label>
+        <label><input type="radio" name="g3q3" value="b"> b) 私が先生です。</label>
+        <label><input type="radio" name="g3q3" value="c"> c) 先生は私です。</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g3q3','b','fb3_3','expl3_3')">Check ✓</button>
+      <span class="feedback" id="fb3_3"></span>
+      <div class="expl" id="expl3_3"><strong>が puts emphasis on who</strong> — 私が先生です singles out "I" specifically as the teacher (implying "not someone else"). は (option a) is a neutral general statement. がは「〜こそ」という強調のニュアンスです。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Fill in the particle: 何 <input type="text" id="q3_4" placeholder="？"> 食べたいですか？(What do you want to eat?)</p>
+      <button class="btn-check" onclick="checkFill('q3_4',['が'],'fb3_4','expl3_4')">Check ✓</button>
+      <span class="feedback" id="fb3_4"></span>
+      <div class="expl" id="expl3_4">〜たい (want to) and 〜ほしい (want something) use <strong>が</strong> for the desired object. 何が食べたい = "what [is it that] you want to eat?" 食べたい・ほしいの前はがです。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I can speak Japanese."</em> <small>💡 話せます = can speak</small></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev3_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev3_5">
+        日本語が話せます。
+        <small>Nihongo ga hanasemasu.</small>
+        <div class="expl-inner">Potential (can do) verbs use <strong>が</strong> for the object: 日本語が話せます, 車が運転できます. が marks "the thing that can be done." 可能動詞の前にはがを使います。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     4. を
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">4</div>
+    <div class="card-title">
+      <h2>を (wo) — Object Marker</h2>
+      <p>Direct object &nbsp;·&nbsp; 目的語を示す助詞</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p><strong>を</strong> (pronounced "o") marks the direct object — the thing that receives the action of the verb.</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「を」は動詞の目的語（動作を受けるもの）を示す助詞です。読み方は「お」です。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>水を飲みます。</td><td>Mizu wo nomimasu.</td><td>I drink water.</td></tr>
+    <tr><td>本を読みます。</td><td>Hon wo yomimasu.</td><td>I read a book.</td></tr>
+    <tr><td>音楽を聴きます。</td><td>Ongaku wo kikimasu.</td><td>I listen to music.</td></tr>
+  </table>
+  <div class="tip"><strong>Pattern:</strong> [Subject] は ＋ [Object] を ＋ [Verb] → 私は寿司を食べます。(I eat sushi.)</div>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Fill in the particle: 水 <input type="text" id="q4_1" placeholder="？"> 飲みます。(I drink water.)</p>
+      <button class="btn-check" onclick="checkFill('q4_1',['を'],'fb4_1','expl4_1')">Check ✓</button>
+      <span class="feedback" id="fb4_1"></span>
+      <div class="expl" id="expl4_1">水 (water) is what is being drunk — it's the direct object, so it takes <strong>を</strong>. を always comes between the object and the verb. 動詞の前、目的語の後に置きます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the particle: 映画 <input type="text" id="q4_2" placeholder="？"> 見ます。(I watch a movie.)</p>
+      <button class="btn-check" onclick="checkFill('q4_2',['を'],'fb4_2','expl4_2')">Check ✓</button>
+      <span class="feedback" id="fb4_2"></span>
+      <div class="expl" id="expl4_2">映画 (movie) is the thing being watched. Any time you do something to/with an object (eat, drink, read, watch, buy…), that object takes <strong>を</strong>. 動作を受ける名詞の後にを置きます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> Which sentence correctly means "I eat sushi"?</p>
+      <div class="choices">
+        <label><input type="radio" name="g4q3" value="a"> a) 私は寿司が食べます。</label>
+        <label><input type="radio" name="g4q3" value="b"> b) 私は寿司を食べます。</label>
+        <label><input type="radio" name="g4q3" value="c"> c) 私は寿司に食べます。</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g4q3','b','fb4_3','expl4_3')">Check ✓</button>
+      <span class="feedback" id="fb4_3"></span>
+      <div class="expl" id="expl4_3">食べる (eat) is an action verb, so its object takes <strong>を</strong>. が (option a) is used for liking/wanting, not for eating. に (option c) marks location/direction, not objects. 食べる・飲む・読む等の動詞には「を」です。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Fill in the particle: 音楽 <input type="text" id="q4_4" placeholder="？"> 聴きます。(I listen to music.)</p>
+      <button class="btn-check" onclick="checkFill('q4_4',['を'],'fb4_4','expl4_4')">Check ✓</button>
+      <span class="feedback" id="fb4_4"></span>
+      <div class="expl" id="expl4_4">音楽 (music) is the direct object of 聴く (listen). Note: in English we say "listen <em>to</em>" but in Japanese, 音楽を聴く uses を, not に. 英語の「〜to」に惑わされないよう注意！</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I read a book every day."</em> <small>💡 every day = 毎日</small></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev4_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev4_5">
+        毎日本を読みます。
+        <small>Mainichi hon wo yomimasu.</small>
+        <div class="expl-inner">毎日 (every day) is a time expression — it goes at the <strong>start</strong> of the sentence. 本を (book + object marker) ＋ 読みます (read). Time words like 毎日・今日・明日は文頭に置きます。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     5. に
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">5</div>
+    <div class="card-title">
+      <h2>に (ni) — Direction, Time & Location</h2>
+      <p>to / at / in &nbsp;·&nbsp; 方向・時間・場所</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p><strong>に</strong> has three main uses: (1) destination "to," (2) specific point in time "at/on," (3) location of existence "in/at."</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「に」は①方向（〜へ）、②時間（〜時に）、③存在の場所（〜にいる/ある）の3つの意味で使います。</p>
+  </div>
+  <table>
+    <tr><th>使い方</th><th>日本語</th><th>English</th></tr>
+    <tr><td>Direction 方向</td><td>学校に行きます。</td><td>I go <em>to</em> school.</td></tr>
+    <tr><td>Time 時間</td><td>3時に来ます。</td><td>I come <em>at</em> 3 o'clock.</td></tr>
+    <tr><td>Existence 存在</td><td>部屋に猫がいます。</td><td>There is a cat <em>in</em> the room.</td></tr>
+  </table>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Fill in the particle: 学校 <input type="text" id="q5_1" placeholder="？"> 行きます。(I go to school.)</p>
+      <button class="btn-check" onclick="checkFill('q5_1',['に'],'fb5_1','expl5_1')">Check ✓</button>
+      <span class="feedback" id="fb5_1"></span>
+      <div class="expl" id="expl5_1">行く (go), 来る (come), 帰る (return) all use <strong>に</strong> for their destination. Pattern: [Place] に + 行きます/来ます/帰ります。行く・来る・帰るの目的地はに。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the particle: 3時 <input type="text" id="q5_2" placeholder="？"> 寝ます。(I sleep at 3 o'clock.)</p>
+      <button class="btn-check" onclick="checkFill('q5_2',['に'],'fb5_2','expl5_2')">Check ✓</button>
+      <span class="feedback" id="fb5_2"></span>
+      <div class="expl" id="expl5_2">Specific clock times use <strong>に</strong>: 3時に, 月曜日に, 1月に. However, relative times do NOT: 今日 (today), 明日 (tomorrow), 毎日 (every day) — these take no particle. 具体的な時刻・日付にはにをつけます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> 部屋に猫がいます。What is に used for here?</p>
+      <div class="choices">
+        <label><input type="radio" name="g5q3" value="a"> a) Direction (going somewhere)</label>
+        <label><input type="radio" name="g5q3" value="b"> b) Time (point in time)</label>
+        <label><input type="radio" name="g5q3" value="c"> c) Existence / Location</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g5q3','c','fb5_3','expl5_3')">Check ✓</button>
+      <span class="feedback" id="fb5_3"></span>
+      <div class="expl" id="expl5_3"><strong>[Place] に + いる/ある</strong> = "exists in/at [place]". いる is for living things (people, animals); ある is for objects. 生き物にはいる、物にはあるを使います。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Fill in the particle: 東京 <input type="text" id="q5_4" placeholder="？"> 住んでいます。(I live in Tokyo.)</p>
+      <button class="btn-check" onclick="checkFill('q5_4',['に'],'fb5_4','expl5_4')">Check ✓</button>
+      <span class="feedback" id="fb5_4"></span>
+      <div class="expl" id="expl5_4">住む (live) uses <strong>に</strong> for location: [Place] に住む. This is the location-of-existence use of に. 働く (work) also uses に: 会社に働く. 住む・働くの場所にはに。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I go to school at 8 o'clock."</em></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev5_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev5_5">
+        8時に学校に行きます。
+        <small>Hachi-ji ni gakkō ni ikimasu.</small>
+        <div class="expl-inner">Two に in one sentence is perfectly natural! <strong>8時に</strong> = at 8 (time に) and <strong>学校に</strong> = to school (direction に). Time expressions come before place expressions. 時間→場所→動詞の順番です。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     6. 〜ます
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">6</div>
+    <div class="card-title">
+      <h2>〜ます (masu) — Polite Verbs</h2>
+      <p>Present / future polite form &nbsp;·&nbsp; 丁寧な動詞の形</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p>In polite Japanese, verbs end in <strong>〜ます</strong>. This is the standard form for beginners and everyday conversation.</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>丁寧な話し方では動詞を「〜ます」の形にします。初心者はまずこの形を覚えましょう。</p>
+  </div>
+  <table>
+    <tr><th>Dictionary Form</th><th>ます-form</th><th>English</th></tr>
+    <tr><td>食べる (taberu)</td><td>食べます (tabemasu)</td><td>eat</td></tr>
+    <tr><td>飲む (nomu)</td><td>飲みます (nomimasu)</td><td>drink</td></tr>
+    <tr><td>行く (iku)</td><td>行きます (ikimasu)</td><td>go</td></tr>
+    <tr><td>見る (miru)</td><td>見ます (mimasu)</td><td>see / watch</td></tr>
+    <tr><td>する (suru)</td><td>します (shimasu)</td><td>do</td></tr>
+  </table>
+  <div class="tip">
+    <strong>Negative:</strong> 〜ません → 食べません &nbsp;·&nbsp;
+    <strong>Past:</strong> 〜ました → 食べました &nbsp;·&nbsp;
+    <strong>Past Neg:</strong> 〜ませんでした → 食べませんでした
   </div>
 
-  <!-- ══════════════════ 2. は ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">2</div>
-      <div class="card-title">
-        <h2>は (wa) — Topic Marker</h2>
-        <p>As for ~ &nbsp;·&nbsp; 話題を示す助詞</p>
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Convert to ます form: 食べる → 食べ <input type="text" id="q6_1" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q6_1',['ます'],'fb6_1','expl6_1')">Check ✓</button>
+      <span class="feedback" id="fb6_1"></span>
+      <div class="expl" id="expl6_1">For Group 2 verbs (ending in る, like 食べる, 見る), drop the る and add <strong>ます</strong>. For Group 1 verbs (like 飲む→飲み+ます, 書く→書き+ます), change the final sound to the "i" row and add ます。る動詞はるを取りますをつける。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Make negative: 飲みます → 飲み <input type="text" id="q6_2" placeholder="？"> (I don't drink)</p>
+      <button class="btn-check" onclick="checkFill('q6_2',['ません'],'fb6_2','expl6_2')">Check ✓</button>
+      <span class="feedback" id="fb6_2"></span>
+      <div class="expl" id="expl6_2">Simply replace ます with <strong>ません</strong> for the polite negative. It works for all verbs the same way. 食べます→食べません, 行きます→行きません. とても簡単！ますをませんに変えるだけ。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> What is the past form of 行きます?</p>
+      <div class="choices">
+        <label><input type="radio" name="g6q3" value="a"> a) 行きません</label>
+        <label><input type="radio" name="g6q3" value="b"> b) 行きました</label>
+        <label><input type="radio" name="g6q3" value="c"> c) 行きたいです</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g6q3','b','fb6_3','expl6_3')">Check ✓</button>
+      <span class="feedback" id="fb6_3"></span>
+      <div class="expl" id="expl6_3">Replace ます with <strong>ました</strong> for past tense. ません (option a) is present negative; たいです (option c) means "want to." ました = past, ません = negative, たいです = want to. この3つを混同しないよう！</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Convert to past: 見ます → 見 <input type="text" id="q6_4" placeholder="？"> (I watched)</p>
+      <button class="btn-check" onclick="checkFill('q6_4',['ました'],'fb6_4','expl6_4')">Check ✓</button>
+      <span class="feedback" id="fb6_4"></span>
+      <div class="expl" id="expl6_4"><strong>ました</strong> works for both "I did" and "I have done." 見ました can mean "I watched" or "I have seen." Context tells you which. ました is always polite past tense. ましたは常に丁寧な過去形。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I didn't drink coffee yesterday."</em> <small>💡 昨日 = yesterday / コーヒー = coffee</small></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev6_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev6_5">
+        昨日コーヒーを飲みませんでした。
+        <small>Kinō kōhī wo nomimasendeshita.</small>
+        <div class="expl-inner"><strong>ませんでした</strong> = past negative ("did not ~"). Built from: ません (negative) ＋ でした (past of です). 昨日 (time word) comes first in the sentence. ませんでした＝過去の否定形。</div>
       </div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p><strong>は</strong> (pronounced "wa") marks what the sentence is <em>about</em>. Think of it as "As for ~" or "Speaking of ~."</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     7. い & な Adjectives
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">7</div>
+    <div class="card-title">
+      <h2>い & な Adjectives</h2>
+      <p>Two types of adjectives &nbsp;·&nbsp; 2種類の形容詞</p>
     </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「は」は文の話題（トピック）を示す助詞です。「〜について言えば」というニュアンスです。</p>
-    </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>私は田中です。</td><td>Watashi wa Tanaka desu.</td><td>I am Tanaka.</td></tr>
-      <tr><td>東京は大きいです。</td><td>Tōkyō wa ōkii desu.</td><td>Tokyo is big.</td></tr>
-      <tr><td>猫はかわいいです。</td><td>Neko wa kawaii desu.</td><td>Cats are cute.</td></tr>
-    </table>
-    <div class="tip"><strong>Tip:</strong> は is pronounced "wa," not "ha," when used as a particle!</div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Fill in the particle: 私 <input type="text" id="q2_1" placeholder="？"> 田中です。</p>
-        <button class="btn-check" onclick="checkFill('q2_1',['は'],'fb2_1')">Check ✓</button>
-        <span class="feedback" id="fb2_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> How is は pronounced as a particle?</p>
-        <div class="choices">
-          <label><input type="radio" name="g2q2" value="a"> a) "ha"</label>
-          <label><input type="radio" name="g2q2" value="b"> b) "wa"</label>
-          <label><input type="radio" name="g2q2" value="c"> c) "ba"</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g2q2','b','fb2_2')">Check ✓</button>
-        <span class="feedback" id="fb2_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> Fill in the particle: 東京 <input type="text" id="q2_3" placeholder="？"> 大きいです。</p>
-        <button class="btn-check" onclick="checkFill('q2_3',['は'],'fb2_3')">Check ✓</button>
-        <span class="feedback" id="fb2_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Fill in the blank: <input type="text" id="q2_4" placeholder="？"> はどこですか？<br><small>💡 Where is the restroom? (restroom = トイレ)</small></p>
-        <button class="btn-check" onclick="checkFill('q2_4',['トイレ'],'fb2_4')">Check ✓</button>
-        <span class="feedback" id="fb2_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"As for cats, they are cute."</em></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev2_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev2_5">猫はかわいいです。<small>Neko wa kawaii desu.</small></div>
-      </div>
-    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p>Japanese has two adjective types: <strong>い-adjectives</strong> (end in い, conjugate on their own) and <strong>な-adjectives</strong> (need な before a noun).</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>日本語の形容詞には「い形容詞」と「な形容詞」の2種類があります。名詞の前につけるときの形が違います。</p>
+  </div>
+  <table>
+    <tr><th></th><th>い-adjective 例</th><th>な-adjective 例</th></tr>
+    <tr><td>Base</td><td>大きい (big)</td><td>静か (quiet)</td></tr>
+    <tr><td>+ Noun</td><td>大きい犬 (big dog)</td><td>静かな部屋 (quiet room)</td></tr>
+    <tr><td>Negative</td><td>大きくない</td><td>静かじゃない</td></tr>
+    <tr><td>Past</td><td>大きかった</td><td>静かでした</td></tr>
+  </table>
+  <div class="tip">
+    <strong>Common い:</strong> 大きい・小さい・新しい・古い・高い・安い<br>
+    <strong>Common な:</strong> 好き・きれい・便利・有名・静か
   </div>
 
-  <!-- ══════════════════ 3. が ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">3</div>
-      <div class="card-title">
-        <h2>が (ga) — Subject Marker</h2>
-        <p>Emphasis & subject &nbsp;·&nbsp; 主語・強調を示す助詞</p>
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> 大きい is which adjective type?</p>
+      <div class="choices">
+        <label><input type="radio" name="g7q1" value="a"> a) い-adjective</label>
+        <label><input type="radio" name="g7q1" value="b"> b) な-adjective</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g7q1','a','fb7_1','expl7_1')">Check ✓</button>
+      <span class="feedback" id="fb7_1"></span>
+      <div class="expl" id="expl7_1">大きい ends in い AND conjugates directly: 大きく<strong>ない</strong> (not big), 大き<strong>かった</strong> (was big). This self-conjugation is the key feature of <strong>い-adjectives</strong>. い形容詞は語尾が変化します。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the blank: 静か <input type="text" id="q7_2" placeholder="？"> 部屋 (quiet room)</p>
+      <button class="btn-check" onclick="checkFill('q7_2',['な'],'fb7_2','expl7_2')">Check ✓</button>
+      <span class="feedback" id="fb7_2"></span>
+      <div class="expl" id="expl7_2">な-adjectives need <strong>な</strong> when directly modifying a noun: 静か<strong>な</strong>部屋, 有名<strong>な</strong>人, きれい<strong>な</strong>花. When used as a predicate (end of sentence), use です: 部屋は静かです. 名詞の前ではな、文末ではですを使います。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> Fill in negative: 大きい → 大きく <input type="text" id="q7_3" placeholder="？"> (not big)</p>
+      <button class="btn-check" onclick="checkFill('q7_3',['ない'],'fb7_3','expl7_3')">Check ✓</button>
+      <span class="feedback" id="fb7_3"></span>
+      <div class="expl" id="expl7_3">い-adjective negative: change the final い → <strong>くない</strong>. 大きい→大きくない, 高い→高くない, 新しい→新しくない. Note: good (いい) is irregular → よくない (not good). い→くないに変えるだけ。いいはよくないと例外！</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> ⚠️ Tricky! きれい ends in い — which type is it?</p>
+      <div class="choices">
+        <label><input type="radio" name="g7q4" value="a"> a) い-adjective</label>
+        <label><input type="radio" name="g7q4" value="b"> b) な-adjective (きれいな〜)</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g7q4','b','fb7_4','expl7_4')">Check ✓</button>
+      <span class="feedback" id="fb7_4"></span>
+      <div class="expl" id="expl7_4">きれい looks like an い-adjective but it is <strong>な</strong>: きれい<strong>な</strong>人, きれいじゃない (NOT きれくない!). Other traps: 嫌い (dislike), 有名 (famous), 親切 (kind) — all な. 語尾がいでもな形容詞の単語があります！要注意。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Fill in past form: 小さい → 小さ <input type="text" id="q7_5" placeholder="？"> (was small)</p>
+      <button class="btn-check" onclick="checkFill('q7_5',['かった'],'fb7_5','expl7_5')">Check ✓</button>
+      <span class="feedback" id="fb7_5"></span>
+      <div class="expl" id="expl7_5">い-adjective past tense: change the final い → <strong>かった</strong>. 小さい→小さかった, 高い→高かった, 新しい→新しかった. Polite past: add です → 小さかったです. い→かったに変えます。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     8. 〜ています
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">8</div>
+    <div class="card-title">
+      <h2>〜ています (te imasu) — Ongoing Action</h2>
+      <p>Present progressive &nbsp;·&nbsp; 進行形 (~ing)</p>
+    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p>Attach <strong>〜ています</strong> to the て-form of a verb to express an action in progress — like English "-ing."</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>動詞のて形に「います」をつけると、今まさに行われていることを表せます。英語の「〜ing」と同じです。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>食べています。</td><td>Tabete imasu.</td><td>I am eating.</td></tr>
+    <tr><td>本を読んでいます。</td><td>Hon wo yonde imasu.</td><td>I am reading a book.</td></tr>
+    <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
+    <tr><td>結婚しています。</td><td>Kekkon shite imasu.</td><td>I am married.</td></tr>
+  </table>
+  <div class="tip"><strong>て-form guide:</strong> 食べる→食べて &nbsp;/&nbsp; 飲む→飲んで &nbsp;/&nbsp; 読む→読んで &nbsp;/&nbsp; 書く→書いて</div>
+
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> て-form of 飲む → 飲ん <input type="text" id="q8_1" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q8_1',['で'],'fb8_1','expl8_1')">Check ✓</button>
+      <span class="feedback" id="fb8_1"></span>
+      <div class="expl" id="expl8_1">Verbs ending in む, ぬ, ぶ all change to <strong>んで</strong>: 飲む→飲んで, 死ぬ→死んで, 遊ぶ→遊んで. This sound change is called "euphonic change" (音便). む・ぬ・ぶで終わる動詞は「んで」になります。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Fill in the blank: 食べ <input type="text" id="q8_2" placeholder="？"> います。(I am eating.)</p>
+      <button class="btn-check" onclick="checkFill('q8_2',['て'],'fb8_2','expl8_2')">Check ✓</button>
+      <span class="feedback" id="fb8_2"></span>
+      <div class="expl" id="expl8_2">食べる → て-form: 食べ<strong>て</strong>. Then add います: 食べ<strong>ています</strong>. The て connects the verb action to います (to be, to exist), creating the progressive meaning. て形＋います＝〜している状態。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> What does 結婚しています mean?</p>
+      <div class="choices">
+        <label><input type="radio" name="g8q3" value="a"> a) I want to get married.</label>
+        <label><input type="radio" name="g8q3" value="b"> b) I am married. (current state)</label>
+        <label><input type="radio" name="g8q3" value="c"> c) I got married yesterday.</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g8q3','b','fb8_3','expl8_3')">Check ✓</button>
+      <span class="feedback" id="fb8_3"></span>
+      <div class="expl" id="expl8_3">〜ています can describe a <strong>resulting state</strong>, not just ongoing action. 結婚した (got married) left a state → 結婚しています (is now married). Similarly: 知っています (I know), 着ています (is wearing). ています＝動作の結果の状態も表せます。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> て-form of 書く → 書い <input type="text" id="q8_4" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q8_4',['て'],'fb8_4','expl8_4')">Check ✓</button>
+      <span class="feedback" id="fb8_4"></span>
+      <div class="expl" id="expl8_4">Verbs ending in く change to <strong>いて</strong>: 書く→書いて, 聴く→聴いて. Important exception: 行く→行<strong>って</strong> (not 行いて!). く→いて。ただし行く→行って（例外）に注意！</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I am studying Japanese."</em> <small>💡 study = 勉強する → て-form: 勉強して</small></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev8_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev8_5">
+        日本語を勉強しています。
+        <small>Nihongo wo benkyō shite imasu.</small>
+        <div class="expl-inner">する (do) → て-form: <strong>して</strong>. 勉強する → 勉強して ＋ います = 勉強しています. する is used with many noun-verb combinations: 勉強する, 運動する, 料理する, 電話する. する動詞はして＋いますになります。</div>
       </div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p><strong>が</strong> marks the grammatical subject with emphasis. Use it for new information, focus, or with verbs like "like," "can," and "want."</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     9. 〜ですか？
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">9</div>
+    <div class="card-title">
+      <h2>〜ですか？ (desu ka) — Questions</h2>
+      <p>Yes/No questions &nbsp;·&nbsp; 疑問文の作り方</p>
     </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「が」は文の主語を強調して示す助詞です。新しい情報や「好き・できる・ほしい」などの動詞と一緒に使います。</p>
-    </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
-      <tr><td>私が田中です。</td><td>Watashi ga Tanaka desu.</td><td><em>I</em> am Tanaka. (emphasis)</td></tr>
-      <tr><td>猫が好きです。</td><td>Neko ga suki desu.</td><td>I like cats.</td></tr>
-    </table>
-    <div class="tip"><strong>は vs が:</strong> 私は学生です = I am a student (general). &nbsp;私が学生です = <em>I</em> am the student (emphasis).</div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Fill in the particle: 雨 <input type="text" id="q3_1" placeholder="？"> 降っています。</p>
-        <button class="btn-check" onclick="checkFill('q3_1',['が'],'fb3_1')">Check ✓</button>
-        <span class="feedback" id="fb3_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the particle: 猫 <input type="text" id="q3_2" placeholder="？"> 好きです。(I like cats.)</p>
-        <button class="btn-check" onclick="checkFill('q3_2',['が'],'fb3_2')">Check ✓</button>
-        <span class="feedback" id="fb3_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> Which sentence means "<em>I</em> (not someone else) am the teacher"?</p>
-        <div class="choices">
-          <label><input type="radio" name="g3q3" value="a"> a) 私は先生です。</label>
-          <label><input type="radio" name="g3q3" value="b"> b) 私が先生です。</label>
-          <label><input type="radio" name="g3q3" value="c"> c) 先生は私です。</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g3q3','b','fb3_3')">Check ✓</button>
-        <span class="feedback" id="fb3_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Fill in the particle: 何 <input type="text" id="q3_4" placeholder="？"> 食べたいですか？</p>
-        <button class="btn-check" onclick="checkFill('q3_4',['が'],'fb3_4')">Check ✓</button>
-        <span class="feedback" id="fb3_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I can speak Japanese."</em> <small>💡 話せます = can speak</small></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev3_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev3_5">日本語が話せます。<small>Nihongo ga hanasemasu.</small></div>
-      </div>
-    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p>To make a yes/no question, just add <strong>か</strong> at the end. Word order does NOT change — unlike English!</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>文の最後に「か」をつけるだけで疑問文になります。語順は変わりません。とても簡単です！</p>
+  </div>
+  <table>
+    <tr><th>Statement 文</th><th>Question 疑問文</th></tr>
+    <tr><td>これはペンです。</td><td>これはペンですか？</td></tr>
+    <tr><td>食べます。</td><td>食べますか？</td></tr>
+    <tr><td>好きです。</td><td>好きですか？</td></tr>
+  </table>
+  <div class="tip">
+    <strong>Question words 疑問詞:</strong> 何(what) · どこ(where) · いつ(when) · だれ(who) · なぜ(why) · いくら(how much)
   </div>
 
-  <!-- ══════════════════ 4. を ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">4</div>
-      <div class="card-title">
-        <h2>を (wo) — Object Marker</h2>
-        <p>Direct object &nbsp;·&nbsp; 目的語を示す助詞</p>
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Turn into a question: これはりんごです → これはりんご <input type="text" id="q9_1" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q9_1',['ですか','ですか？'],'fb9_1','expl9_1')">Check ✓</button>
+      <span class="feedback" id="fb9_1"></span>
+      <div class="expl" id="expl9_1">Just add <strong>か</strong> after です (or ます). No word order change at all — this is much simpler than English! In casual speech, you can just raise your intonation: りんご？ 文末にかをつけるだけ。語順変更不要！</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> How do you say "Yes, that's right"?</p>
+      <div class="choices">
+        <label><input type="radio" name="g9q2" value="a"> a) はい、そうです。</label>
+        <label><input type="radio" name="g9q2" value="b"> b) いいえ、そうです。</label>
+        <label><input type="radio" name="g9q2" value="c"> c) はい、違います。</label>
+      </div>
+      <button class="btn-check" onclick="checkMC('g9q2','a','fb9_2','expl9_2')">Check ✓</button>
+      <span class="feedback" id="fb9_2"></span>
+      <div class="expl" id="expl9_2"><strong>はい</strong> = yes, <strong>そうです</strong> = "that is so / that's right." いいえ = no. 違います = "it's different / that's wrong." So: いいえ、違います = "No, that's wrong." はい＝yes、いいえ＝no。そうです＝そのとおりです。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> What question word means "where"? (Write in Japanese)</p>
+      <p><input type="text" id="q9_3" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q9_3',['どこ'],'fb9_3','expl9_3')">Check ✓</button>
+      <span class="feedback" id="fb9_3"></span>
+      <div class="expl" id="expl9_3"><strong>どこ</strong> = where. Pattern: [Topic] は + どこ + ですか？= "Where is ~?" Other place words: どこか (somewhere), どこも (everywhere / nowhere), どこにも行かない (won't go anywhere). どこ＝場所を聞く疑問詞。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Turn into a question: 田中さんは学生です → 田中さんは学生 <input type="text" id="q9_4" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q9_4',['ですか','ですか？'],'fb9_4','expl9_4')">Check ✓</button>
+      <span class="feedback" id="fb9_4"></span>
+      <div class="expl" id="expl9_4">Replace the period with <strong>か？</strong> — that's all! 田中さんは学生<strong>ですか？</strong> = "Is Tanaka-san a student?" In formal writing, か is used without ？; in everyday writing, adding ？makes it clearer. 。をか？に変えるだけです。</div>
+    </div>
+
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"Do you eat sushi?"</em></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev9_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev9_5">
+        寿司を食べますか？
+        <small>Sushi wo tabemasu ka?</small>
+        <div class="expl-inner">寿司を食べます (I eat sushi) → add <strong>か</strong> to make it a question. The subject (you/I) is often dropped in Japanese — context makes it clear. 日本語では主語（あなたは）をよく省略します。</div>
       </div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p><strong>を</strong> (pronounced "o") marks the direct object — the thing that receives the action of the verb.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     10. 〜たいです
+════════════════════════════════════════════ -->
+<div class="card">
+  <div class="card-header">
+    <div class="num">10</div>
+    <div class="card-title">
+      <h2>〜たいです (tai desu) — "I Want To"</h2>
+      <p>Expressing desire &nbsp;·&nbsp; 願望の表現</p>
     </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「を」は動詞の目的語（動作を受けるもの）を示す助詞です。読み方は「お」です。</p>
-    </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>水を飲みます。</td><td>Mizu wo nomimasu.</td><td>I drink water.</td></tr>
-      <tr><td>本を読みます。</td><td>Hon wo yomimasu.</td><td>I read a book.</td></tr>
-      <tr><td>音楽を聴きます。</td><td>Ongaku wo kikimasu.</td><td>I listen to music.</td></tr>
-    </table>
-    <div class="tip"><strong>Pattern:</strong> [Subject] は ＋ [Object] を ＋ [Verb] → 私は寿司を食べます。(I eat sushi.)</div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Fill in the particle: 水 <input type="text" id="q4_1" placeholder="？"> 飲みます。</p>
-        <button class="btn-check" onclick="checkFill('q4_1',['を'],'fb4_1')">Check ✓</button>
-        <span class="feedback" id="fb4_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the particle: 映画 <input type="text" id="q4_2" placeholder="？"> 見ます。(I watch a movie.)</p>
-        <button class="btn-check" onclick="checkFill('q4_2',['を'],'fb4_2')">Check ✓</button>
-        <span class="feedback" id="fb4_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> Which sentence correctly means "I eat sushi"?</p>
-        <div class="choices">
-          <label><input type="radio" name="g4q3" value="a"> a) 私は寿司が食べます。</label>
-          <label><input type="radio" name="g4q3" value="b"> b) 私は寿司を食べます。</label>
-          <label><input type="radio" name="g4q3" value="c"> c) 私は寿司に食べます。</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g4q3','b','fb4_3')">Check ✓</button>
-        <span class="feedback" id="fb4_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Fill in the particle: 音楽 <input type="text" id="q4_4" placeholder="？"> 聴きます。</p>
-        <button class="btn-check" onclick="checkFill('q4_4',['を'],'fb4_4')">Check ✓</button>
-        <span class="feedback" id="fb4_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I read a book every day."</em> <small>💡 every day = 毎日</small></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev4_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev4_5">毎日本を読みます。<small>Mainichi hon wo yomimasu.</small></div>
-      </div>
-    </div>
+  </div>
+  <div class="lang-block en">
+    <div class="lang-label">English</div>
+    <p>To say you <em>want to do</em> something, replace <strong>〜ます</strong> with <strong>〜たいです</strong>. Used only for your own desires.</p>
+  </div>
+  <div class="lang-block jp">
+    <div class="lang-label">日本語</div>
+    <p>「〜たいです」は自分がしたいことを表す表現です。動詞のます形の「ます」を「たいです」に置き換えます。</p>
+  </div>
+  <table>
+    <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+    <tr><td>寿司を食べたいです。</td><td>Sushi wo tabetai desu.</td><td>I want to eat sushi.</td></tr>
+    <tr><td>日本に行きたいです。</td><td>Nihon ni ikitai desu.</td><td>I want to go to Japan.</td></tr>
+    <tr><td>日本語を話したいです。</td><td>Nihongo wo hanashitai desu.</td><td>I want to speak Japanese.</td></tr>
+  </table>
+  <div class="tip">
+    <strong>Negative:</strong> 〜たくないです → 食べたくないです (I don't want to eat)<br>
+    <strong>Past:</strong> 〜たかったです → 行きたかったです (I wanted to go)
   </div>
 
-  <!-- ══════════════════ 5. に ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">5</div>
-      <div class="card-title">
-        <h2>に (ni) — Direction, Time & Location</h2>
-        <p>to / at / in &nbsp;·&nbsp; 方向・時間・場所</p>
-      </div>
-    </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p><strong>に</strong> has three main uses: (1) destination "to," (2) specific point in time "at/on," (3) location of existence "in/at."</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「に」は①方向（〜へ）、②時間（〜時に）、③存在の場所（〜にいる/ある）の3つの意味で使います。</p>
-    </div>
-    <table>
-      <tr><th>使い方</th><th>日本語</th><th>English</th></tr>
-      <tr><td>Direction 方向</td><td>学校に行きます。</td><td>I go <em>to</em> school.</td></tr>
-      <tr><td>Time 時間</td><td>3時に来ます。</td><td>I come <em>at</em> 3 o'clock.</td></tr>
-      <tr><td>Existence 存在</td><td>部屋に猫がいます。</td><td>There is a cat <em>in</em> the room.</td></tr>
-    </table>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Fill in the particle: 学校 <input type="text" id="q5_1" placeholder="？"> 行きます。</p>
-        <button class="btn-check" onclick="checkFill('q5_1',['に'],'fb5_1')">Check ✓</button>
-        <span class="feedback" id="fb5_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the particle: 3時 <input type="text" id="q5_2" placeholder="？"> 寝ます。(I sleep at 3.)</p>
-        <button class="btn-check" onclick="checkFill('q5_2',['に'],'fb5_2')">Check ✓</button>
-        <span class="feedback" id="fb5_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> 部屋に猫がいます。What is に used for here?</p>
-        <div class="choices">
-          <label><input type="radio" name="g5q3" value="a"> a) Direction (going somewhere)</label>
-          <label><input type="radio" name="g5q3" value="b"> b) Time (point in time)</label>
-          <label><input type="radio" name="g5q3" value="c"> c) Existence / Location</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g5q3','c','fb5_3')">Check ✓</button>
-        <span class="feedback" id="fb5_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Fill in the particle: 東京 <input type="text" id="q5_4" placeholder="？"> 住んでいます。(I live in Tokyo.)</p>
-        <button class="btn-check" onclick="checkFill('q5_4',['に'],'fb5_4')">Check ✓</button>
-        <span class="feedback" id="fb5_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I go to school at 8 o'clock."</em></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev5_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev5_5">8時に学校に行きます。<small>Hachi-ji ni gakkō ni ikimasu.</small></div>
-      </div>
-    </div>
-  </div>
+  <div class="quiz-section">
+    <h3>Practice Questions · 練習問題</h3>
 
-  <!-- ══════════════════ 6. 〜ます ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">6</div>
-      <div class="card-title">
-        <h2>〜ます (masu) — Polite Verbs</h2>
-        <p>Present / future polite form &nbsp;·&nbsp; 丁寧な動詞の形</p>
-      </div>
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q1.</strong> Convert to たい form: 行きます → 行き <input type="text" id="q10_1" placeholder="？"></p>
+      <button class="btn-check" onclick="checkFill('q10_1',['たいです','たい'],'fb10_1','expl10_1')">Check ✓</button>
+      <span class="feedback" id="fb10_1"></span>
+      <div class="expl" id="expl10_1">Take the verb stem (ます form minus ます) and add <strong>たいです</strong>. 行き (stem) ＋ たいです = 行きたいです. It works for all verbs: 食べたい, 飲みたい, 見たい, したい. ます形のますをたいですに変えます。</div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p>In polite Japanese, verbs end in <strong>〜ます</strong>. This is the standard form for beginners and everyday conversation.</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>丁寧な話し方では動詞を「〜ます」の形にします。初心者はまずこの形を覚えましょう。</p>
-    </div>
-    <table>
-      <tr><th>Dictionary Form</th><th>ます-form</th><th>English</th></tr>
-      <tr><td>食べる (taberu)</td><td>食べます (tabemasu)</td><td>eat</td></tr>
-      <tr><td>飲む (nomu)</td><td>飲みます (nomimasu)</td><td>drink</td></tr>
-      <tr><td>行く (iku)</td><td>行きます (ikimasu)</td><td>go</td></tr>
-      <tr><td>見る (miru)</td><td>見ます (mimasu)</td><td>see / watch</td></tr>
-      <tr><td>する (suru)</td><td>します (shimasu)</td><td>do</td></tr>
-    </table>
-    <div class="tip">
-      <strong>Negative:</strong> 〜ません → 食べません &nbsp;·&nbsp;
-      <strong>Past:</strong> 〜ました → 食べました &nbsp;·&nbsp;
-      <strong>Past Neg:</strong> 〜ませんでした → 食べませんでした
-    </div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Convert to ます form: 食べる → 食べ <input type="text" id="q6_1" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q6_1',['ます'],'fb6_1')">Check ✓</button>
-        <span class="feedback" id="fb6_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Make negative: 飲みます → 飲み <input type="text" id="q6_2" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q6_2',['ません'],'fb6_2')">Check ✓</button>
-        <span class="feedback" id="fb6_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> What is the past form of 行きます?</p>
-        <div class="choices">
-          <label><input type="radio" name="g6q3" value="a"> a) 行きません</label>
-          <label><input type="radio" name="g6q3" value="b"> b) 行きました</label>
-          <label><input type="radio" name="g6q3" value="c"> c) 行きたいです</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g6q3','b','fb6_3')">Check ✓</button>
-        <span class="feedback" id="fb6_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Convert to past: 見ます → 見 <input type="text" id="q6_4" placeholder="？"> (I watched)</p>
-        <button class="btn-check" onclick="checkFill('q6_4',['ました'],'fb6_4')">Check ✓</button>
-        <span class="feedback" id="fb6_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I didn't drink coffee yesterday."</em> <small>💡 昨日 = yesterday / コーヒー = coffee</small></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev6_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev6_5">昨日コーヒーを飲みませんでした。<small>Kinō kōhī wo nomimasendeshita.</small></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ══════════════════ 7. い & な Adjectives ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">7</div>
-      <div class="card-title">
-        <h2>い & な Adjectives</h2>
-        <p>Two types of adjectives &nbsp;·&nbsp; 2種類の形容詞</p>
-      </div>
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q2.</strong> Make negative: 食べたいです → 食べ <input type="text" id="q10_2" placeholder="？"> です (I don't want to eat)</p>
+      <button class="btn-check" onclick="checkFill('q10_2',['たくない'],'fb10_2','expl10_2')">Check ✓</button>
+      <span class="feedback" id="fb10_2"></span>
+      <div class="expl" id="expl10_2">たい behaves like an <strong>い-adjective</strong>: negative = たい → <strong>たくない</strong>. (Same rule as 大きい → 大きくない.) 食べたくないです = "I don't want to eat." たいはい形容詞と同じ活用です。</div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p>Japanese has two adjective types: <strong>い-adjectives</strong> (end in い, conjugate on their own) and <strong>な-adjectives</strong> (need な before a noun).</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>日本語の形容詞には「い形容詞」と「な形容詞」の2種類があります。名詞の前につけるときの形が違います。</p>
-    </div>
-    <table>
-      <tr><th></th><th>い-adjective 例</th><th>な-adjective 例</th></tr>
-      <tr><td>Base</td><td>大きい (big)</td><td>静か (quiet)</td></tr>
-      <tr><td>+ Noun</td><td>大きい犬 (big dog)</td><td>静かな部屋 (quiet room)</td></tr>
-      <tr><td>Negative</td><td>大きくない</td><td>静かじゃない</td></tr>
-      <tr><td>Past</td><td>大きかった</td><td>静かでした</td></tr>
-    </table>
-    <div class="tip">
-      <strong>Common い:</strong> 大きい・小さい・新しい・古い・高い・安い<br>
-      <strong>Common な:</strong> 好き・きれい・便利・有名・静か
-    </div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> 大きい is which adjective type?</p>
-        <div class="choices">
-          <label><input type="radio" name="g7q1" value="a"> a) い-adjective</label>
-          <label><input type="radio" name="g7q1" value="b"> b) な-adjective</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g7q1','a','fb7_1')">Check ✓</button>
-        <span class="feedback" id="fb7_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the blank: 静か <input type="text" id="q7_2" placeholder="？"> 部屋 (quiet room)</p>
-        <button class="btn-check" onclick="checkFill('q7_2',['な'],'fb7_2')">Check ✓</button>
-        <span class="feedback" id="fb7_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> Fill in negative: 大きい → 大きく <input type="text" id="q7_3" placeholder="？"> (not big)</p>
-        <button class="btn-check" onclick="checkFill('q7_3',['ない'],'fb7_3')">Check ✓</button>
-        <span class="feedback" id="fb7_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> ⚠️ Tricky! きれい ends in い — which type is it?</p>
-        <div class="choices">
-          <label><input type="radio" name="g7q4" value="a"> a) い-adjective</label>
-          <label><input type="radio" name="g7q4" value="b"> b) な-adjective (きれいな〜)</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g7q4','b','fb7_4')">Check ✓</button>
-        <span class="feedback" id="fb7_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Fill in past form: 小さい → 小さ <input type="text" id="q7_5" placeholder="？"> (was small)</p>
-        <button class="btn-check" onclick="checkFill('q7_5',['かった'],'fb7_5')">Check ✓</button>
-        <span class="feedback" id="fb7_5"></span>
-      </div>
-    </div>
-  </div>
 
-  <!-- ══════════════════ 8. 〜ています ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">8</div>
-      <div class="card-title">
-        <h2>〜ています (te imasu) — Ongoing Action</h2>
-        <p>Present progressive &nbsp;·&nbsp; 進行形 (~ing)</p>
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q3.</strong> 〜たいです is used to express:</p>
+      <div class="choices">
+        <label><input type="radio" name="g10q3" value="a"> a) Someone else's desire ("He wants to…")</label>
+        <label><input type="radio" name="g10q3" value="b"> b) Your own desire ("I want to…")</label>
+        <label><input type="radio" name="g10q3" value="c"> c) A command ("You must…")</label>
       </div>
+      <button class="btn-check" onclick="checkMC('g10q3','b','fb10_3','expl10_3')">Check ✓</button>
+      <span class="feedback" id="fb10_3"></span>
+      <div class="expl" id="expl10_3">たいです is <strong>only for your own desires</strong>. For others, use たがっています: 彼は行きたがっています (He seems to want to go). Using たい for others sounds unnatural in Japanese. たいです＝自分の気持ちのみ。他人には「〜たがっています」を使います。</div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p>Attach <strong>〜ています</strong> to the て-form of a verb to express an action in progress — like English "-ing."</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>動詞のて形に「います」をつけると、今まさに行われていることを表せます。英語の「〜ing」と同じです。</p>
-    </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>食べています。</td><td>Tabete imasu.</td><td>I am eating.</td></tr>
-      <tr><td>本を読んでいます。</td><td>Hon wo yonde imasu.</td><td>I am reading a book.</td></tr>
-      <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
-      <tr><td>結婚しています。</td><td>Kekkon shite imasu.</td><td>I am married.</td></tr>
-    </table>
-    <div class="tip"><strong>て-form guide:</strong> 食べる→食べて &nbsp;/&nbsp; 飲む→飲んで &nbsp;/&nbsp; 読む→読んで &nbsp;/&nbsp; 書く→書いて</div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> て-form of 飲む → 飲ん <input type="text" id="q8_1" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q8_1',['で'],'fb8_1')">Check ✓</button>
-        <span class="feedback" id="fb8_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Fill in the blank: 食べ <input type="text" id="q8_2" placeholder="？"> います。(I am eating.)</p>
-        <button class="btn-check" onclick="checkFill('q8_2',['て'],'fb8_2')">Check ✓</button>
-        <span class="feedback" id="fb8_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> What does 結婚しています mean?</p>
-        <div class="choices">
-          <label><input type="radio" name="g8q3" value="a"> a) I want to get married.</label>
-          <label><input type="radio" name="g8q3" value="b"> b) I am married. (current state)</label>
-          <label><input type="radio" name="g8q3" value="c"> c) I got married yesterday.</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g8q3','b','fb8_3')">Check ✓</button>
-        <span class="feedback" id="fb8_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> て-form of 書く → 書い <input type="text" id="q8_4" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q8_4',['て'],'fb8_4')">Check ✓</button>
-        <span class="feedback" id="fb8_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I am studying Japanese."</em> <small>💡 study = 勉強する → te-form: 勉強して</small></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev8_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev8_5">日本語を勉強しています。<small>Nihongo wo benkyō shite imasu.</small></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ══════════════════ 9. 〜ですか？ ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">9</div>
-      <div class="card-title">
-        <h2>〜ですか？ (desu ka) — Questions</h2>
-        <p>Yes/No questions &nbsp;·&nbsp; 疑問文の作り方</p>
-      </div>
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q4.</strong> Convert to past: 行きたいです → 行き <input type="text" id="q10_4" placeholder="？"> です (I wanted to go)</p>
+      <button class="btn-check" onclick="checkFill('q10_4',['たかった'],'fb10_4','expl10_4')">Check ✓</button>
+      <span class="feedback" id="fb10_4"></span>
+      <div class="expl" id="expl10_4">Again, たい conjugates like an い-adjective: past = たい → <strong>たかった</strong>. 行きたかったです = "I wanted to go (but didn't)." Often implies regret. 行きたかったのに… = "I wanted to go, but…" (regretful). たい→たかった（過去形）。</div>
     </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p>To make a yes/no question, just add <strong>か</strong> at the end. Word order does NOT change — unlike English!</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>文の最後に「か」をつけるだけで疑問文になります。語順は変わりません。とても簡単です！</p>
-    </div>
-    <table>
-      <tr><th>Statement 文</th><th>Question 疑問文</th></tr>
-      <tr><td>これはペンです。</td><td>これはペンですか？</td></tr>
-      <tr><td>食べます。</td><td>食べますか？</td></tr>
-      <tr><td>好きです。</td><td>好きですか？</td></tr>
-    </table>
-    <div class="tip">
-      <strong>Question words 疑問詞:</strong> 何(what) · どこ(where) · いつ(when) · だれ(who) · なぜ(why) · いくら(how much)
-    </div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Turn into a question: これはりんごです → これはりんご <input type="text" id="q9_1" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q9_1',['ですか','ですか？'],'fb9_1')">Check ✓</button>
-        <span class="feedback" id="fb9_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> How do you say "Yes, that's right"?</p>
-        <div class="choices">
-          <label><input type="radio" name="g9q2" value="a"> a) はい、そうです。</label>
-          <label><input type="radio" name="g9q2" value="b"> b) いいえ、そうです。</label>
-          <label><input type="radio" name="g9q2" value="c"> c) はい、違います。</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g9q2','a','fb9_2')">Check ✓</button>
-        <span class="feedback" id="fb9_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> What question word means "where"? (Write in Japanese)</p>
-        <p><input type="text" id="q9_3" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q9_3',['どこ'],'fb9_3')">Check ✓</button>
-        <span class="feedback" id="fb9_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Turn into a question: 田中さんは学生です → 田中さんは学生 <input type="text" id="q9_4" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q9_4',['ですか','ですか？'],'fb9_4')">Check ✓</button>
-        <span class="feedback" id="fb9_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"Do you eat sushi?"</em></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev9_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev9_5">寿司を食べますか？<small>Sushi wo tabemasu ka?</small></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- ══════════════════ 10. 〜たいです ══════════════════ -->
-  <div class="card">
-    <div class="card-header">
-      <div class="num">10</div>
-      <div class="card-title">
-        <h2>〜たいです (tai desu) — "I Want To"</h2>
-        <p>Expressing desire &nbsp;·&nbsp; 願望の表現</p>
-      </div>
-    </div>
-    <div class="lang-block en">
-      <div class="lang-label">English</div>
-      <p>To say you <em>want to do</em> something, replace <strong>〜ます</strong> with <strong>〜たいです</strong>. Used only for your own desires.</p>
-    </div>
-    <div class="lang-block jp">
-      <div class="lang-label">日本語</div>
-      <p>「〜たいです」は自分がしたいことを表す表現です。動詞のます形の「ます」を「たいです」に置き換えます。</p>
-    </div>
-    <table>
-      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
-      <tr><td>寿司を食べたいです。</td><td>Sushi wo tabetai desu.</td><td>I want to eat sushi.</td></tr>
-      <tr><td>日本に行きたいです。</td><td>Nihon ni ikitai desu.</td><td>I want to go to Japan.</td></tr>
-      <tr><td>日本語を話したいです。</td><td>Nihongo wo hanashitai desu.</td><td>I want to speak Japanese.</td></tr>
-    </table>
-    <div class="tip">
-      <strong>Negative:</strong> 〜たくないです → 食べたくないです (I don't want to eat)<br>
-      <strong>Past:</strong> 〜たかったです → 行きたかったです (I wanted to go)
-    </div>
-    <div class="quiz-section">
-      <h3>Practice Questions · 練習問題</h3>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q1.</strong> Convert to たい form: 行きます → 行き <input type="text" id="q10_1" placeholder="？"></p>
-        <button class="btn-check" onclick="checkFill('q10_1',['たいです','たい'],'fb10_1')">Check ✓</button>
-        <span class="feedback" id="fb10_1"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q2.</strong> Make negative: 食べたいです → 食べ <input type="text" id="q10_2" placeholder="？"> です</p>
-        <button class="btn-check" onclick="checkFill('q10_2',['たくない'],'fb10_2')">Check ✓</button>
-        <span class="feedback" id="fb10_2"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q3.</strong> 〜たいです is used to express:</p>
-        <div class="choices">
-          <label><input type="radio" name="g10q3" value="a"> a) Someone else's desire ("He wants to…")</label>
-          <label><input type="radio" name="g10q3" value="b"> b) Your own desire ("I want to…")</label>
-          <label><input type="radio" name="g10q3" value="c"> c) A command ("You must…")</label>
-        </div>
-        <button class="btn-check" onclick="checkMC('g10q3','b','fb10_3')">Check ✓</button>
-        <span class="feedback" id="fb10_3"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q4.</strong> Convert to past: 行きたいです → 行き <input type="text" id="q10_4" placeholder="？"> です</p>
-        <button class="btn-check" onclick="checkFill('q10_4',['たかった'],'fb10_4')">Check ✓</button>
-        <span class="feedback" id="fb10_4"></span>
-      </div>
-      <div class="quiz-item">
-        <p class="q-text"><strong>Q5.</strong> Translate: <em>"I want to study Japanese."</em> <small>💡 study = 勉強します</small></p>
-        <button class="btn-reveal" onclick="toggleReveal('rev10_5')">Show Answer 💡</button>
-        <div class="answer-reveal" id="rev10_5">日本語を勉強したいです。<small>Nihongo wo benkyō shitai desu.</small></div>
+    <div class="quiz-item">
+      <p class="q-text"><strong>Q5.</strong> Translate: <em>"I want to study Japanese."</em> <small>💡 study = 勉強します</small></p>
+      <button class="btn-reveal" onclick="toggleReveal('rev10_5')">Show Answer 💡</button>
+      <div class="answer-reveal" id="rev10_5">
+        日本語を勉強したいです。
+        <small>Nihongo wo benkyō shitai desu.</small>
+        <div class="expl-inner">勉強します → stem: 勉強し ＋ たいです = 勉強し<strong>たいです</strong>. Note: the を particle stays the same (日本語を). たいです does not change the particles in the rest of the sentence. 他の助詞はそのままで、ますをたいですに変えるだけ。</div>
       </div>
     </div>
   </div>
+</div>
 
 </main>
 
@@ -976,7 +990,7 @@
 </footer>
 
 <script>
-  function checkFill(inputId, answers, feedbackId) {
+  function checkFill(inputId, answers, feedbackId, explId) {
     const val = document.getElementById(inputId).value.trim();
     const fb  = document.getElementById(feedbackId);
     const hit = answers.some(a => a === val || a.toLowerCase() === val.toLowerCase());
@@ -987,9 +1001,10 @@
       fb.textContent = '✗  Answer: ' + answers[0];
       fb.className = 'feedback wrong';
     }
+    if (explId) document.getElementById(explId).style.display = 'block';
   }
 
-  function checkMC(name, correctValue, feedbackId) {
+  function checkMC(name, correctValue, feedbackId, explId) {
     const sel = document.querySelector(`input[name="${name}"]:checked`);
     const fb  = document.getElementById(feedbackId);
     if (!sel) {
@@ -1004,6 +1019,7 @@
       fb.textContent = '✗  Not quite — try again!';
       fb.className = 'feedback wrong';
     }
+    if (explId) document.getElementById(explId).style.display = 'block';
   }
 
   function toggleReveal(revealId) {
