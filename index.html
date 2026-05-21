@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Japanese Grammar for Beginners</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f5f0eb;
+      color: #2c2c2c;
+      line-height: 1.7;
+    }
+
+    header {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      color: white;
+      text-align: center;
+      padding: 48px 24px 40px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      margin-top: 4px;
+      opacity: 0.75;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-left: 6px solid #e74c3c;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .num {
+      background: #e74c3c;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .card-title h2 {
+      font-size: 1.4rem;
+      color: #c0392b;
+    }
+
+    .card-title p {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .lang-block {
+      background: #fdf6f6;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .lang-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #e74c3c;
+      margin-bottom: 6px;
+    }
+
+    .lang-block p {
+      font-size: 0.97rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.93rem;
+    }
+
+    th {
+      background: #c0392b;
+      color: white;
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f0e8e8;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fdf6f6; }
+
+    .tip {
+      background: #fff8e1;
+      border-left: 4px solid #f39c12;
+      padding: 12px 16px;
+      border-radius: 6px;
+      margin-top: 14px;
+      font-size: 0.92rem;
+    }
+
+    .tip strong { color: #e67e22; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🗾 Japanese Grammar for Beginners</h1>
+  <p>外国人のための日本語文法入門</p>
+  <p class="subtitle">10 Essential Grammar Points · 英語と日本語で学ぼう</p>
+</header>
+
+<main>
+
+  <!-- 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">1</div>
+      <div class="card-title">
+        <h2>です (desu) — "To Be"</h2>
+        <p>Polite sentence ending · 丁寧な断定</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p><strong>です</strong> works like "am / is / are." It always comes at the <em>end</em> of a sentence and makes speech polite.</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「です」は文の最後につける丁寧な表現です。英語の「is / am / are」にあたります。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>私は学生です。</td><td>Watashi wa gakusei desu.</td><td>I am a student.</td></tr>
+      <tr><td>これはペンです。</td><td>Kore wa pen desu.</td><td>This is a pen.</td></tr>
+      <tr><td>彼女は先生です。</td><td>Kanojo wa sensei desu.</td><td>She is a teacher.</td></tr>
+    </table>
+    <div class="tip"><strong>Negative:</strong> ではありません (dewa arimasen) = "is not"<br>私は学生ではありません。= I am not a student.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">2</div>
+      <div class="card-title">
+        <h2>は (wa) — Topic Marker</h2>
+        <p>As for ~ · 話題を示す助詞</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p><strong>は</strong> (pronounced "wa") marks what the sentence is <em>about</em>. Think of it as "As for ~" or "Speaking of ~."</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「は」は文の話題（トピック）を示す助詞です。「〜について言えば」というニュアンスです。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>私は田中です。</td><td>Watashi wa Tanaka desu.</td><td>I am Tanaka.</td></tr>
+      <tr><td>東京は大きいです。</td><td>Tōkyō wa ōkii desu.</td><td>Tokyo is big.</td></tr>
+      <tr><td>猫はかわいいです。</td><td>Neko wa kawaii desu.</td><td>Cats are cute.</td></tr>
+    </table>
+    <div class="tip"><strong>Tip:</strong> は is pronounced "wa," not "ha," when used as a particle!</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">3</div>
+      <div class="card-title">
+        <h2>が (ga) — Subject Marker</h2>
+        <p>Emphasis & subject · 主語・強調を示す助詞</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p><strong>が</strong> marks the grammatical subject with emphasis. Use it for new information, focus, or with verbs like "like," "can," and "want."</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「が」は文の主語を強調して示す助詞です。新しい情報や「好き・できる・ほしい」などの動詞と一緒に使います。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
+      <tr><td>私が田中です。</td><td>Watashi ga Tanaka desu.</td><td><em>I</em> am Tanaka. (not someone else)</td></tr>
+      <tr><td>猫が好きです。</td><td>Neko ga suki desu.</td><td>I like cats.</td></tr>
+    </table>
+    <div class="tip"><strong>は vs が:</strong> 私は学生です = I am a student (general). 私が学生です = <em>I</em> am the student (emphasis).</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">4</div>
+      <div class="card-title">
+        <h2>を (wo) — Object Marker</h2>
+        <p>Direct object · 目的語を示す助詞</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p><strong>を</strong> (pronounced "o") marks the direct object — the thing that receives the action of the verb.</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「を」は動詞の目的語（動作を受けるもの）を示す助詞です。読み方は「お」です。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>水を飲みます。</td><td>Mizu wo nomimasu.</td><td>I drink water.</td></tr>
+      <tr><td>本を読みます。</td><td>Hon wo yomimasu.</td><td>I read a book.</td></tr>
+      <tr><td>音楽を聴きます。</td><td>Ongaku wo kikimasu.</td><td>I listen to music.</td></tr>
+    </table>
+    <div class="tip"><strong>Pattern:</strong> [Subject] は + [Object] を + [Verb] → 私は寿司を食べます。(I eat sushi.)</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">5</div>
+      <div class="card-title">
+        <h2>に (ni) — Direction, Time & Location</h2>
+        <p>to / at / in · 方向・時間・場所</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p><strong>に</strong> has three main uses: (1) destination "to," (2) specific point in time "at/on," (3) location of existence "in/at."</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「に」は①方向（〜へ）、②時間（〜時に）、③存在の場所（〜にいる/ある）の3つの意味で使います。</p>
+    </div>
+    <table>
+      <tr><th>使い方</th><th>日本語</th><th>English</th></tr>
+      <tr><td>Direction (方向)</td><td>学校に行きます。</td><td>I go <em>to</em> school.</td></tr>
+      <tr><td>Time (時間)</td><td>3時に来ます。</td><td>I come <em>at</em> 3 o'clock.</td></tr>
+      <tr><td>Existence (存在)</td><td>部屋に猫がいます。</td><td>There is a cat <em>in</em> the room.</td></tr>
+    </table>
+  </div>
+
+  <!-- 6 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">6</div>
+      <div class="card-title">
+        <h2>〜ます (masu) — Polite Verbs</h2>
+        <p>Present / future polite form · 丁寧な動詞の形</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p>In polite Japanese, verbs end in <strong>〜ます</strong>. This is the standard form for beginners and everyday conversation.</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>丁寧な話し方では動詞を「〜ます」の形にします。初心者はまずこの形を覚えましょう。</p>
+    </div>
+    <table>
+      <tr><th>Dictionary Form</th><th>ます-form</th><th>English</th></tr>
+      <tr><td>食べる (taberu)</td><td>食べます (tabemasu)</td><td>eat</td></tr>
+      <tr><td>飲む (nomu)</td><td>飲みます (nomimasu)</td><td>drink</td></tr>
+      <tr><td>行く (iku)</td><td>行きます (ikimasu)</td><td>go</td></tr>
+      <tr><td>見る (miru)</td><td>見ます (mimasu)</td><td>see / watch</td></tr>
+      <tr><td>する (suru)</td><td>します (shimasu)</td><td>do</td></tr>
+    </table>
+    <div class="tip">
+      <strong>Negative:</strong> 〜ません → 食べません (I don't eat)<br>
+      <strong>Past:</strong> 〜ました → 食べました (I ate)<br>
+      <strong>Past Negative:</strong> 〜ませんでした → 食べませんでした (I didn't eat)
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">7</div>
+      <div class="card-title">
+        <h2>い & な Adjectives</h2>
+        <p>Two types of adjectives · 2種類の形容詞</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p>Japanese has two adjective types: <strong>い-adjectives</strong> (end in い, conjugate on their own) and <strong>な-adjectives</strong> (need な before a noun).</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>日本語の形容詞には「い形容詞」と「な形容詞」の2種類があります。名詞の前につけるときの形が違います。</p>
+    </div>
+    <table>
+      <tr><th></th><th>い-adjective 例</th><th>な-adjective 例</th></tr>
+      <tr><td>Base</td><td>大きい (big)</td><td>静か (quiet)</td></tr>
+      <tr><td>+ Noun</td><td>大きい犬 (big dog)</td><td>静かな部屋 (quiet room)</td></tr>
+      <tr><td>Negative</td><td>大きくない</td><td>静かじゃない</td></tr>
+      <tr><td>Past</td><td>大きかった</td><td>静かでした</td></tr>
+    </table>
+    <div class="tip">
+      <strong>Common い:</strong> 大きい(big), 小さい(small), 新しい(new), 古い(old), 高い(expensive), 安い(cheap)<br>
+      <strong>Common な:</strong> 好き(like), きれい(pretty), 便利(convenient), 有名(famous)
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">8</div>
+      <div class="card-title">
+        <h2>〜ています (te imasu) — Ongoing Action</h2>
+        <p>Present progressive · 進行形 (~ing)</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p>Attach <strong>〜ています</strong> to the て-form of a verb to express an action in progress — like English "-ing."</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>動詞のて形に「います」をつけると、今まさに行われていることを表せます。英語の「〜ing」と同じです。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>食べています。</td><td>Tabete imasu.</td><td>I am eating.</td></tr>
+      <tr><td>本を読んでいます。</td><td>Hon wo yonde imasu.</td><td>I am reading a book.</td></tr>
+      <tr><td>雨が降っています。</td><td>Ame ga futte imasu.</td><td>It is raining.</td></tr>
+      <tr><td>結婚しています。</td><td>Kekkon shite imasu.</td><td>I am married.</td></tr>
+    </table>
+    <div class="tip"><strong>て-form quick guide:</strong> 食べる→食べて / 飲む→飲んで / 読む→読んで / 書く→書いて</div>
+  </div>
+
+  <!-- 9 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">9</div>
+      <div class="card-title">
+        <h2>〜ですか？ (desu ka) — Questions</h2>
+        <p>Yes/No questions · 疑問文の作り方</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p>To make a yes/no question, just add <strong>か</strong> at the end of a statement. Word order does NOT change (unlike English)!</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>文の最後に「か」をつけるだけで疑問文になります。語順は変わりません。とても簡単です！</p>
+    </div>
+    <table>
+      <tr><th>Statement (文)</th><th>Question (疑問文)</th></tr>
+      <tr><td>これはペンです。(This is a pen.)</td><td>これはペンですか？(Is this a pen?)</td></tr>
+      <tr><td>食べます。(I eat.)</td><td>食べますか？(Do you eat?)</td></tr>
+      <tr><td>好きです。(I like it.)</td><td>好きですか？(Do you like it?)</td></tr>
+    </table>
+    <div class="tip">
+      <strong>Question words (疑問詞):</strong> 何(nani)=what · どこ(doko)=where · いつ(itsu)=when · だれ(dare)=who · なぜ(naze)=why · いくら(ikura)=how much
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="num">10</div>
+      <div class="card-title">
+        <h2>〜たいです (tai desu) — "I Want To"</h2>
+        <p>Expressing desire · 願望の表現</p>
+      </div>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">English</div>
+      <p>To say you <em>want to do</em> something, replace <strong>〜ます</strong> with <strong>〜たいです</strong>. This is used only for your own desires.</p>
+    </div>
+    <div class="lang-block">
+      <div class="lang-label">日本語</div>
+      <p>「〜たいです」は自分がしたいことを表す表現です。動詞のます形の「ます」を「たいです」に置き換えます。</p>
+    </div>
+    <table>
+      <tr><th>日本語</th><th>Romaji</th><th>English</th></tr>
+      <tr><td>寿司を食べたいです。</td><td>Sushi wo tabetai desu.</td><td>I want to eat sushi.</td></tr>
+      <tr><td>日本に行きたいです。</td><td>Nihon ni ikitai desu.</td><td>I want to go to Japan.</td></tr>
+      <tr><td>日本語を話したいです。</td><td>Nihongo wo hanashitai desu.</td><td>I want to speak Japanese.</td></tr>
+    </table>
+    <div class="tip">
+      <strong>Negative:</strong> 〜たくないです → 食べたくないです (I don't want to eat)<br>
+      <strong>Past:</strong> 〜たかったです → 行きたかったです (I wanted to go)
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Japanese Grammar for Beginners · 外国人のための日本語文法入門
+</footer>
+
+</body>
+</html>
