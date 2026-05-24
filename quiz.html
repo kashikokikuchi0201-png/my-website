@@ -513,9 +513,9 @@ const questions = [
     grammar:"〜ば / 〜れば", romaji:"~ba / ~reba",
     en_explain:"Irregular: する → すれば. Used to express 'if you do ~, the result will be ~'.",
     jp_kana:"「する」の　ばけいは　「すれば」です（きそくへんかく）。もっとれんしゅうすれば　じょうずになります。",
-    example_jp:"もっと練習すれば、上手になります。", example_kana:"もっとれんしゅうすれば、じょうずになります。",
-    example_rom:"Motto renshū sureba, jōzu ni narimasu.", example_en:"If you practice more, you will improve.",
-    type:"fill", q:"Complete with ば-form of する:\n「もっと練習 ___ 、上手になります。」\n(Write in hiragana)",
+    example_jp:"早く寝れば、元気になります。", example_kana:"はやくねれば、げんきになります。",
+    example_rom:"Hayaku nereba, genki ni narimasu.", example_en:"If you sleep early, you will feel better.",
+    type:"fill", q:"Complete with ば-form of する:\n「毎日勉強 ___ 、試験に合格できます。」\n(Write in hiragana)",
     answer:"すれば",
     fb_en:"✅ する → すれば. Irregular — memorise this!",
     fb_jp:"「する」→「すれば」（きそくへんかく）。もっとれんしゅうすれば　じょうずになります。"
@@ -550,8 +550,8 @@ const questions = [
     grammar:"〜ても", romaji:"~te mo",
     en_explain:"い-adjective + ても: remove い, add くても. 高い → 高くても.",
     jp_kana:"いけいようしのてもけい：い　をとって　くても　をつけます。「たかい」→「たかくても」。",
-    example_jp:"高くても、買いたいです。", example_kana:"たかくても、かいたいです。",
-    example_rom:"Takakute mo, kaitai desu.", example_en:"Even if it is expensive, I want to buy it.",
+    example_jp:"疲れても、あきらめません。", example_kana:"つかれても、あきらめません。",
+    example_rom:"Tsukarete mo, akiramemasen.", example_en:"Even if I get tired, I will not give up.",
     type:"fill", q:"「高い」をてものかたちにしてください。\nChange 高い (expensive) to ても-form. (Write in hiragana)",
     answer:"たかくても",
     fb_en:"✅ 高い → 高くても → たかくても. い-adj: remove い + くても.",
@@ -561,23 +561,23 @@ const questions = [
     grammar:"〜ても", romaji:"~te mo",
     en_explain:"な-adjective + ても: add でも. 静か → 静かでも.",
     jp_kana:"なけいようしのてもけい：でも　をつけます。「しずか」→「しずかでも」。",
-    example_jp:"静かでも、集中できません。", example_kana:"しずかでも、しゅうちゅうできません。",
-    example_rom:"Shizuka de mo, shūchū dekimasen.", example_en:"Even if it is quiet, I cannot concentrate.",
-    type:"fill", q:"「静か」（なけいようし）をてものかたちにしてください。\nChange 静か (na-adj) to ても-form. (Write in hiragana)",
-    answer:"しずかでも",
-    fb_en:"✅ 静か → 静かでも → しずかでも. な-adj: add でも.",
-    fb_jp:"「しずか」＋でも＝「しずかでも」。なけいようしには　でも　をつけます。"
+    example_jp:"暑くても、窓を開けません。", example_kana:"あつくても、まどをあけません。",
+    example_rom:"Atsukute mo, mado wo akemasen.", example_en:"Even if it is hot, I do not open the window.",
+    type:"fill", q:"「便利」（べんり、なけいようし）をてものかたちにしてください。\nChange 便利 [convenient] (na-adj) to ても-form. (Write in hiragana)",
+    answer:"べんりでも",
+    fb_en:"✅ 便利 → 便利でも → べんりでも. な-adj: add でも.",
+    fb_jp:"「べんり」＋でも＝「べんりでも」。なけいようしには　でも　をつけます。"
   },
   {
     grammar:"〜ても", romaji:"~te mo",
     en_explain:"Verbs: て-form + も. 行く → 行って → 行っても.",
     jp_kana:"どうし：てけい＋も。「いく」→「いって」→「いっても」。",
-    example_jp:"どこに行っても、友だちができます。", example_kana:"どこにいっても、ともだちができます。",
-    example_rom:"Doko ni itte mo, tomodachi ga dekimasu.", example_en:"Wherever I go, I make friends.",
-    type:"fill", q:"「行く」をてものかたちにしてください。\nChange 行く to ても-form. (Write in hiragana)",
-    answer:"いっても",
-    fb_en:"✅ 行く → 行って → 行っても → いっても. て-form of 行く is 行って (not 行いて!).",
-    fb_jp:"「いく」のてけいは　「いって」→「いっても」。てけい＋も＝ても。"
+    example_jp:"雨が降っても、試合は続きます。", example_kana:"あめがふっても、しあいはつづきます。",
+    example_rom:"Ame ga futte mo, shiai wa tsuzukimasu.", example_en:"Even if it rains, the game continues.",
+    type:"fill", q:"「食べる」をてものかたちにしてください。\nChange 食べる to ても-form. (Write in hiragana)",
+    answer:"たべても",
+    fb_en:"✅ 食べる → て-form 食べて → 食べても → たべても.",
+    fb_jp:"「たべる」のてけいは「たべて」→「たべて」＋も＝「たべても」。"
   },
 
   /* ━━━ 3. 〜のに ━━━ */
@@ -668,8 +668,8 @@ const questions = [
     grammar:"〜ために", romaji:"~tame ni",
     en_explain:"Purpose: dictionary form of verb + ために. 痩せる = to lose weight.",
     jp_kana:"「やせる」＋ために＝「やせるために」。もくてきをあらわします。",
-    example_jp:"痩せるために、毎日運動します。", example_kana:"やせるために、まいにちうんどうします。",
-    example_rom:"Yaseru tame ni, mainichi undō shimasu.", example_en:"In order to lose weight, I exercise every day.",
+    example_jp:"友達を助けるために、急いで来ました。", example_kana:"ともだちをたすけるために、いそいできました。",
+    example_rom:"Tomodachi wo tasukeru tame ni, isoide kimashita.", example_en:"I came quickly in order to help my friend.",
     type:"fill", q:"Put 痩せる into ために-form, then complete:\n「___ 、毎日運動します。」\n(In order to lose weight, I exercise every day.) (Write in hiragana)",
     answer:"やせるために",
     fb_en:"✅ 痩せる (dictionary form) + ために = やせるために.",
@@ -679,9 +679,9 @@ const questions = [
     grammar:"〜ために", romaji:"~tame ni",
     en_explain:"Purpose: dictionary form + ために. 日本に行く = to go to Japan.",
     jp_kana:"「にほんにいく」＋ために＝「にほんにいくために」。",
-    example_jp:"日本に行くために、お金を貯めています。", example_kana:"にほんにいくために、おかねをためています。",
-    example_rom:"Nihon ni iku tame ni, okane wo tamete imasu.", example_en:"I am saving money in order to go to Japan.",
-    type:"fill", q:"Put 日本に行く into ために-form:\n「___ 、お金を貯めています。」\n(Write in hiragana)",
+    example_jp:"健康のために、毎日野菜を食べます。", example_kana:"けんこうのために、まいにちやさいをたべます。",
+    example_rom:"Kenkō no tame ni, mainichi yasai wo tabemasu.", example_en:"I eat vegetables every day for my health.",
+    type:"fill", q:"Put 日本に行く into ために-form:\n「___ 、アルバイトをしています。」\n(I work part-time in order to go to Japan. Write in hiragana)",
     answer:"にほんにいくために",
     fb_en:"✅ 行く (dictionary form) + ために = 行くために = にほんにいくために.",
     fb_jp:"「にほんにいく」＋ために。「いく」はじしょけいなので　そのまま＋ためにをつけます。"
@@ -690,9 +690,9 @@ const questions = [
     grammar:"〜ために", romaji:"~tame ni",
     en_explain:"Purpose: dictionary form + ために. 医者になる = to become a doctor.",
     jp_kana:"「いしゃになる」＋ために＝もくてきをあらわします。",
-    example_jp:"医者になるために、一生懸命勉強しています。", example_kana:"いしゃになるために、いっしょうけんめいべんきょうしています。",
-    example_rom:"Isha ni naru tame ni, isshoukenmei benkyō shite imasu.", example_en:"I study hard in order to become a doctor.",
-    type:"fill", q:"Complete:\n「医者になる ___ 、一生懸命勉強しています。」",
+    example_jp:"将来のために、今から貯金しています。", example_kana:"しょうらいのために、いまからちょきんしています。",
+    example_rom:"Shōrai no tame ni, ima kara chokín shite imasu.", example_en:"I am saving money from now for my future.",
+    type:"fill", q:"Complete:\n「パイロットになる ___ 、英語を勉強しています。」\n(In order to become a pilot, I study English.)",
     answer:"ために",
     fb_en:"✅ なる (dictionary form) + ために = なるために. 'In order to become a doctor.'",
     fb_jp:"「なる」はじしょけい。「なる」＋ために＝「なるために」。もくてきをあらわします。"
@@ -749,12 +749,12 @@ const questions = [
     grammar:"〜ながら", romaji:"~nagara",
     en_explain:"歩く (to walk) → ます-stem: 歩き → 歩き + ながら = 歩きながら.",
     jp_kana:"「あるく」のますけいは「あるき」→「あるき」＋ながら＝「あるきながら」。",
-    example_jp:"歩きながら、電話しました。", example_kana:"あるきながら、でんわしました。",
-    example_rom:"Aruki nagara, denwa shimashita.", example_en:"I called while walking.",
-    type:"fill", q:"「歩く」をながらのかたちにして、ぶんをかんせいさせてください:\n「___ 、電話しました。」\n(Write in hiragana)",
-    answer:"あるきながら",
-    fb_en:"✅ 歩く → ます-stem 歩き → 歩きながら → あるきながら.",
-    fb_jp:"「あるく」のますけいは「あるき」→「あるき」＋ながら＝「あるきながら」。"
+    example_jp:"テレビを見ながら、ご飯を食べます。", example_kana:"テレビをみながら、ごはんをたべます。",
+    example_rom:"Terebi wo minagara, gohan wo tabemasu.", example_en:"I eat while watching TV.",
+    type:"fill", q:"「歌う」をながらのかたちにして、ぶんをかんせいさせてください:\n「___ 、シャワーを浴びます。」\n(Change 歌う (to sing) to ながら-form. Write in hiragana)",
+    answer:"うたいながら",
+    fb_en:"✅ 歌う → ます-stem 歌い → 歌いながら → うたいながら.",
+    fb_jp:"「うたう」のますけいは「うたい」→「うたい」＋ながら＝「うたいながら」。"
   },
 
   /* ━━━ 6. 〜てしまう ━━━ */
@@ -786,8 +786,8 @@ const questions = [
     grammar:"〜てしまう", romaji:"~te shimau",
     en_explain:"食べる → て-form: 食べて → 食べてしまった (ended up eating).",
     jp_kana:"「たべる」のてけい：「たべて」→「たべてしまった」。",
-    example_jp:"全部食べてしまった。", example_kana:"ぜんぶたべてしまった。",
-    example_rom:"Zenbu tabete shimatta.", example_en:"I ended up eating everything.",
+    example_jp:"鍵を家に忘れてしまった。", example_kana:"かぎをいえにわすれてしまった。",
+    example_rom:"Kagi wo ie ni wasurete shimatta.", example_en:"I ended up forgetting my keys at home.",
     type:"fill", q:"「食べる」をてしまったのかたちにしてください。\nChange 食べる to てしまった-form. (Write in hiragana)",
     answer:"たべてしまった",
     fb_en:"✅ 食べる → て-form 食べて → 食べてしまった → たべてしまった.",
@@ -797,8 +797,8 @@ const questions = [
     grammar:"〜てしまう", romaji:"~te shimau",
     en_explain:"壊す (こわす, to break) → て-form: 壊して → 壊してしまった.",
     jp_kana:"「こわす」のてけい：「こわして」→「こわしてしまった」。",
-    example_jp:"スマホを壊してしまいました。", example_kana:"スマホをこわしてしまいました。",
-    example_rom:"Sumaho wo kowashite shimaimashita.", example_en:"I ended up breaking my phone.",
+    example_jp:"電車に乗り遅れてしまいました。", example_kana:"でんしゃにのりおくれてしまいました。",
+    example_rom:"Densha ni noriókure te shimaimashita.", example_en:"I ended up missing the train.",
     type:"fill", q:"「壊す」（to break）をてしまったのかたちにしてください。\nChange 壊す to てしまった-form. (Write in hiragana)",
     answer:"こわしてしまった",
     fb_en:"✅ 壊す → て-form 壊して → 壊してしまった → こわしてしまった.",
@@ -808,8 +808,8 @@ const questions = [
     grammar:"〜てしまう", romaji:"~te shimau",
     en_explain:"寝る (ねる, to sleep/fall asleep) → casual: 寝てしまった → 寝ちゃった → ねちゃった.",
     jp_kana:"「ねる」のてけいは「ねて」→カジュアルは「ねちゃった」。",
-    example_jp:"授業中に寝ちゃった！", example_kana:"じゅぎょうちゅうにねちゃった！",
-    example_rom:"Jugyōchū ni nechatta!", example_en:"I fell asleep during class!",
+    example_jp:"財布を忘れちゃった！", example_kana:"さいふをわすれちゃった！",
+    example_rom:"Saifu wo wasurechatta!", example_en:"I forgot my wallet! (Oops!)",
     type:"fill", q:"「寝る」をカジュアルなてしまったのかたちにしてください。\nChange 寝る to casual 〜ちゃった form. (Write in hiragana)",
     answer:"ねちゃった",
     fb_en:"✅ 寝る → て-form 寝て → 寝てしまった → casual: 寝ちゃった → ねちゃった.",
@@ -845,9 +845,9 @@ const questions = [
     grammar:"〜はずだ", romaji:"~hazu da",
     en_explain:"Verb (plain present/progressive) + はずです = 'should be doing ~'.",
     jp_kana:"どうしのふつうけい（げんざい・しんこう）＋はずです＝「〜しているはずです」。",
-    example_jp:"彼は今図書館で勉強しているはずです。", example_kana:"かれはいまとしょかんでべんきょうしているはずです。",
-    example_rom:"Kare wa ima toshokan de benkyō shite iru hazu desu.", example_en:"He should be studying at the library now.",
-    type:"fill", q:"Complete:\n「彼は今勉強している ___ です。」\n(He should be studying now.)",
+    example_jp:"電車はもう出発しているはずです。", example_kana:"でんしゃはもうしゅっぱつしているはずです。",
+    example_rom:"Densha wa mō shuppatsu shite iru hazu desu.", example_en:"The train should have already departed.",
+    type:"fill", q:"Complete:\n「田中さんはもう家に帰っている ___ です。」\n(Mr. Tanaka should have already gone home.)",
     answer:"はず",
     fb_en:"✅ している (plain progressive) + はずです = 'should be studying.'",
     fb_jp:"「べんきょうしている」（ふつうけい）＋はずです。"
@@ -856,9 +856,9 @@ const questions = [
     grammar:"〜はずだ", romaji:"~hazu da",
     en_explain:"はずがない = 'there is no way that ~' / 'cannot possibly be ~'.",
     jp_kana:"「はずがない」＝「〜のはずがない」＝「〜であるわけがない」というい　みです。",
-    example_jp:"彼女がそんなことを言うはずがない。", example_kana:"かのじょがそんなことをいうはずがない。",
-    example_rom:"Kanojo ga sonna koto wo iu hazu ga nai.", example_en:"There is no way she said that.",
-    type:"fill", q:"Complete the negative form:\n「彼女がそんなことを言う ___ がない。」\n(There is no way she said that.)",
+    example_jp:"このケーキはおいしいはずです。さっき作りたてです。", example_kana:"このケーキはおいしいはずです。さっきつくりたてです。",
+    example_rom:"Kono kēki wa oishii hazu desu. Sakki tsukuritate desu.", example_en:"This cake should be delicious — it was just freshly made.",
+    type:"fill", q:"Complete the negative form:\n「あの人がそんなことをする ___ がない。」\n(There is no way that person would do such a thing.)",
     answer:"はず",
     fb_en:"✅ はずがない = 'no way / cannot possibly.' Verb plain + はずがない.",
     fb_jp:"「いう」（じしょけい）＋はずがない＝「いうはずがない」。ぜったいにありえない、というい　みです。"
@@ -867,8 +867,8 @@ const questions = [
     grammar:"〜はずだ", romaji:"~hazu da",
     en_explain:"Verb (dictionary form) + はずです = 'should / is supposed to ~'.",
     jp_kana:"どうしのじしょけい＋はずです。ちかいうちに　でんしゃがくるはずです。",
-    example_jp:"もうすぐ先生が来るはずです。", example_kana:"もうすぐせんせいがくるはずです。",
-    example_rom:"Mōsugu sensei ga kuru hazu desu.", example_en:"The teacher should come soon.",
+    example_jp:"彼女は料理が上手なはずです。", example_kana:"かのじょはりょうりがじょうずなはずです。",
+    example_rom:"Kanojo wa ryōri ga jōzu na hazu desu.", example_en:"She should be good at cooking.",
     type:"fill", q:"Complete:\n「もうすぐ電車が来る ___ です。」\n(The train should come soon.)",
     answer:"はず",
     fb_en:"✅ 来る (dictionary form) + はずです = 'should come.' Based on the schedule.",
@@ -904,9 +904,9 @@ const questions = [
     grammar:"〜らしい", romaji:"~rashii",
     en_explain:"Verb dictionary form + らしい. 来る + らしい = 来るらしい.",
     jp_kana:"どうしのじしょけい（ふつうけい）＋らしい。「くる」＋らしい＝「くるらしい」。",
-    example_jp:"社長が来るらしい。", example_kana:"しゃちょうがくるらしい。",
-    example_rom:"Shachō ga kuru rashii.", example_en:"I heard the president is coming.",
-    type:"fill", q:"Attach らしい to 「来る」(dictionary form):\n「社長が ___ 。(I heard the president is coming.)」\n(Write in hiragana)",
+    example_jp:"彼女は有名な歌手らしいよ。", example_kana:"かのじょはゆうめいなかしゅらしいよ。",
+    example_rom:"Kanojo wa yūmei na kashu rashii yo.", example_en:"I heard she is a famous singer.",
+    type:"fill", q:"Attach らしい to 「来る」(dictionary form):\n「田中先生が明日学校に ___ 。(I heard Teacher Tanaka is coming tomorrow.)」\n(Write in hiragana)",
     answer:"くるらしい",
     fb_en:"✅ 来る (dictionary) + らしい = 来るらしい = くるらしい.",
     fb_jp:"「くる」（じしょけい）＋らしい＝「くるらしい」。"
@@ -926,8 +926,8 @@ const questions = [
     grammar:"〜らしい", romaji:"~rashii",
     en_explain:"な-adj (without な) + らしい. 有名 + らしい = 有名らしい.",
     jp_kana:"なけいようし（なをとって）＋らしい。「ゆうめい」＋らしい＝「ゆうめいらしい」。",
-    example_jp:"あのレストランは有名らしい。", example_kana:"あのレストランはゆうめいらしい。",
-    example_rom:"Ano resutoran wa yūmei rashii.", example_en:"I heard that restaurant is famous.",
+    example_jp:"明日、大きな台風が来るらしい。", example_kana:"あした、おおきなたいふうがくるらしい。",
+    example_rom:"Ashita, ōkina taifū ga kuru rashii.", example_en:"I heard a big typhoon is coming tomorrow.",
     type:"fill", q:"Attach らしい to 「有名」(na-adj):\n「あのお店は ___ 。(I heard that shop is famous.)」\n(Write in hiragana)",
     answer:"ゆうめいらしい",
     fb_en:"✅ な-adj 有名 (no な) + らしい = 有名らしい = ゆうめいらしい.",
@@ -963,20 +963,20 @@ const questions = [
     grammar:"〜ようだ / 〜みたいだ", romaji:"~yō da / ~mitai da",
     en_explain:"Verb (plain progressive) + ようです = 'seems to be doing ~' [formal].",
     jp_kana:"どうし（ふつうしんこうけい）＋ようです＝「〜しているようにみえる」（ていねい）。",
-    example_jp:"彼は疲れているようです。", example_kana:"かれはつかれているようです。",
-    example_rom:"Kare wa tsukarete iru yō desu.", example_en:"He seems to be tired. [formal]",
-    type:"fill", q:"Attach ようです to 「疲れている」:\n「彼は ___ 。(He seems tired.) [formal]」\n(Write in hiragana)",
-    answer:"つかれているようです",
-    fb_en:"✅ 疲れている (plain progressive) + ようです = 疲れているようです = つかれているようです.",
-    fb_jp:"「つかれている」（ふつうしんこうけい）＋ようです＝「つかれているようです」。"
+    example_jp:"空が暗くなってきたようです。", example_kana:"そらがくらくなってきたようです。",
+    example_rom:"Sora ga kuraku natte kita yō desu.", example_en:"The sky seems to have gotten dark.",
+    type:"fill", q:"Attach ようです to 「眠い」(ねむい):\n「授業中に、彼は ___ 。(In class, he seems sleepy.) [formal]」\n(Write in hiragana)",
+    answer:"ねむいようです",
+    fb_en:"✅ 眠い (plain い-adj) + ようです = 眠いようです = ねむいようです.",
+    fb_jp:"「ねむい」（いけいようし）＋ようです＝「ねむいようです」。じぶんでみてすいりょうします。"
   },
   {
     grammar:"〜ようだ / 〜みたいだ", romaji:"~yō da / ~mitai da",
     en_explain:"ようだ → みたいだ (casual version). 雨が降るようだ → 雨が降るみたいだ.",
     jp_kana:"「ようだ」→「みたいだ」（カジュアル）。「あめがふるようだ」→「あめがふるみたいだ」。",
-    example_jp:"雨が降るみたいだね。", example_kana:"あめがふるみたいだね。",
-    example_rom:"Ame ga furu mitai da ne.", example_en:"Looks like it's going to rain, huh? (casual)",
-    type:"fill", q:"Change to casual form:\n「雨が降るようだ」→「雨が降る ___ だ」",
+    example_jp:"彼は怒っているみたいだよ。", example_kana:"かれはおこっているみたいだよ。",
+    example_rom:"Kare wa okotte iru mitai da yo.", example_en:"He seems to be angry, huh? (casual)",
+    type:"fill", q:"Change formal to casual form:\n「体が重いようだ」→「体が重い ___ だ」",
     answer:"みたい",
     fb_en:"✅ ようだ → みたいだ (casual). Same meaning, more relaxed speech style.",
     fb_jp:"「ようだ」→カジュアルは「みたいだ」。「あめがふるようだ」→「あめがふるみたいだ」。"
@@ -985,9 +985,9 @@ const questions = [
     grammar:"〜ようだ / 〜みたいだ", romaji:"~yō da / ~mitai da",
     en_explain:"い-adj plain form + ようです. 嬉しい + ようです = 嬉しいようです.",
     jp_kana:"いけいようし（そのまま）＋ようです。「うれしい」＋ようです＝「うれしいようです」。",
-    example_jp:"彼女は嬉しいようです。", example_kana:"かのじょはうれしいようです。",
-    example_rom:"Kanojo wa ureshii yō desu.", example_en:"She seems happy. [formal]",
-    type:"fill", q:"Complete: [Use formal ようです]\n「彼女は嬉しい ___ です。(She seems happy.)」",
+    example_jp:"外はとても寒いようです。", example_kana:"そとはとてもさむいようです。",
+    example_rom:"Soto wa totemo samui yō desu.", example_en:"It seems very cold outside.",
+    type:"fill", q:"Complete: [Use formal ようです]\n「彼は元気な ___ です。(He seems to be well.)」",
     answer:"よう",
     fb_en:"✅ 嬉しい + ようです = 嬉しいようです. (みたいです for casual version)",
     fb_jp:"「うれしい」＋ようです＝「うれしいようです」。みたいです＝カジュアルバージョン。"
@@ -1022,9 +1022,9 @@ const questions = [
     grammar:"〜まま", romaji:"~mama",
     en_explain:"立つ (to stand) → た-form: 立った + まま = 立ったまま (while standing / remaining standing).",
     jp_kana:"「たつ」のたけい：「たった」→「たった」＋まま＝「たったまま」（たってい　るじょうたいで）。",
-    example_jp:"立ったまま、話した。", example_kana:"たったまま、はなした。",
-    example_rom:"Tatta mama, hanashita.", example_en:"I talked while standing up.",
-    type:"fill", q:"「立つ」をままのかたちにして、ぶんをかんせいさせてください:\n「___ 、話した。(I talked while standing.)」\n(た-form of 立つ + まま. Write in hiragana)",
+    example_jp:"窓を開けたまま、出かけてしまった。", example_kana:"まどをあけたまま、でかけてしまった。",
+    example_rom:"Mado wo aketa mama, dekakete shimatta.", example_en:"I went out leaving the window open.",
+    type:"fill", q:"「立つ」をままのかたちにして、ぶんをかんせいさせてください:\n「___ 、ずっと待っていました。(I kept waiting while standing.)」\n(た-form of 立つ + まま. Write in hiragana)",
     answer:"たったまま",
     fb_en:"✅ 立つ → た-form 立った + まま = 立ったまま = たったまま.",
     fb_jp:"「たつ」のたけいは「たった」→「たった」＋まま＝「たったまま」。"
@@ -1044,9 +1044,9 @@ const questions = [
     grammar:"〜まま", romaji:"~mama",
     en_explain:"履く (はく, to put on shoes) → た-form: 履いた + まま = 履いたまま.",
     jp_kana:"「はく」のたけい：「はいた」→「はいた」＋まま＝「はいたまま」（ぬがないで）。",
-    example_jp:"子どもは靴を履いたまま、家に入った。", example_kana:"こどもはくつをはいたまま、いえにはいった。",
-    example_rom:"Kodomo wa kutsu wo haita mama, ie ni haitta.", example_en:"The child entered the house with shoes on.",
-    type:"fill", q:"「履く」をままのかたちにしてください:\n「子どもは靴を ___ 、家に入った。」\n(た-form of 履く + まま. Write in hiragana)",
+    example_jp:"シャツを着たまま、海で泳いでしまった。", example_kana:"シャツをきたまま、うみでおよいでしまった。",
+    example_rom:"Shatsu wo kita mama, umi de oyoide shimatta.", example_en:"I ended up swimming in the sea with my shirt on.",
+    type:"fill", q:"「履く」をままのかたちにしてください:\n「子どもは靴を ___ 、学校に入った。」\n(た-form of 履く + まま. Write in hiragana)",
     answer:"はいたまま",
     fb_en:"✅ 履く → た-form 履いた + まま = 履いたまま = はいたまま.",
     fb_jp:"「はく」のたけいは「はいた」→「はいた」＋まま＝「はいたまま」。くつをぬがないで　そのまま。"
@@ -1186,6 +1186,22 @@ function checkMC(btn, chosen, answer, fb_en, fb_jp) {
   showFeedback(correct, fb_en, fb_jp, btn);
 }
 
+/* Kanji→hiragana map so students can answer in either script */
+const kanjiToKana = {
+  '安ければ':'やすければ', '高くても':'たかくても', '静かでも':'しずかでも',
+  '便利でも':'べんりでも', '食べても':'たべても', '行っても':'いっても',
+  '痩せるために':'やせるために', '日本に行くために':'にほんにいくために',
+  '歌いながら':'うたいながら', '走りながら':'はしりながら',
+  '泳ぎながら':'およぎながら', '歩きながら':'あるきながら',
+  '食べてしまった':'たべてしまった', '壊してしまった':'こわしてしまった',
+  '忘れ':'わすれ', '来るらしい':'くるらしい',
+  '面白いらしい':'おもしろいらしい', '有名らしい':'ゆうめいらしい',
+  '眠いようです':'ねむいようです', '立ったまま':'たったまま',
+  '履いたまま':'はいたまま', '来れば':'くれば', '飲めば':'のめば',
+  'なります':'なります',
+};
+function normalizeJP(s) { return kanjiToKana[s] || s; }
+
 function checkFill(answer, fb_en, fb_jp) {
   if (answered) return;
   const input = document.getElementById('fill-input');
@@ -1194,7 +1210,7 @@ function checkFill(answer, fb_en, fb_jp) {
   answered = true;
   input.disabled = true;
   document.getElementById('submit-btn').disabled = true;
-  const correct = val === answer;
+  const correct = val === answer || normalizeJP(val) === answer;
   input.classList.add(correct ? 'correct' : 'wrong');
   if (!correct) {
     const hint = document.createElement('span');
