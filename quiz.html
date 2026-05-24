@@ -189,6 +189,18 @@
 
     /* ── Choices ── */
     .choices { display: flex; flex-direction: column; gap: 10px; }
+    .choice-wrap { display: flex; align-items: center; gap: 8px; }
+    .choice-wrap .choice-btn { flex: 1; }
+    .speak-btn-sm {
+      width: 30px; height: 30px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      border: none; border-radius: 50%; cursor: pointer; font-size: 0.78rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 7px rgba(180,100,220,0.28);
+      transition: all 0.18s cubic-bezier(.34,1.56,.64,1);
+    }
+    .speak-btn-sm:hover { transform: scale(1.18); box-shadow: 0 4px 12px rgba(180,100,220,0.4); }
+    .speak-btn-sm.playing { animation: pulse 0.6s ease infinite alternate; background: linear-gradient(135deg, var(--mint), var(--sky)); }
     .choice-btn {
       background: linear-gradient(135deg, #FAF0FF, #F5EBFF);
       border: 2px solid var(--lav-md); border-radius: 16px;
@@ -429,17 +441,23 @@ loadVoices();
 function speak(text, btn) {
   if (!window.speechSynthesis) return;
   speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ja-JP';
-  u.rate = 0.85;
-  u.pitch = 1.08;
-  if (jpVoice) u.voice = jpVoice;
-  if (btn) {
-    btn.classList.add('playing');
-    u.onend  = () => btn.classList.remove('playing');
-    u.onerror = () => btn.classList.remove('playing');
+  if (btn) btn.classList.add('playing');
+
+  // Split at Japanese punctuation so pauses between phrases sound natural
+  const parts = text.split(/(?<=[。、！？…])/).filter(p => p.trim());
+  let i = 0;
+  function next() {
+    if (i >= parts.length) { if (btn) btn.classList.remove('playing'); return; }
+    const u = new SpeechSynthesisUtterance(parts[i++]);
+    u.lang = 'ja-JP';
+    u.rate = 0.9;   // natural pace (not too slow)
+    u.pitch = 1.0;  // flat, real pitch (not robotic-high)
+    if (jpVoice) u.voice = jpVoice;
+    u.onend = next;
+    u.onerror = () => { if (btn) btn.classList.remove('playing'); };
+    speechSynthesis.speak(u);
   }
-  speechSynthesis.speak(u);
+  next();
 }
 
 /* ── Questions (5 per grammar point = 50 total) ── */
@@ -1110,7 +1128,7 @@ function renderQuestion() {
       <div class="q-num">✏️ Question ${current+1} · Multiple Choice</div>
       <div class="q-text">${q.q}</div>
       <div class="choices">
-        ${sc.map(c=>`<button class="choice-btn" onclick="checkMC(this,'${esc(c)}','${esc(q.answer)}','${esc(q.fb_en)}','${esc(q.fb_jp)}')">${c}</button>`).join('')}
+        ${sc.map(c=>`<div class="choice-wrap"><button class="speak-btn-sm" onclick="speak('${esc(c)}',this)" title="きく🔊">🔊</button><button class="choice-btn" onclick="checkMC(this,'${esc(c)}','${esc(q.answer)}','${esc(q.fb_en)}','${esc(q.fb_jp)}')">${c}</button></div>`).join('')}
       </div>
       <div class="feedback" id="feedback"></div>
       <button class="next-btn" id="next-btn" onclick="nextQ()">次へ → Next 🌸</button>
