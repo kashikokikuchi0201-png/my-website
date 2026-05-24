@@ -147,11 +147,24 @@
     .example-box {
       background: var(--yel-lt); border: 1.5px solid #FFE090; border-radius: 14px;
       padding: 12px 16px; font-size: 0.87rem;
-      display: flex; flex-direction: column; gap: 2px;
+      display: flex; flex-direction: column; gap: 4px;
     }
-    .ex-jp  { font-weight: 800; font-family: 'M PLUS Rounded 1c', sans-serif; }
-    .ex-rom { color: var(--text-sm); font-style: italic; font-size: 0.81rem; }
-    .ex-en  { color: #A06000; font-size: 0.84rem; }
+    .ex-top { display: flex; align-items: center; gap: 8px; }
+    .speak-btn {
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      border: none; border-radius: 99px; width: 32px; height: 32px;
+      font-size: 0.85rem; cursor: pointer; flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(180,100,220,0.3);
+      transition: all 0.18s cubic-bezier(.34,1.56,.64,1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .speak-btn:hover { transform: scale(1.15); box-shadow: 0 4px 12px rgba(180,100,220,0.45); }
+    .speak-btn.playing { animation: pulse 0.6s ease infinite alternate; background: linear-gradient(135deg, var(--mint), var(--sky)); }
+    @keyframes pulse { from{transform:scale(1)} to{transform:scale(1.2)} }
+    .ex-jp   { font-weight: 800; font-family: 'M PLUS Rounded 1c', sans-serif; }
+    .ex-kana { color: #C060C0; font-size: 0.84rem; font-family: 'M PLUS Rounded 1c', sans-serif; font-weight: 700; }
+    .ex-rom  { color: var(--text-sm); font-style: italic; font-size: 0.81rem; }
+    .ex-en   { color: #A06000; font-size: 0.84rem; }
 
     /* ── Question card ── */
     .q-card {
@@ -399,216 +412,269 @@ function spawnSparkles(x, y) {
   }
 }
 
+/* ── Text-to-Speech ── */
+function speak(text, btn) {
+  if (!window.speechSynthesis) { alert('このブラウザはおんせいに対応していません。'); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ja-JP'; u.rate = 0.82; u.pitch = 1.05;
+  if (btn) {
+    btn.classList.add('playing');
+    u.onend = () => btn.classList.remove('playing');
+  }
+  speechSynthesis.speak(u);
+}
+
 /* ── Questions ── */
 const questions = [
   {
     grammar:"〜ば / 〜れば", romaji:"~ba / ~reba",
     en_explain:"Conditional 'if ~'. Expresses a condition that leads to a result.",
-    jp_explain:"条件を表す表現。「もし〜なら、〜になる」という意味。",
-    example_jp:"お金があれば、旅行したい。", example_rom:"Okane ga areba, ryokō shitai.", example_en:"If I have money, I want to travel.",
+    jp_kana:"「もし〜ならば、〜になる」というい　みのひょうげんです。じょうけんをあらわします。",
+    example_jp:"お金があれば、旅行したい。",
+    example_kana:"おかねがあれば、りょこうしたい。",
+    example_rom:"Okane ga areba, ryokō shitai.", example_en:"If I have money, I want to travel.",
     type:"mc", q:"Choose the correct conditional form of 食べる (to eat):",
     choices:["食べれば","食べたら","食べなら","食べので"], answer:"食べれば",
     fb_en:"✅ 食べれば = 'if (you) eat.' Verb stem + れば for る-verbs.",
-    fb_jp:"「食べる」の条件形は「食べれば」。る動詞は語幹＋れば。"
+    fb_jp:"「たべれば」は「もしたべるなら」というい　みです。るどうしは　ごかん＋れば　のかたちです。"
   },
   {
     grammar:"〜ば / 〜れば", romaji:"~ba / ~reba",
     en_explain:"Conditional 'if ~'. Expresses a condition that leads to a result.",
-    jp_explain:"条件を表す表現。「もし〜なら、〜になる」という意味。",
-    example_jp:"早く起きれば、間に合う。", example_rom:"Hayaku okireba, ma ni au.", example_en:"If you wake up early, you'll make it in time.",
+    jp_kana:"「もし〜ならば、〜になる」というい　みのひょうげんです。じょうけんをあらわします。",
+    example_jp:"早く起きれば、間に合う。",
+    example_kana:"はやくおきれば、まにあう。",
+    example_rom:"Hayaku okireba, ma ni au.", example_en:"If you wake up early, you'll make it in time.",
     type:"fill", q:"Fill in: もっと練習すれば、上手に ___ 。\n(If you practice more, you will become good.)\n(Hint: なる = to become → polite form)",
     answer:"なります",
     fb_en:"✅ なります = will become. 〜ば introduces the condition, the result follows.",
-    fb_jp:"「なる」の丁寧形は「なります」。〜ばの後に結果が来ます。"
+    fb_jp:"「なる」のていねいけいは「なります」です。〜ばのあとに　けっかをあらわすぶんがきます。"
   },
   {
     grammar:"〜ても", romaji:"~te mo",
     en_explain:"'Even if ~'. The result happens regardless of the condition.",
-    jp_explain:"「〜であっても」という逆接。条件に関係なく結果が起きる。",
-    example_jp:"雨が降っても、試合は続く。", example_rom:"Ame ga futte mo, shiai wa tsuzuku.", example_en:"Even if it rains, the game continues.",
+    jp_kana:"「〜であっても」というい　みです。じょうけんにかんけいなく、けっかがおきます。",
+    example_jp:"雨が降っても、試合は続く。",
+    example_kana:"あめがふっても、しあいはつづく。",
+    example_rom:"Ame ga futte mo, shiai wa tsuzuku.", example_en:"Even if it rains, the game continues.",
     type:"mc", q:"Which sentence means 'Even if it is expensive, I want to buy it'?",
     choices:["高ければ、買いたいです。","高いので、買いたいです。","高くても、買いたいです。","高いなら、買いたいです。"],
     answer:"高くても、買いたいです。",
     fb_en:"✅ 高くても = 'even if expensive.' い-adjective: remove い → く + ても.",
-    fb_jp:"「高い」→「高く」＋ても。い形容詞はい→くに変えてもをつけます。"
+    fb_jp:"「たかい」→「たかく」＋ても。いけいようしは　い→くにかえて　もをつけます。"
   },
   {
     grammar:"〜ても", romaji:"~te mo",
     en_explain:"'Even if ~'. The result happens regardless of the condition.",
-    jp_explain:"「〜であっても」という逆接の表現。",
-    example_jp:"何度言っても、わかってくれない。", example_rom:"Nando itte mo, wakatte kurenai.", example_en:"No matter how many times I say it, they don't understand.",
+    jp_kana:"「〜であっても」というい　みです。じょうけんにかんけいなく、けっかがおきます。",
+    example_jp:"何度言っても、わかってくれない。",
+    example_kana:"なんどいっても、わかってくれない。",
+    example_rom:"Nando itte mo, wakatte kurenai.", example_en:"No matter how many times I say it, they don't understand.",
     type:"fill", q:"Fill in: 疲れ ___ 、仕事を続けます。\n(Even if I am tired, I will continue working.)",
     answer:"ても",
     fb_en:"✅ 疲れても = 'even if tired.' Verb て-form + も = ても.",
-    fb_jp:"「疲れる」→「疲れ」＋ても。動詞のて形＋もです。"
+    fb_jp:"「つかれる」→「つかれ」＋ても。どうしのてけい＋もです。"
   },
   {
     grammar:"〜のに", romaji:"~no ni",
     en_explain:"'Even though ~' — expresses surprise or frustration at an unexpected result.",
-    jp_explain:"予想と違う結果に対する驚きや不満を表す逆接表現。",
-    example_jp:"一生懸命勉強したのに、テストに落ちた。", example_rom:"Isshoukenmei benkyō shita no ni, tesuto ni ochita.", example_en:"Even though I studied hard, I failed the test.",
+    jp_kana:"よそうとちがうけっかに　おどろきやふまんをあらわすひょうげんです。",
+    example_jp:"一生懸命勉強したのに、テストに落ちた。",
+    example_kana:"いっしょうけんめいべんきょうしたのに、テストにおちた。",
+    example_rom:"Isshoukenmei benkyō shita no ni, tesuto ni ochita.", example_en:"Even though I studied hard, I failed the test.",
     type:"mc", q:"Which best translates: 'Even though she is busy, she helps me'?",
     choices:["忙しいから、手伝ってくれる。","忙しいのに、手伝ってくれる。","忙しくて、手伝ってくれる。","忙しければ、手伝ってくれる。"],
     answer:"忙しいのに、手伝ってくれる。",
     fb_en:"✅ のに expresses surprise — she's busy, yet she still helps.",
-    fb_jp:"「のに」は驚き・意外性を表します。忙しいにもかかわらず手伝う、という意外な結果。"
+    fb_jp:"「のに」はおどろき・いがいせいをあらわします。いそがしいのに　てつだう、というよそうがいのけっかです。"
   },
   {
     grammar:"〜のに", romaji:"~no ni",
     en_explain:"'Even though ~' — expresses surprise or frustration at an unexpected outcome.",
-    jp_explain:"予想外の結果に対する不満・驚きを表す表現。",
-    example_jp:"連絡したのに、返事がない。", example_rom:"Renraku shita no ni, henji ga nai.", example_en:"Even though I contacted them, there is no reply.",
+    jp_kana:"よそうとちがうけっかに　おどろきやふまんをあらわすひょうげんです。",
+    example_jp:"連絡したのに、返事がない。",
+    example_kana:"れんらくしたのに、へんじがない。",
+    example_rom:"Renraku shita no ni, henji ga nai.", example_en:"Even though I contacted them, there is no reply.",
     type:"fill", q:"Fill in: 晴れている ___ 、外に出たくない。\n(Even though it is sunny, I don't want to go outside.)",
     answer:"のに",
     fb_en:"✅ 晴れているのに = 'even though it is sunny.' Shows contradiction.",
-    fb_jp:"「のに」で意外・不満のニュアンスを出します。"
-  },
-  {
-    grammar:"〜ために", romaji:"~tame ni",
-    en_explain:"'In order to ~' (purpose). Used to express the goal of an action.",
-    jp_explain:"目的「〜するために」を表す。前後の主語が同じ場合に使う。",
-    example_jp:"健康のために、毎日運動する。", example_rom:"Kenkō no tame ni, mainichi undō suru.", example_en:"In order to stay healthy, I exercise every day.",
-    type:"mc", q:"Which sentence means 'I study Japanese in order to work in Japan'?",
-    choices:["日本で働くので、日本語を勉強する。","日本で働くために、日本語を勉強する。","日本で働いても、日本語を勉強する。","日本で働けば、日本語を勉強する。"],
-    answer:"日本で働くために、日本語を勉強する。",
-    fb_en:"✅ 〜ために (purpose): 'in order to work in Japan, I study Japanese.'",
-    fb_jp:"「働くために」＝「働くことを目的として」。辞書形＋ために。"
+    fb_jp:"「のに」でいがい・ふまんのニュアンスをだします。はれているのにそとにでない→むじゅんをかんじている。"
   },
   {
     grammar:"〜ために", romaji:"~tame ni",
     en_explain:"'In order to ~' (purpose). Verb dictionary form + ために.",
-    jp_explain:"目的を表す。動詞の辞書形＋ために。",
-    example_jp:"試験に合格するために、毎日勉強します。", example_rom:"Shiken ni gōkaku suru tame ni, mainichi benkyō shimasu.", example_en:"In order to pass the exam, I study every day.",
+    jp_kana:"「〜するために」というもくてきをあらわします。どうしのじしょけい＋ために　のかたちです。",
+    example_jp:"健康のために、毎日運動する。",
+    example_kana:"けんこうのために、まいにちうんどうする。",
+    example_rom:"Kenkō no tame ni, mainichi undō suru.", example_en:"In order to stay healthy, I exercise every day.",
+    type:"mc", q:"Which sentence means 'I study Japanese in order to work in Japan'?",
+    choices:["日本で働くので、日本語を勉強する。","日本で働くために、日本語を勉強する。","日本で働いても、日本語を勉強する。","日本で働けば、日本語を勉強する。"],
+    answer:"日本で働くために、日本語を勉強する。",
+    fb_en:"✅ 〜ために (purpose): 'in order to work in Japan, I study Japanese.'",
+    fb_jp:"「はたらくために」＝「はたらくことをもくてきとして」。どうしのじしょけい＋ためにのかたちです。"
+  },
+  {
+    grammar:"〜ために", romaji:"~tame ni",
+    en_explain:"'In order to ~' (purpose). Verb dictionary form + ために.",
+    jp_kana:"「〜するために」というもくてきをあらわします。どうしのじしょけい＋ために　のかたちです。",
+    example_jp:"試験に合格するために、毎日勉強します。",
+    example_kana:"しけんにごうかくするために、まいにちべんきょうします。",
+    example_rom:"Shiken ni gōkaku suru tame ni, mainichi benkyō shimasu.", example_en:"In order to pass the exam, I study every day.",
     type:"fill", q:"Fill in: 日本語が上手になる ___ 、毎日話す練習をします。\n(In order to get good at Japanese, I practice speaking every day.)",
     answer:"ために",
     fb_en:"✅ ために follows the dictionary form of a verb to show purpose.",
-    fb_jp:"動詞の辞書形＋ために＝〜することを目的として。"
+    fb_jp:"どうしのじしょけい＋ために＝〜することをもくてきとして。"
   },
   {
     grammar:"〜ながら", romaji:"~nagara",
     en_explain:"'While doing ~' — two actions happening simultaneously by the same person.",
-    jp_explain:"同じ人が2つの動作を同時に行うことを表す。「〜しながら〜する」。",
-    example_jp:"音楽を聴きながら、勉強する。", example_rom:"Ongaku wo kikinagara, benkyō suru.", example_en:"I study while listening to music.",
+    jp_kana:"おなじひとが　ふたつのどうさを　どうじにおこなうことをあらわします。「〜しながら〜する」のかたちです。",
+    example_jp:"音楽を聴きながら、勉強する。",
+    example_kana:"おんがくをききながら、べんきょうする。",
+    example_rom:"Ongaku wo kikinagara, benkyō suru.", example_en:"I study while listening to music.",
     type:"mc", q:"Choose the correct form: 'I walk while looking at my phone.'",
     choices:["スマホを見ても、歩きます。","スマホを見ながら、歩きます。","スマホを見たら、歩きます。","スマホを見るので、歩きます。"],
     answer:"スマホを見ながら、歩きます。",
     fb_en:"✅ ながら = doing two things simultaneously. Verb ます-stem + ながら.",
-    fb_jp:"「見る」→「見」＋ながら。ます形の語幹＋ながら。同時動作を表す。"
+    fb_jp:"「みる」→「み」＋ながら。どうしのますけいのごかん＋ながら。どうじどうさをあらわします。"
   },
   {
     grammar:"〜ながら", romaji:"~nagara",
     en_explain:"'While doing ~' — the main action is the verb after ながら.",
-    jp_explain:"メインの動作はながらの後の動詞。ながら前の動作はサブの動作。",
-    example_jp:"コーヒーを飲みながら、新聞を読む。", example_rom:"Kōhī wo nominagara, shinbun wo yomu.", example_en:"I read the newspaper while drinking coffee.",
+    jp_kana:"おなじひとが　ふたつのどうさを　どうじにおこなうことをあらわします。ながらのあとのどうしがメインのどうさです。",
+    example_jp:"コーヒーを飲みながら、新聞を読む。",
+    example_kana:"コーヒーをのみながら、しんぶんをよむ。",
+    example_rom:"Kōhī wo nominagara, shinbun wo yomu.", example_en:"I read the newspaper while drinking coffee.",
     type:"fill", q:"Fill in: 歌い ___ 、料理します。\n(I cook while singing.)",
     answer:"ながら",
     fb_en:"✅ 歌い + ながら = while singing. ます-stem of 歌う (utau) is 歌い (utai).",
-    fb_jp:"「歌う」のます形の語幹「歌い」＋ながら。"
+    fb_jp:"「うたう」のますけいのごかん「うたい」＋ながら＝うたいながら。"
   },
   {
     grammar:"〜てしまう", romaji:"~te shimau",
     en_explain:"'End up doing ~' or 'accidentally did ~'. Shows regret or unintended completion.",
-    jp_explain:"「うっかり〜した」「残念ながら〜した」など、後悔や意図しない完了を表す。",
-    example_jp:"ケーキを全部食べてしまった。", example_rom:"Kēki wo zenbu tabete shimatta.", example_en:"I ended up eating all the cake.",
+    jp_kana:"「うっかり〜した」「ざんねんながら〜した」など、こうかいやいとしないかんりょうをあらわします。",
+    example_jp:"ケーキを全部食べてしまった。",
+    example_kana:"ケーキをぜんぶたべてしまった。",
+    example_rom:"Kēki wo zenbu tabete shimatta.", example_en:"I ended up eating all the cake.",
     type:"mc", q:"Which sentence expresses regret or an unintended action?",
     choices:["財布を忘れました。","財布を忘れてしまいました。","財布を忘れています。","財布を忘れたいです。"],
     answer:"財布を忘れてしまいました。",
     fb_en:"✅ 〜てしまいました adds regret — 'I unfortunately/accidentally forgot my wallet.'",
-    fb_jp:"「〜てしまいました」＝後悔・残念なニュアンス。「しまった！」という気持ち。"
+    fb_jp:"「〜てしまいました」＝こうかい・ざんねんなニュアンス。「しまった！」というきもちがこめられます。"
   },
   {
     grammar:"〜てしまう", romaji:"~te shimau",
     en_explain:"In casual speech, 〜てしまう contracts to 〜ちゃう.",
-    jp_explain:"話し言葉では「〜てしまう」→「〜ちゃう」に縮約される。",
-    example_jp:"また寝坊しちゃった！", example_rom:"Mata nebō shichatta!", example_en:"I overslept again! (Ugh!)",
+    jp_kana:"はなしことばでは「〜てしまう」が「〜ちゃう」にちぢまります。",
+    example_jp:"また寝坊しちゃった！",
+    example_kana:"またねぼうしちゃった！",
+    example_rom:"Mata nebō shichatta!", example_en:"I overslept again! (Ugh!)",
     type:"fill", q:"Fill in: 宿題を ___ てしまった。(I ended up forgetting my homework.)\n(Hint: 忘れる = to forget → て-form stem)",
     answer:"忘れ",
     fb_en:"✅ 忘れてしまった = 'I ended up forgetting.' 忘れる → 忘れ + てしまった.",
-    fb_jp:"「忘れる」のて形は「忘れて」→「忘れてしまった」。後悔のニュアンス。"
+    fb_jp:"「わすれる」のてけいは「わすれて」→「わすれてしまった」。こうかいのニュアンスがあります。"
   },
   {
     grammar:"〜はずだ", romaji:"~hazu da",
     en_explain:"'Should be ~' / 'supposed to ~'. Logical expectation based on evidence.",
-    jp_explain:"根拠に基づいた推量・期待。「〜であると予想・想定される」という意味。",
-    example_jp:"彼女はもう着いているはずだ。", example_rom:"Kanojo wa mō tsuite iru hazu da.", example_en:"She should have arrived by now.",
+    jp_kana:"こんきょにもとづいたすいりょう・きたいをあらわします。「〜であると　よそう・そうていされる」というい　みです。",
+    example_jp:"彼女はもう着いているはずだ。",
+    example_kana:"かのじょはもうついているはずだ。",
+    example_rom:"Kanojo wa mō tsuite iru hazu da.", example_en:"She should have arrived by now.",
     type:"mc", q:"Which sentence means 'The train should be on time'?",
     choices:["電車は時間通りらしいです。","電車は時間通りようです。","電車は時間通りのはずです。","電車は時間通りそうです。"],
     answer:"電車は時間通りのはずです。",
     fb_en:"✅ 〜のはずです = 'should be ~'. Noun/na-adj + の + はずです.",
-    fb_jp:"「時間通り」＋の＋はずです。論理的に「そうであるはず」という意味。"
+    fb_jp:"「じかんどおり」＋の＋はずです。ろんりてきに「そうであるはず」というい　みです。"
   },
   {
     grammar:"〜はずだ", romaji:"~hazu da",
     en_explain:"'Supposed to ~' — based on information or reasoning.",
-    jp_explain:"情報や理由に基づく推量。現実が違う場合、驚きも表せる。",
-    example_jp:"このボタンを押せば動くはずなのに、動かない。", example_rom:"Kono botan wo oseba ugoku hazu na no ni, ugokanai.", example_en:"It should work if you press this button, but it doesn't.",
+    jp_kana:"じょうほうやりゆうにもとづくすいりょうです。げんじつがちがうばあい、おどろきもあらわせます。",
+    example_jp:"このボタンを押せば動くはずなのに、動かない。",
+    example_kana:"このボタンをおせばうごくはずなのに、うごかない。",
+    example_rom:"Kono botan wo oseba ugoku hazu na no ni, ugokanai.", example_en:"It should work if you press this button, but it doesn't.",
     type:"fill", q:"Fill in: 田中さんは今日来る ___ です。(Mr. Tanaka is supposed to come today.)",
     answer:"はず",
     fb_en:"✅ 来るはずです = 'is supposed to come.' Dictionary form + はずです.",
-    fb_jp:"動詞の辞書形＋はずです。「来るはずです」＝来ることが予定されている。"
+    fb_jp:"どうしのじしょけい＋はずです。「くるはずです」＝くることがよていされています。"
   },
   {
     grammar:"〜らしい", romaji:"~rashii",
     en_explain:"'Seems like ~' / 'I heard that ~'. Based on secondhand information.",
-    jp_explain:"伝聞や外からの情報に基づく推量。「〜とのことだ」。",
-    example_jp:"明日は雨らしい。", example_rom:"Ashita wa ame rashii.", example_en:"It seems like it will rain tomorrow. (I heard it will.)",
+    jp_kana:"でんぶんや　ひとからきいたじょうほうにもとづくすいりょうです。「〜とのことだ」「ひとからきいた」。",
+    example_jp:"明日は雨らしい。",
+    example_kana:"あしたはあめらしい。",
+    example_rom:"Ashita wa ame rashii.", example_en:"It seems like it will rain tomorrow. (I heard it will.)",
     type:"mc", q:"Which sentence uses らしい correctly for hearsay?",
     choices:["彼は医者らしいです。（彼を見て思った）","彼は医者らしいです。（人から聞いた）","彼は医者だそうらしいです。","彼は医者なようらしいです。"],
     answer:"彼は医者らしいです。（人から聞いた）",
     fb_en:"✅ らしい is used for information received from others (hearsay).",
-    fb_jp:"「らしい」は伝聞（人から聞いた情報）に使います。"
+    fb_jp:"「らしい」はでんぶん（ひとからきいたじょうほう）につかいます。"
   },
   {
     grammar:"〜らしい", romaji:"~rashii",
     en_explain:"'Seems like ~'. Based on general impression or hearsay.",
-    jp_explain:"「〜に特有の様子だ」または伝聞の意味でも使う。",
-    example_jp:"あの映画は面白いらしいよ。", example_rom:"Ano eiga wa omoshiroi rashii yo.", example_en:"I heard that movie is interesting.",
+    jp_kana:"でんぶんや　ひとからきいたじょうほうにもとづくすいりょうです。「〜にとくゆうのようすだ」というい　みでもつかいます。",
+    example_jp:"あの映画は面白いらしいよ。",
+    example_kana:"あのえいがはおもしろいらしいよ。",
+    example_rom:"Ano eiga wa omoshiroi rashii yo.", example_en:"I heard that movie is interesting.",
     type:"fill", q:"Fill in: 新しいカフェができた ___ 。みんなそう言っている。\n(It seems a new café has opened. Everyone is saying so.)",
     answer:"らしい",
     fb_en:"✅ らしい follows plain form verbs for hearsay. できた + らしい.",
-    fb_jp:"動詞の普通形＋らしい。みんなそう言っている→伝聞なのでらしいが適切。"
+    fb_jp:"どうしのふつうけい＋らしい。みんなそういっている→でんぶんなのでらしいがてきせつです。"
   },
   {
     grammar:"〜ようだ / 〜みたいだ", romaji:"~yō da / ~mitai da",
     en_explain:"'It seems ~' — based on direct observation or evidence.",
-    jp_explain:"自分で見たり感じたりした根拠に基づく推量。「〜に見える」。",
-    example_jp:"彼女は怒っているようだ。", example_rom:"Kanojo wa okotte iru yō da.", example_en:"She seems to be angry. (I can tell from observation.)",
+    jp_kana:"じぶんでみたり　かんじたりした　こんきょにもとづくすいりょうです。「〜にみえる」「〜のようだ」。",
+    example_jp:"彼女は怒っているようだ。",
+    example_kana:"かのじょはおこっているようだ。",
+    example_rom:"Kanojo wa okotte iru yō da.", example_en:"She seems to be angry. (I can tell from observation.)",
     type:"mc", q:"You see dark clouds outside. Which sentence is most natural?",
     choices:["雨が降るらしいです。","雨が降るようです。","雨が降るはずです。","雨が降るそうです。"],
     answer:"雨が降るようです。",
     fb_en:"✅ ようです is used when you directly observe evidence (dark clouds).",
-    fb_jp:"「ようです」は直接見たり感じたりした根拠に使います。黒い雲→雨が降るようです。"
+    fb_jp:"「ようです」はちょくせつみたり　かんじたりしたこんきょにつかいます。くろいくも→あめがふるようです。"
   },
   {
     grammar:"〜ようだ / 〜みたいだ", romaji:"~yō da / ~mitai da",
     en_explain:"みたいだ is the casual equivalent of ようだ. Both based on direct observation.",
-    jp_explain:"「みたいだ」はようだのカジュアルな形。どちらも直接観察に基づく推量。",
-    example_jp:"彼はまだ寝ているみたいだ。", example_rom:"Kare wa mada nete iru mitai da.", example_en:"He seems to still be sleeping.",
+    jp_kana:"「みたいだ」は「ようだ」のカジュアルなかたちです。どちらも　ちょくせつかんさつにもとづくすいりょうです。",
+    example_jp:"彼はまだ寝ているみたいだ。",
+    example_kana:"かれはまだねているみたいだ。",
+    example_rom:"Kare wa mada nete iru mitai da.", example_en:"He seems to still be sleeping.",
     type:"fill", q:"Fill in: 部屋が静かだ。誰もいない ___ だ。\n(The room is quiet. It seems like no one is there.)",
     answer:"よう",
     fb_en:"✅ ようだ — you observe the quiet room and conclude no one is there.",
-    fb_jp:"「よう」＋「だ」→「ようだ」。直接観察をもとに推量。"
+    fb_jp:"「よう」＋「だ」→「ようだ」。ちょくせつかんさつをもとに　すいりょうします。"
   },
   {
     grammar:"〜まま", romaji:"~mama",
     en_explain:"'Leaving ~ as is / in that state.' The previous state continues unchanged.",
-    jp_explain:"「〜した状態のまま（変化なしで）〜する」という意味。",
-    example_jp:"靴を履いたまま、部屋に入った。", example_rom:"Kutsu wo haita mama, heya ni haitta.", example_en:"I entered the room with my shoes still on.",
+    jp_kana:"「〜したじょうたいのまま（へんかなしで）〜する」というい　みです。まえのじょうたいがつづきます。",
+    example_jp:"靴を履いたまま、部屋に入った。",
+    example_kana:"くつをはいたまま、へやにはいった。",
+    example_rom:"Kutsu wo haita mama, heya ni haitta.", example_en:"I entered the room with my shoes still on.",
     type:"mc", q:"Which sentence means 'I fell asleep with the TV on'?",
     choices:["テレビをつけながら、寝た。","テレビをつけたまま、寝た。","テレビをつけても、寝た。","テレビをつけたのに、寝た。"],
     answer:"テレビをつけたまま、寝た。",
     fb_en:"✅ 〜たまま = 'leaving it on.' The TV stayed on — it was not turned off.",
-    fb_jp:"「〜たまま」は「〜した状態を変えずに」という意味。テレビがついたまま＝消さないで。"
+    fb_jp:"「〜たまま」は「〜したじょうたいをかえずに」というい　みです。テレビがついたまま＝けさないで。"
   },
   {
     grammar:"〜まま", romaji:"~mama",
     en_explain:"'Leaving ~ as is.' Can also follow nouns: このまま = as it is / like this.",
-    jp_explain:"名詞の後にも使える。「このまま」＝この状態を変えずに。",
-    example_jp:"このまま続けてください。", example_rom:"Kono mama tsuzukete kudasai.", example_en:"Please continue as is.",
+    jp_kana:"「このまま」＝このじょうたいをかえずに、というい　みです。めいしのあとにもつかえます。",
+    example_jp:"このまま続けてください。",
+    example_kana:"このままつづけてください。",
+    example_rom:"Kono mama tsuzukete kudasai.", example_en:"Please continue as is.",
     type:"fill", q:"Fill in: 窓を開けた ___ 、眠ってしまった。\n(I fell asleep with the window still open.)",
     answer:"まま",
     fb_en:"✅ 開けたまま = 'leaving the window open.' Past verb + まま.",
-    fb_jp:"「開けた」＋「まま」＝開けたままにして（閉めないで）。動詞のた形＋まま。"
+    fb_jp:"「あけた」＋「まま」＝あけたままにして（しめないで）。どうしのたけい＋まま。"
   }
 ];
 
@@ -665,10 +731,16 @@ function renderQuestion() {
     <div class="gp-romaji">${q.romaji}</div>
     <div class="explain-row">
       <div class="eb en"><div class="eb-label">🇬🇧 English</div>${q.en_explain}</div>
-      <div class="eb jp"><div class="eb-label">🇯🇵 日本語</div>${q.jp_explain}</div>
+      <div class="eb jp"><div class="eb-label">🇯🇵 にほんご（ひらがな・カタカナ）</div>${q.jp_kana}</div>
     </div>
     <div class="example-box">
-      <div class="ex-jp">💬 ${q.example_jp}</div>
+      <div class="ex-top">
+        <button class="speak-btn" id="speak-btn" onclick="speak('${esc(q.example_jp)}',this)" title="きいてみよう！">🔊</button>
+        <div>
+          <div class="ex-jp">${q.example_jp}</div>
+          <div class="ex-kana">📖 ${q.example_kana}</div>
+        </div>
+      </div>
       <div class="ex-rom">${q.example_rom}</div>
       <div class="ex-en">${q.example_en}</div>
     </div>
