@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌸 JLPT N3 Grammar Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink:   #FF8FAB;
+      --pink-lt:#FFD6E3;
+      --pink-bg:#FFF0F5;
+      --lav:    #B89FE8;
+      --lav-lt: #EDE4FF;
+      --mint:   #7DD9B8;
+      --yellow: #FFD97D;
+      --yel-lt: #FFF6D6;
+      --text:   #3D2C3E;
+      --text-sm:#7A5C85;
+      --shadow: rgba(180,140,200,0.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
+      background-color: #FDF5FF;
+      background-image:
+        radial-gradient(circle at 15% 20%, #FFE4F0 0%, transparent 35%),
+        radial-gradient(circle at 85% 10%, #E8DEFF 0%, transparent 30%),
+        radial-gradient(circle at 50% 90%, #D8F5EC 0%, transparent 35%);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #FF8FAB 0%, #C17FE8 50%, #89C4F4 100%);
+      color: white; text-align: center; padding: 44px 24px 36px;
+      position: relative; overflow: hidden;
+    }
+    header::before {
+      content: '🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸 ✦ 🌸';
+      position: absolute; top: 10px; left: 0; right: 0;
+      font-size: 0.8rem; opacity: 0.45; letter-spacing: 8px;
+    }
+    header h1 { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 2.2rem; font-weight: 800; }
+    header p  { font-size: 1rem; margin-top: 8px; opacity: 0.9; }
+    .badge { display: inline-block; background: rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 16px; font-size: 0.82rem; font-weight: 800; letter-spacing: 1px; margin-top: 10px; }
+    .back-link {
+      display: inline-block; margin-top: 14px;
+      background: rgba(255,255,255,0.25); color: white;
+      padding: 6px 18px; border-radius: 20px; font-size: 0.85rem;
+      text-decoration: none; transition: background 0.2s; margin-left: 8px;
+    }
+    .back-link:hover { background: rgba(255,255,255,0.4); }
+
+    main { max-width: 800px; margin: 36px auto; padding: 0 20px 80px; }
+
+    .progress-wrap { margin-bottom: 28px; }
+    .progress-info { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-sm); margin-bottom: 8px; font-weight: 700; }
+    .progress-bar { height: 10px; background: #EDE4FF; border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--pink), var(--lav)); border-radius: 99px; transition: width 0.4s ease; }
+
+    /* Grammar info panel at top of each question */
+    .grammar-panel {
+      background: rgba(255,255,255,0.85); border-radius: 18px; padding: 20px 24px;
+      margin-bottom: 18px; border: 2px solid var(--lav-lt);
+      box-shadow: 0 3px 14px var(--shadow);
+    }
+    .grammar-panel-title {
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: 1.2rem; font-weight: 800;
+      background: linear-gradient(90deg, #C060B0, #7040C0);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px;
+    }
+    .grammar-romaji { font-size: 0.85rem; color: var(--text-sm); margin-bottom: 10px; font-style: italic; }
+    .grammar-explain { display: flex; gap: 10px; flex-wrap: wrap; }
+    .explain-block { flex: 1; min-width: 200px; border-radius: 12px; padding: 10px 14px; font-size: 0.88rem; }
+    .explain-block.en { background: var(--lav-lt); border: 1.5px solid #D4C4F5; }
+    .explain-block.jp { background: var(--pink-bg); border: 1.5px solid var(--pink-lt); }
+    .explain-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+    .explain-block.en .explain-label { color: var(--lav); }
+    .explain-block.jp .explain-label { color: var(--pink); }
+    .example-row { margin-top: 10px; background: var(--yel-lt); border-radius: 10px; padding: 10px 14px; font-size: 0.87rem; border: 1.5px solid #FFE0A0; }
+    .example-row .ex-jp  { font-weight: 700; color: var(--text); }
+    .example-row .ex-rom { color: var(--text-sm); font-style: italic; font-size: 0.82rem; }
+    .example-row .ex-en  { color: #B06000; font-size: 0.85rem; }
+
+    /* Question card */
+    .q-card {
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(8px);
+      border-radius: 24px; padding: 28px 30px; margin-bottom: 20px;
+      box-shadow: 0 6px 28px var(--shadow); border: 2px solid rgba(255,183,213,0.4);
+      position: relative; overflow: hidden;
+      display: none;
+    }
+    .q-card.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .q-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 7px; height: 100%;
+      background: linear-gradient(180deg, var(--pink) 0%, var(--lav) 100%);
+      border-radius: 24px 0 0 24px;
+    }
+
+    .q-num { font-size: 0.72rem; font-weight: 800; color: var(--text-sm); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+    .q-text { font-size: 1.05rem; font-weight: 700; line-height: 1.9; margin-bottom: 20px; }
+
+    .choices { display: flex; flex-direction: column; gap: 10px; }
+    .choice-btn {
+      background: var(--lav-lt); border: 2px solid #D4C4F5;
+      border-radius: 14px; padding: 12px 20px; font-size: 0.96rem;
+      font-family: 'Nunito', sans-serif; font-weight: 600; color: var(--text);
+      cursor: pointer; text-align: left; transition: all 0.18s;
+    }
+    .choice-btn:hover:not(:disabled) { background: #D8CCFF; border-color: var(--lav); transform: translateX(4px); }
+    .choice-btn.correct { background: #D8F5EC; border-color: var(--mint); color: #1A7A55; }
+    .choice-btn.wrong   { background: #FFE0E8; border-color: #FF6B8A; color: #C0002A; }
+    .choice-btn:disabled { cursor: default; }
+
+    .fill-wrap { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+    .fill-input {
+      border: 2.5px solid #D4C4F5; border-radius: 12px; padding: 8px 16px;
+      font-size: 1rem; font-family: 'M PLUS Rounded 1c', sans-serif;
+      background: #FAF5FF; color: var(--text); min-width: 160px; max-width: 240px;
+      transition: border-color 0.2s;
+    }
+    .fill-input:focus { outline: none; border-color: var(--lav); background: white; }
+    .fill-input.correct { border-color: var(--mint); background: #D8F5EC; color: #1A7A55; }
+    .fill-input.wrong   { border-color: #FF6B8A; background: #FFE0E8; color: #C0002A; }
+
+    .submit-btn {
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      color: white; border: none; border-radius: 14px; padding: 10px 24px;
+      font-size: 0.95rem; font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(180,140,210,0.35);
+    }
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+    .feedback { margin-top: 16px; padding: 14px 18px; border-radius: 14px; font-size: 0.92rem; display: none; line-height: 1.7; }
+    .feedback.correct { background: #D8F5EC; border: 1.5px solid var(--mint); color: #1A7A55; }
+    .feedback.wrong   { background: #FFE0E8; border: 1.5px solid #FF6B8A; color: #C0002A; }
+    .feedback.show    { display: block; animation: fadeIn 0.25s ease; }
+    .feedback-jp { margin-top: 6px; color: inherit; opacity: 0.85; }
+
+    .next-btn {
+      display: none; margin-top: 18px;
+      background: linear-gradient(135deg, #C17FE8, #89C4F4);
+      color: white; border: none; border-radius: 14px; padding: 12px 32px;
+      font-size: 1rem; font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(130,100,220,0.3);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .next-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .next-btn.show { display: block; animation: fadeIn 0.3s ease; }
+
+    #result { display: none; text-align: center; }
+    #result.show { display: block; animation: fadeIn 0.5s ease; }
+    .result-card {
+      background: rgba(255,255,255,0.92); border-radius: 28px; padding: 48px 32px;
+      box-shadow: 0 8px 36px var(--shadow); border: 2px solid var(--pink-lt);
+    }
+    .result-emoji { font-size: 4rem; margin-bottom: 16px; }
+    .result-title { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 1.8rem; font-weight: 800; background: linear-gradient(90deg, #C060B0, #7040C0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+    .result-score { font-size: 3.5rem; font-weight: 800; color: #A030A0; font-family: 'M PLUS Rounded 1c', sans-serif; margin: 16px 0; }
+    .result-msg { color: var(--text-sm); font-size: 1rem; margin-bottom: 28px; line-height: 1.8; }
+    .retry-btn {
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      color: white; border: none; border-radius: 16px; padding: 14px 36px;
+      font-size: 1.05rem; font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 700; cursor: pointer; margin: 6px;
+      box-shadow: 0 4px 18px rgba(180,140,210,0.4); transition: opacity 0.2s;
+    }
+    .retry-btn:hover { opacity: 0.85; }
+    .review-btn {
+      display: inline-block; background: linear-gradient(135deg, var(--mint), #89C4F4);
+      color: white; border: none; border-radius: 16px; padding: 14px 36px;
+      font-size: 1.05rem; font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-weight: 700; text-decoration: none; margin: 6px;
+      box-shadow: 0 4px 18px rgba(130,210,180,0.35);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>✏️ JLPT N3 Grammar Quiz</h1>
+  <p>日本語能力試験 N3 文法クイズ</p>
+  <div>
+    <span class="badge">🎯 JLPT N3</span>
+    <a href="index.html" class="back-link">← Grammar Guide</a>
+  </div>
+</header>
+
+<main>
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span id="q-counter">Question 1 / 20</span>
+      <span id="score-info">Score: 0</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:5%"></div></div>
+  </div>
+
+  <div id="quiz-area"></div>
+
+  <div id="result">
+    <div class="result-card">
+      <div class="result-emoji" id="result-emoji">🌸</div>
+      <div class="result-title">Quiz Complete!</div>
+      <div class="result-score" id="result-score">0 / 20</div>
+      <div class="result-msg" id="result-msg"></div>
+      <button class="retry-btn" onclick="startQuiz()">🔄 Try Again · もう一度</button>
+      <a href="index.html" class="review-btn">📖 Grammar Guide</a>
+    </div>
+  </div>
+</main>
+
+<script>
+const questions = [
+
+  // ── 1. 〜ば (conditional) ──
+  {
+    grammar: "〜ば / 〜れば",
+    romaji: "~ba / ~reba",
+    en_explain: "Conditional 'if ~'. Used to express a condition that leads to a result.",
+    jp_explain: "条件を表す表現。「もし〜なら、〜になる」という意味。",
+    example_jp: "お金があれば、旅行したい。",
+    example_rom: "Okane ga areba, ryokō shitai.",
+    example_en: "If I have money, I want to travel.",
+    type: "mc",
+    q: "Choose the correct conditional form of 食べる (to eat):",
+    choices: ["食べれば", "食べたら", "食べなら", "食べので"],
+    answer: "食べれば",
+    fb_en: "✅ 食べれば = 'if (you) eat.' Verb stem + れば for る-verbs.",
+    fb_jp: "「食べる」の条件形は「食べれば」です。る動詞は語幹＋れば。"
+  },
+  {
+    grammar: "〜ば / 〜れば",
+    romaji: "~ba / ~reba",
+    en_explain: "Conditional 'if ~'. Used to express a condition that leads to a result.",
+    jp_explain: "条件を表す表現。「もし〜なら、〜になる」という意味。",
+    example_jp: "早く起きれば、間に合う。",
+    example_rom: "Hayaku okireba, ma ni au.",
+    example_en: "If you wake up early, you'll make it in time.",
+    type: "fill",
+    q: "Fill in: もっと練習すれば、上手に ___ 。\n(If you practice more, you will become good.)\n(Hint: なる = to become → polite form)",
+    answer: "なります",
+    fb_en: "✅ なります = will become. 〜ば introduces the condition, the result follows.",
+    fb_jp: "「なる」の丁寧形は「なります」。〜ばの後に結果が来ます。"
+  },
+
+  // ── 2. 〜ても (even if) ──
+  {
+    grammar: "〜ても",
+    romaji: "~te mo",
+    en_explain: "'Even if ~' or 'even though ~'. The result happens regardless of the condition.",
+    jp_explain: "「〜であっても」「〜にもかかわらず」という意味。条件に関係なく結果が起きる。",
+    example_jp: "雨が降っても、試合は続く。",
+    example_rom: "Ame ga futte mo, shiai wa tsuzuku.",
+    example_en: "Even if it rains, the game continues.",
+    type: "mc",
+    q: "Which sentence means 'Even if it is expensive, I want to buy it'?",
+    choices: [
+      "高ければ、買いたいです。",
+      "高いので、買いたいです。",
+      "高くても、買いたいです。",
+      "高いなら、買いたいです。"
+    ],
+    answer: "高くても、買いたいです。",
+    fb_en: "✅ 高くても = 'even if it is expensive.' い-adjective: remove い → く + ても.",
+    fb_jp: "「高い」→「高く」＋ても。い形容詞はい→くに変えてもをつけます。"
+  },
+  {
+    grammar: "〜ても",
+    romaji: "~te mo",
+    en_explain: "'Even if ~' or 'even though ~'. The result happens regardless of the condition.",
+    jp_explain: "「〜であっても」という逆接の表現。",
+    example_jp: "何度言っても、わかってくれない。",
+    example_rom: "Nando itte mo, wakatte kurenai.",
+    example_en: "No matter how many times I say it, they don't understand.",
+    type: "fill",
+    q: "Fill in: 疲れ ___ 、仕事を続けます。\n(Even if I am tired, I will continue working.)",
+    answer: "ても",
+    fb_en: "✅ 疲れても = 'even if (I am) tired.' Verb て-form + も = ても.",
+    fb_jp: "「疲れる」→「疲れ」＋ても。動詞のて形＋もです。"
+  },
+
+  // ── 3. 〜のに (even though / in order to) ──
+  {
+    grammar: "〜のに",
+    romaji: "~no ni",
+    en_explain: "'Even though ~' — expresses surprise or frustration that the result is unexpected.",
+    jp_explain: "「〜にもかかわらず」という意味。予想と違う結果に対する驚きや不満を表す。",
+    example_jp: "一生懸命勉強したのに、テストに落ちた。",
+    example_rom: "Isshoukenmei benkyō shita no ni, tesuto ni ochita.",
+    example_en: "Even though I studied hard, I failed the test.",
+    type: "mc",
+    q: "Which best translates: 'Even though she is busy, she helps me'?",
+    choices: [
+      "忙しいから、手伝ってくれる。",
+      "忙しいのに、手伝ってくれる。",
+      "忙しくて、手伝ってくれる。",
+      "忙しければ、手伝ってくれる。"
+    ],
+    answer: "忙しいのに、手伝ってくれる。",
+    fb_en: "✅ のに here expresses surprise — she's busy, yet she still helps.",
+    fb_jp: "「のに」は驚きや意外性を表します。忙しいにもかかわらず手伝う、という意外な結果。"
+  },
+  {
+    grammar: "〜のに",
+    romaji: "~no ni",
+    en_explain: "'Even though ~' — expresses surprise or frustration at an unexpected outcome.",
+    jp_explain: "予想外の結果に対する不満・驚きを表す表現。",
+    example_jp: "連絡したのに、返事がない。",
+    example_rom: "Renraku shita no ni, henji ga nai.",
+    example_en: "Even though I contacted them, there is no reply.",
+    type: "fill",
+    q: "Fill in: 晴れている ___ 、外に出たくない。\n(Even though it is sunny, I don't want to go outside.)",
+    answer: "のに",
+    fb_en: "✅ 晴れているのに = 'even though it is sunny.' Shows the speaker finds this contradictory.",
+    fb_jp: "「のに」で意外・不満のニュアンスを出します。晴れているのに外に出ない→矛盾を感じている。"
+  },
+
+  // ── 4. 〜ために (in order to / because of) ──
+  {
+    grammar: "〜ために",
+    romaji: "~tame ni",
+    en_explain: "'In order to ~' (purpose) or 'because of ~' (cause). Depends on context.",
+    jp_explain: "目的「〜するために」か原因「〜のために」を表す。",
+    example_jp: "健康のために、毎日運動する。",
+    example_rom: "Kenkō no tame ni, mainichi undō suru.",
+    example_en: "In order to stay healthy, I exercise every day.",
+    type: "mc",
+    q: "Which sentence means 'I study Japanese in order to work in Japan'?",
+    choices: [
+      "日本で働くので、日本語を勉強する。",
+      "日本で働くために、日本語を勉強する。",
+      "日本で働いても、日本語を勉強する。",
+      "日本で働けば、日本語を勉強する。"
+    ],
+    answer: "日本で働くために、日本語を勉強する。",
+    fb_en: "✅ 〜ために (purpose): 'in order to work in Japan, I study Japanese.'",
+    fb_jp: "「働くために」＝「働くことを目的として」。目的を表すために＝verb dictionary form＋ために。"
+  },
+  {
+    grammar: "〜ために",
+    romaji: "~tame ni",
+    en_explain: "'In order to ~' (purpose). The subject of both clauses is usually the same.",
+    jp_explain: "目的を表す。前後の主語が同じ場合に使う。",
+    example_jp: "試験に合格するために、毎日勉強します。",
+    example_rom: "Shiken ni gōkaku suru tame ni, mainichi benkyō shimasu.",
+    example_en: "In order to pass the exam, I study every day.",
+    type: "fill",
+    q: "Fill in: 日本語が上手になる ___ 、毎日話す練習をします。\n(In order to get good at Japanese, I practice speaking every day.)",
+    answer: "ために",
+    fb_en: "✅ ために follows the dictionary form of a verb to show purpose.",
+    fb_jp: "動詞の辞書形＋ために＝〜することを目的として。"
+  },
+
+  // ── 5. 〜ながら (while doing) ──
+  {
+    grammar: "〜ながら",
+    romaji: "~nagara",
+    en_explain: "'While doing ~' — two actions happening at the same time by the same person.",
+    jp_explain: "同じ人が2つの動作を同時に行うことを表す。「〜しながら〜する」。",
+    example_jp: "音楽を聴きながら、勉強する。",
+    example_rom: "Ongaku wo kikinagara, benkyō suru.",
+    example_en: "I study while listening to music.",
+    type: "mc",
+    q: "Choose the correct form: 'I walk while looking at my phone.'",
+    choices: [
+      "スマホを見ても、歩きます。",
+      "スマホを見ながら、歩きます。",
+      "スマホを見たら、歩きます。",
+      "スマホを見るので、歩きます。"
+    ],
+    answer: "スマホを見ながら、歩きます。",
+    fb_en: "✅ ながら = doing two things simultaneously. Verb stem + ながら.",
+    fb_jp: "「見る」→「見」＋ながら。動詞のます形の語幹＋ながら。同時動作を表す。"
+  },
+  {
+    grammar: "〜ながら",
+    romaji: "~nagara",
+    en_explain: "'While doing ~' — the main action is the verb after ながら.",
+    jp_explain: "メインの動作はながらの後の動詞。ながらの前の動作はサブの動作。",
+    example_jp: "コーヒーを飲みながら、新聞を読む。",
+    example_rom: "Kōhī wo nominagara, shinbun wo yomu.",
+    example_en: "I read the newspaper while drinking coffee.",
+    type: "fill",
+    q: "Fill in: 歌い ___ 、料理します。\n(I cook while singing.)",
+    answer: "ながら",
+    fb_en: "✅ 歌い + ながら = while singing. The ます-stem of 歌う (utau) is 歌い (utai).",
+    fb_jp: "「歌う」のます形の語幹「歌い」＋ながら＝歌いながら。"
+  },
+
+  // ── 6. 〜てしまう (end up / accidentally) ──
+  {
+    grammar: "〜てしまう",
+    romaji: "~te shimau",
+    en_explain: "'End up doing ~' or 'accidentally did ~'. Shows regret or completion of an unintended action.",
+    jp_explain: "「うっかり〜した」「残念ながら〜した」など、後悔や意図しない完了を表す。",
+    example_jp: "ケーキを全部食べてしまった。",
+    example_rom: "Kēki wo zenbu tabete shimatta.",
+    example_en: "I ended up eating all the cake. (I accidentally ate it all.)",
+    type: "mc",
+    q: "Which sentence expresses regret or an unintended action?",
+    choices: [
+      "財布を忘れました。",
+      "財布を忘れてしまいました。",
+      "財布を忘れています。",
+      "財布を忘れたいです。"
+    ],
+    answer: "財布を忘れてしまいました。",
+    fb_en: "✅ 〜てしまいました adds a nuance of regret — 'I accidentally/unfortunately forgot my wallet.'",
+    fb_jp: "「〜てしまいました」＝後悔・残念なニュアンス。「しまった！」という気持ちが込められる。"
+  },
+  {
+    grammar: "〜てしまう",
+    romaji: "~te shimau",
+    en_explain: "In casual speech, 〜てしまう contracts to 〜ちゃう (or 〜じゃう after ん).",
+    jp_explain: "話し言葉では「〜てしまう」→「〜ちゃう」に縮約される（〜んでしまう→〜んじゃう）。",
+    example_jp: "また寝坊しちゃった！",
+    example_rom: "Mata nebō shichatta!",
+    example_en: "I overslept again! (Ugh!)",
+    type: "fill",
+    q: "Fill in: 宿題を ___ てしまった。(I ended up forgetting my homework.)\n(Hint: 忘れる = to forget → て-form)",
+    answer: "忘れ",
+    fb_en: "✅ 忘れてしまった = 'I ended up forgetting.' 忘れる → 忘れ + てしまった.",
+    fb_jp: "「忘れる」のて形は「忘れて」→「忘れてしまった」。後悔のニュアンス。"
+  },
+
+  // ── 7. 〜はずだ (supposed to / expected to) ──
+  {
+    grammar: "〜はずだ",
+    romaji: "~hazu da",
+    en_explain: "'(It) should be ~' / 'supposed to ~'. Expresses a logical expectation based on evidence or reasoning.",
+    jp_explain: "根拠に基づいた推量・期待。「〜であると予想・想定される」という意味。",
+    example_jp: "彼女はもう着いているはずだ。",
+    example_rom: "Kanojo wa mō tsuite iru hazu da.",
+    example_en: "She should have arrived by now.",
+    type: "mc",
+    q: "Which sentence means 'The train should be on time'?",
+    choices: [
+      "電車は時間通りらしいです。",
+      "電車は時間通りようです。",
+      "電車は時間通りのはずです。",
+      "電車は時間通りそうです。"
+    ],
+    answer: "電車は時間通りのはずです。",
+    fb_en: "✅ 〜のはずです = 'should be ~'. Na-adjective / noun + の + はずです.",
+    fb_jp: "「時間通り」（な形容詞・名詞）＋の＋はずです。論理的に「そうであるはず」という意味。"
+  },
+  {
+    grammar: "〜はずだ",
+    romaji: "~hazu da",
+    en_explain: "'Supposed to ~' based on information or reasoning. Often expresses mild surprise when reality differs.",
+    jp_explain: "情報や理由に基づく推量。現実が違う場合、驚きも表せる。",
+    example_jp: "このボタンを押せば動くはずなのに、動かない。",
+    example_rom: "Kono botan wo oseba ugoku hazu na no ni, ugokanai.",
+    example_en: "It should work if you press this button, but it doesn't.",
+    type: "fill",
+    q: "Fill in: 田中さんは今日来る ___ です。(Mr. Tanaka is supposed to come today.)",
+    answer: "はず",
+    fb_en: "✅ 来るはずです = 'is supposed to come.' Dictionary form + はずです.",
+    fb_jp: "動詞の辞書形＋はずです。「来るはずです」＝来ることが予定・期待されている。"
+  },
+
+  // ── 8. 〜らしい (hearsay / seems) ──
+  {
+    grammar: "〜らしい",
+    romaji: "~rashii",
+    en_explain: "'Seems like ~' / 'I heard that ~'. Based on secondhand information or general impression.",
+    jp_explain: "伝聞や外からの情報に基づく推量。「〜とのことだ」「〜みたいだ」。",
+    example_jp: "明日は雨らしい。",
+    example_rom: "Ashita wa ame rashii.",
+    example_en: "It seems like it will rain tomorrow. (I heard it will.)",
+    type: "mc",
+    q: "Which sentence uses らしい correctly for hearsay?",
+    choices: [
+      "彼は医者らしいです。（彼を見て思った）",
+      "彼は医者らしいです。（人から聞いた）",
+      "彼は医者だそうらしいです。",
+      "彼は医者なようらしいです。"
+    ],
+    answer: "彼は医者らしいです。（人から聞いた）",
+    fb_en: "✅ らしい is used for information received from others (hearsay) or general impression.",
+    fb_jp: "「らしい」は伝聞（人から聞いた情報）や一般的な印象に使います。"
+  },
+  {
+    grammar: "〜らしい",
+    romaji: "~rashii",
+    en_explain: "'Seems like ~'. Also used to mean 'typical of ~' (e.g. 男らしい = manly / typical of a man).",
+    jp_explain: "「〜に特有の様子だ」という意味でも使う（例：男らしい＝男性にふさわしい）。",
+    example_jp: "あの映画は面白いらしいよ。",
+    example_rom: "Ano eiga wa omoshiroi rashii yo.",
+    example_en: "I heard that movie is interesting.",
+    type: "fill",
+    q: "Fill in: 新しいカフェができた ___ 。みんなそう言っている。\n(It seems a new café has opened. Everyone is saying so.)",
+    answer: "らしい",
+    fb_en: "✅ らしい follows plain form verbs/adjectives for hearsay. できた (opened) + らしい.",
+    fb_jp: "動詞の普通形＋らしい。「みんなそう言っている」→伝聞なのでらしいが適切。"
+  },
+
+  // ── 9. 〜ようだ (seems / appears) ──
+  {
+    grammar: "〜ようだ / 〜みたいだ",
+    romaji: "~yō da / ~mitai da",
+    en_explain: "'It seems ~' / 'It looks like ~'. Based on direct observation or evidence.",
+    jp_explain: "自分で見たり感じたりした根拠に基づく推量。「〜に見える」「〜のようだ」。",
+    example_jp: "彼女は怒っているようだ。",
+    example_rom: "Kanojo wa okotte iru yō da.",
+    example_en: "She seems to be angry. (I can see/feel it.)",
+    type: "mc",
+    q: "You see dark clouds outside. Which sentence is most natural?",
+    choices: [
+      "雨が降るらしいです。",
+      "雨が降るようです。",
+      "雨が降るはずです。",
+      "雨が降るそうです。"
+    ],
+    answer: "雨が降るようです。",
+    fb_en: "✅ ようです is used when you can directly observe evidence (dark clouds = looks like rain).",
+    fb_jp: "「ようです」は直接見たり感じたりした根拠に使います。黒い雲→雨が降るようです。"
+  },
+  {
+    grammar: "〜ようだ / 〜みたいだ",
+    romaji: "~yō da / ~mitai da",
+    en_explain: "みたいだ is the casual equivalent of ようだ. Both mean 'seems like' based on observation.",
+    jp_explain: "「みたいだ」はようだのカジュアルな形。どちらも直接観察に基づく推量。",
+    example_jp: "彼はまだ寝ているみたいだ。",
+    example_rom: "Kare wa mada nete iru mitai da.",
+    example_en: "He seems to still be sleeping.",
+    type: "fill",
+    q: "Fill in: 部屋が静かだ。誰もいない ___ だ。\n(The room is quiet. It seems like no one is there.)",
+    answer: "よう",
+    fb_en: "✅ ようだ (or みたいだ) — you observe the quiet room and conclude no one is there.",
+    fb_jp: "「よう」＋「だ」→「ようだ」。直接観察（静かな部屋）をもとに推量。"
+  },
+
+  // ── 10. 〜まま (leaving as-is) ──
+  {
+    grammar: "〜まま",
+    romaji: "~mama",
+    en_explain: "'As it is' / 'leaving ~ in a state'. The state from before continues without change.",
+    jp_explain: "「〜した状態のまま（変化なしで）〜する」という意味。",
+    example_jp: "靴を履いたまま、部屋に入った。",
+    example_rom: "Kutsu wo haita mama, heya ni haitta.",
+    example_en: "I entered the room with my shoes still on. (without taking them off)",
+    type: "mc",
+    q: "Which sentence means 'I fell asleep with the TV on'?",
+    choices: [
+      "テレビをつけながら、寝た。",
+      "テレビをつけたまま、寝た。",
+      "テレビをつけても、寝た。",
+      "テレビをつけたのに、寝た。"
+    ],
+    answer: "テレビをつけたまま、寝た。",
+    fb_en: "✅ 〜たまま = 'leaving it in the state of having done ~'. The TV stayed on while sleeping.",
+    fb_jp: "「〜たまま」は「〜した状態を変えずに」という意味。テレビがついたまま＝消さないで。"
+  },
+  {
+    grammar: "〜まま",
+    romaji: "~mama",
+    en_explain: "'Leaving ~ as is.' Can also follow nouns (この + まま = as it is / like this).",
+    jp_explain: "名詞の後にも使える。「このまま」＝この状態を変えずに。",
+    example_jp: "このまま続けてください。",
+    example_rom: "Kono mama tsuzukete kudasai.",
+    example_en: "Please continue as is. / Keep going like this.",
+    type: "fill",
+    q: "Fill in: 窓を開けた ___ 、眠ってしまった。\n(I fell asleep with the window still open.)",
+    answer: "まま",
+    fb_en: "✅ 開けたまま = 'leaving the window open.' Past tense verb + まま.",
+    fb_jp: "「開けた」＋「まま」＝開けたままにして（閉めないで）。動詞のた形＋まま。"
+  }
+
+];
+
+let current = 0, score = 0, answered = false, shuffled = [];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startQuiz() {
+  current = 0; score = 0;
+  shuffled = shuffle([...questions]);
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = 'block';
+  renderQuestion(); updateProgress();
+}
+
+function updateProgress() {
+  const total = shuffled.length;
+  document.getElementById('progress-fill').style.width = Math.max(5, (current / total) * 100) + '%';
+  document.getElementById('q-counter').textContent = `Question ${current + 1} / ${total}`;
+  document.getElementById('score-info').textContent = `Score: ${score}`;
+}
+
+function esc(s) { return s.replace(/'/g, "\\'"); }
+
+function renderQuestion() {
+  answered = false;
+  const q = shuffled[current];
+  const area = document.getElementById('quiz-area');
+
+  const panel = `
+    <div class="grammar-panel">
+      <div class="grammar-panel-title">${q.grammar}</div>
+      <div class="grammar-romaji">${q.romaji}</div>
+      <div class="grammar-explain">
+        <div class="explain-block en">
+          <div class="explain-label">English</div>
+          ${q.en_explain}
+        </div>
+        <div class="explain-block jp">
+          <div class="explain-label">日本語</div>
+          ${q.jp_explain}
+        </div>
+      </div>
+      <div class="example-row">
+        <div class="ex-jp">${q.example_jp}</div>
+        <div class="ex-rom">${q.example_rom}</div>
+        <div class="ex-en">${q.example_en}</div>
+      </div>
+    </div>`;
+
+  let card = '';
+  if (q.type === 'mc') {
+    const shuffledChoices = shuffle([...q.choices]);
+    card = `
+      <div class="q-card active">
+        <div class="q-num">Question ${current + 1}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="choices">
+          ${shuffledChoices.map(c => `<button class="choice-btn" onclick="checkMC(this,'${esc(c)}','${esc(q.answer)}','${esc(q.fb_en)}','${esc(q.fb_jp)}')">${c}</button>`).join('')}
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" onclick="nextQ()">Next → 次へ</button>
+      </div>`;
+  } else {
+    card = `
+      <div class="q-card active">
+        <div class="q-num">Question ${current + 1}</div>
+        <div class="q-text" style="white-space:pre-line">${q.q}</div>
+        <div class="fill-wrap">
+          <input class="fill-input" id="fill-input" type="text" placeholder="Answer..." autocomplete="off"
+            onkeydown="if(event.key==='Enter')checkFill('${esc(q.answer)}','${esc(q.fb_en)}','${esc(q.fb_jp)}')">
+          <button class="submit-btn" id="submit-btn"
+            onclick="checkFill('${esc(q.answer)}','${esc(q.fb_en)}','${esc(q.fb_jp)}')">Check ✓</button>
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" onclick="nextQ()">Next → 次へ</button>
+      </div>`;
+  }
+
+  area.innerHTML = panel + card;
+  if (q.type === 'fill') setTimeout(() => document.getElementById('fill-input').focus(), 100);
+}
+
+function showFeedback(correct, fb_en, fb_jp) {
+  const fb = document.getElementById('feedback');
+  fb.innerHTML = `${fb_en}<div class="feedback-jp">${fb_jp}</div>`;
+  fb.className = 'feedback ' + (correct ? 'correct' : 'wrong') + ' show';
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('score-info').textContent = `Score: ${score}`;
+}
+
+function checkMC(btn, chosen, answer, fb_en, fb_jp) {
+  if (answered) return;
+  answered = true;
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.disabled = true;
+    if (b.textContent === answer) b.classList.add('correct');
+  });
+  const correct = chosen === answer;
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (correct) score++;
+  showFeedback(correct, fb_en, fb_jp);
+}
+
+function checkFill(answer, fb_en, fb_jp) {
+  if (answered) return;
+  const input = document.getElementById('fill-input');
+  const val = input.value.trim();
+  if (!val) return;
+  answered = true;
+  input.disabled = true;
+  document.getElementById('submit-btn').disabled = true;
+  const correct = val === answer;
+  input.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:#1A7A55;font-weight:800;font-size:1rem;margin-left:8px;';
+    hint.textContent = '→ ' + answer;
+    input.parentNode.appendChild(hint);
+  }
+  if (correct) score++;
+  showFeedback(correct, fb_en, fb_jp);
+}
+
+function nextQ() {
+  current++;
+  if (current >= shuffled.length) { showResult(); }
+  else { updateProgress(); renderQuestion(); }
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const r = document.getElementById('result');
+  r.classList.add('show');
+  const pct = score / shuffled.length;
+  let emoji, msg;
+  if (pct >= 0.9)      { emoji = '🏆'; msg = 'Excellent! N3 Grammar Master! · N3文法マスターです！すごい！'; }
+  else if (pct >= 0.7) { emoji = '🌸'; msg = 'Great job! Almost there! · よくできました！もう少しです！'; }
+  else if (pct >= 0.5) { emoji = '😊'; msg = 'Good effort! Keep practicing! · よく頑張りました！もっと練習しましょう！'; }
+  else                  { emoji = '📖'; msg = 'Review the grammar and try again! · もう一度文法を復習してみましょう！'; }
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-score').textContent = `${score} / ${shuffled.length}`;
+  document.getElementById('result-msg').textContent = msg;
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('q-counter').textContent = 'Complete! 完了！';
+}
+
+startQuiz();
+</script>
+</body>
+</html>
