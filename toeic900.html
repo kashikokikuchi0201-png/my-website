@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC 900点突破 対策・問題集</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #0f1117; color: #e0e0e0; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #1a1f35 0%, #0d3b6e 100%);
+    padding: 24px 32px;
+    border-bottom: 2px solid #2a4a7f;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  header h1 { font-size: 1.6rem; color: #fff; }
+  header .score-badge {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: #fff; padding: 8px 20px; border-radius: 20px;
+    font-weight: bold; font-size: 1.1rem;
+  }
+
+  .nav-tabs {
+    display: flex; background: #1a1f2e; border-bottom: 1px solid #2a3a5c;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 20px; cursor: pointer; white-space: nowrap;
+    color: #888; font-size: 0.9rem; border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-tab:hover { color: #ccc; background: #1f2840; }
+  .nav-tab.active { color: #60a5fa; border-bottom-color: #60a5fa; background: #1f2840; }
+
+  .tab-content { display: none; padding: 24px 32px; max-width: 900px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* ── Strategy section ── */
+  .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 640px) { .strategy-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: #1a1f2e; border: 1px solid #2a3a5c; border-radius: 12px;
+    padding: 20px;
+  }
+  .card h3 { color: #60a5fa; margin-bottom: 10px; font-size: 1rem; }
+  .card p, .card li { color: #b0c0d8; font-size: 0.88rem; line-height: 1.7; }
+  .card ul { padding-left: 16px; }
+  .card .big-num { font-size: 2rem; font-weight: bold; color: #f59e0b; }
+
+  .target-bar { background: #0d1a2d; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; }
+  .target-bar .label { font-size: 0.8rem; color: #888; margin-bottom: 6px; }
+  .bar-track { background: #1a2a40; border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .bar-label { display: flex; justify-content: space-between; margin-top: 4px; font-size: 0.78rem; color: #aaa; }
+
+  /* ── Quiz section ── */
+  .part-header {
+    background: linear-gradient(90deg, #1e3a5f, #1a2840);
+    border-left: 4px solid #3b82f6;
+    padding: 12px 16px; border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+  }
+  .part-header h2 { color: #60a5fa; font-size: 1rem; }
+  .part-header p { color: #88a4c0; font-size: 0.82rem; margin-top: 4px; }
+
+  .question-block {
+    background: #1a1f2e; border: 1px solid #2a3a5c; border-radius: 10px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .q-num { font-size: 0.75rem; color: #f59e0b; font-weight: bold; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .q-text { color: #d0dff0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 14px; }
+  .q-text .blank { background: #2a3a5c; color: #fff; padding: 2px 14px; border-radius: 4px; font-weight: bold; }
+  .passage {
+    background: #0d1a2d; border-left: 3px solid #3b82f6;
+    padding: 14px 16px; border-radius: 0 6px 6px 0;
+    font-size: 0.88rem; color: #c0d4e8; line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .choices { display: grid; gap: 8px; }
+  .choice-btn {
+    background: #111827; border: 1px solid #374151;
+    color: #c0d0e4; padding: 10px 14px; border-radius: 8px;
+    cursor: pointer; text-align: left; font-size: 0.88rem; line-height: 1.5;
+    transition: all 0.15s;
+  }
+  .choice-btn:hover:not(.locked) { background: #1e2d42; border-color: #4a6fa0; }
+  .choice-btn.selected { background: #1e3a5f; border-color: #60a5fa; }
+  .choice-btn.correct { background: #064e3b; border-color: #10b981; color: #6ee7b7; }
+  .choice-btn.wrong   { background: #450a0a; border-color: #ef4444; color: #fca5a5; }
+  .choice-btn.reveal  { background: #064e3b; border-color: #10b981; color: #6ee7b7; }
+
+  .check-btn {
+    margin-top: 12px; padding: 9px 24px;
+    background: #3b82f6; color: #fff; border: none; border-radius: 8px;
+    font-size: 0.88rem; cursor: pointer; transition: background 0.2s;
+  }
+  .check-btn:hover { background: #2563eb; }
+  .check-btn:disabled { background: #374151; color: #6b7280; cursor: default; }
+
+  .explanation {
+    margin-top: 12px; padding: 12px 14px;
+    background: #0d1a2d; border-radius: 6px;
+    font-size: 0.84rem; color: #94b8d8; line-height: 1.7; display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation strong { color: #f59e0b; }
+
+  /* Score tracker */
+  #score-display {
+    position: fixed; bottom: 20px; right: 20px;
+    background: #1a2840; border: 1px solid #2a4a7f;
+    border-radius: 12px; padding: 12px 18px; font-size: 0.85rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 100;
+  }
+  #score-display span { color: #60a5fa; font-weight: bold; font-size: 1.1rem; }
+
+  /* Tips */
+  .tip-block {
+    background: #1a2010; border: 1px solid #365214; border-radius: 8px;
+    padding: 14px 16px; margin-bottom: 12px; font-size: 0.86rem; color: #a0c870; line-height: 1.7;
+  }
+  .tip-block strong { color: #86efac; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>TOEIC 900点突破 対策プログラム</h1>
+  <div class="score-badge">目標 900+</div>
+</header>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showTab('strategy')">戦略・スコア分析</div>
+  <div class="nav-tab" onclick="showTab('part5')">Part 5 文法</div>
+  <div class="nav-tab" onclick="showTab('part6')">Part 6 長文穴埋め</div>
+  <div class="nav-tab" onclick="showTab('part7')">Part 7 読解</div>
+  <div class="nav-tab" onclick="showTab('listening')">リスニング対策</div>
+  <div class="nav-tab" onclick="showTab('vocab')">頻出語彙</div>
+</div>
+
+<!-- ═══════════════ STRATEGY TAB ═══════════════ -->
+<div id="tab-strategy" class="tab-content active">
+  <h2 style="color:#f0f4ff; margin-bottom:20px; font-size:1.3rem;">900点への道筋</h2>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:24px;">
+    <div class="card" style="border-color:#3b82f6;">
+      <div class="big-num">495</div>
+      <div style="color:#888; font-size:0.8rem;">Listening 満点</div>
+      <p style="margin-top:8px;">Part 1–4 ミス0〜3問圏内を目指す</p>
+    </div>
+    <div class="card" style="border-color:#10b981;">
+      <div class="big-num">495</div>
+      <div style="color:#888; font-size:0.8rem;">Reading 満点</div>
+      <p style="margin-top:8px;">Part 5–7 全問正答・時間内完走</p>
+    </div>
+    <div class="card" style="border-color:#f59e0b;">
+      <div class="big-num">900</div>
+      <div style="color:#888; font-size:0.8rem;">目標スコア</div>
+      <p style="margin-top:8px;">L:460+ / R:440+ が現実的な配分</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <div class="target-bar">
+      <div class="label">Part 5 (30問) ― 文法・語彙 → 目標: 28/30正答</div>
+      <div class="bar-track"><div class="bar-fill" style="width:93%"></div></div>
+      <div class="bar-label"><span>0</span><span>93%+</span></div>
+    </div>
+    <div class="target-bar">
+      <div class="label">Part 6 (16問) ― 長文穴埋め → 目標: 15/16正答</div>
+      <div class="bar-track"><div class="bar-fill" style="width:94%"></div></div>
+      <div class="bar-label"><span>0</span><span>94%+</span></div>
+    </div>
+    <div class="target-bar">
+      <div class="label">Part 7 (54問) ― 読解 → 目標: 50/54正答（時間内完走必須）</div>
+      <div class="bar-track"><div class="bar-fill" style="width:93%"></div></div>
+      <div class="bar-label"><span>0</span><span>93%+</span></div>
+    </div>
+  </div>
+
+  <div class="strategy-grid">
+    <div class="card">
+      <h3>Reading 攻略順序</h3>
+      <ul>
+        <li>Part 5: 1問20秒以内で処理</li>
+        <li>Part 6: 1問セット7分以内</li>
+        <li>Part 7 SP: 1問セット5分</li>
+        <li>Part 7 DP/TP: 1問セット10分</li>
+        <li><strong style="color:#f59e0b;">残り75分で全Part 7完走が目安</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Listening 攻略ポイント</h3>
+      <ul>
+        <li>Part 2: 引っかけ選択肢パターン暗記</li>
+        <li>Part 3/4: 設問を先読み（30秒以内）</li>
+        <li>意図問題・図表問題を重点練習</li>
+        <li>British/Australian英語に慣れる</li>
+        <li><strong style="color:#f59e0b;">シャドーイングを毎日15分継続</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>語彙・文法の優先度</h3>
+      <ul>
+        <li>品詞識別（名詞/動詞/形容詞/副詞）</li>
+        <li>前置詞の慣用表現 50個</li>
+        <li>受動態・完了形の時制判断</li>
+        <li>接続詞 vs 前置詞 vs 副詞の区別</li>
+        <li>コロケーション（動詞＋名詞）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>週間学習プラン（目安）</h3>
+      <ul>
+        <li>月・水・金: 公式問題集 Part 5×30問</li>
+        <li>火・木: リスニング精聴＋シャドーイング</li>
+        <li>土: Part 7 長文2セット通し</li>
+        <li>日: 模試1回分 → 復習</li>
+        <li><strong style="color:#f59e0b;">復習 > 問題数。必ず解説を読む</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PART 5 TAB ═══════════════ -->
+<div id="tab-part5" class="tab-content">
+  <div class="part-header">
+    <h2>Part 5 — 短文穴埋め（Incomplete Sentences）</h2>
+    <p>1問20〜25秒が目標。品詞・時制・前置詞・代名詞の4タイプが頻出</p>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-block" id="p5q1">
+    <div class="q-num">Q1 ／ 品詞識別</div>
+    <div class="q-text">
+      The CEO's <span class="blank">______</span> to cut costs by 15% surprised many analysts.
+    </div>
+    <div class="choices" id="p5q1-choices">
+      <button class="choice-btn" onclick="select('p5q1',this,'A')"> (A) decide</button>
+      <button class="choice-btn" onclick="select('p5q1',this,'B')"> (B) decision</button>
+      <button class="choice-btn" onclick="select('p5q1',this,'C')"> (C) decisive</button>
+      <button class="choice-btn" onclick="select('p5q1',this,'D')"> (D) decidedly</button>
+    </div>
+    <button class="check-btn" id="p5q1-btn" onclick="check('p5q1','B','p5q1-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q1-exp">
+      <strong>正解: (B) decision</strong><br>
+      冠詞 The CEO's の直後・動詞 surprised の主語位置 → 名詞が必要。
+      decide（動詞）、decisive（形容詞）、decidedly（副詞）は品詞が不一致。<br>
+      <strong>ポイント:</strong> 空欄前後の品詞を0.5秒で見極める。冠詞・所有格の後は名詞確定。
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block" id="p5q2">
+    <div class="q-num">Q2 ／ 前置詞</div>
+    <div class="q-text">
+      The new regulations will take effect <span class="blank">______</span> January 1st.
+    </div>
+    <div class="choices" id="p5q2-choices">
+      <button class="choice-btn" onclick="select('p5q2',this,'A')"> (A) in</button>
+      <button class="choice-btn" onclick="select('p5q2',this,'B')"> (B) on</button>
+      <button class="choice-btn" onclick="select('p5q2',this,'C')"> (C) at</button>
+      <button class="choice-btn" onclick="select('p5q2',this,'D')"> (D) by</button>
+    </div>
+    <button class="check-btn" id="p5q2-btn" onclick="check('p5q2','B','p5q2-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q2-exp">
+      <strong>正解: (B) on</strong><br>
+      特定の日付（January 1st）には <em>on</em> を使う。
+      in は月・年、at は時刻・特定地点、by は期限（〜までに）。<br>
+      <strong>例:</strong> on Monday / in January / at noon / by Friday
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block" id="p5q3">
+    <div class="q-num">Q3 ／ 動詞の形（時制・態）</div>
+    <div class="q-text">
+      By the time the manager arrived, the staff <span class="blank">______</span> already the report.
+    </div>
+    <div class="choices" id="p5q3-choices">
+      <button class="choice-btn" onclick="select('p5q3',this,'A')"> (A) submitted</button>
+      <button class="choice-btn" onclick="select('p5q3',this,'B')"> (B) had submitted</button>
+      <button class="choice-btn" onclick="select('p5q3',this,'C')"> (C) has submitted</button>
+      <button class="choice-btn" onclick="select('p5q3',this,'D')"> (D) will submit</button>
+    </div>
+    <button class="check-btn" id="p5q3-btn" onclick="check('p5q3','B','p5q3-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q3-exp">
+      <strong>正解: (B) had submitted</strong><br>
+      "By the time + 過去形" → 主節は<em>過去完了（had + 過去分詞）</em>。<br>
+      マネージャーが到着した時点より前の完了した動作を表す。<br>
+      <strong>公式:</strong> By the time S1 過去形, S2 <u>had + p.p.</u>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block" id="p5q4">
+    <div class="q-num">Q4 ／ 接続詞 vs 前置詞</div>
+    <div class="q-text">
+      <span class="blank">______</span> the heavy rain, the outdoor conference was held as scheduled.
+    </div>
+    <div class="choices" id="p5q4-choices">
+      <button class="choice-btn" onclick="select('p5q4',this,'A')"> (A) Although</button>
+      <button class="choice-btn" onclick="select('p5q4',this,'B')"> (B) However</button>
+      <button class="choice-btn" onclick="select('p5q4',this,'C')"> (C) Despite</button>
+      <button class="choice-btn" onclick="select('p5q4',this,'D')"> (D) Even though</button>
+    </div>
+    <button class="check-btn" id="p5q4-btn" onclick="check('p5q4','C','p5q4-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q4-exp">
+      <strong>正解: (C) Despite</strong><br>
+      空欄の後が名詞句（the heavy rain）→ <em>前置詞</em>が必要。<br>
+      Although / Even though は接続詞（後にS+Vが必要）、However は副詞（文頭なら ; が必要）。<br>
+      <strong>セット暗記:</strong> despite / in spite of / owing to / due to + 名詞
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-block" id="p5q5">
+    <div class="q-num">Q5 ／ 語彙（コロケーション）</div>
+    <div class="q-text">
+      Employees are encouraged to <span class="blank">______</span> advantage of the new training programs.
+    </div>
+    <div class="choices" id="p5q5-choices">
+      <button class="choice-btn" onclick="select('p5q5',this,'A')"> (A) get</button>
+      <button class="choice-btn" onclick="select('p5q5',this,'B')"> (B) take</button>
+      <button class="choice-btn" onclick="select('p5q5',this,'C')"> (C) have</button>
+      <button class="choice-btn" onclick="select('p5q5',this,'D')"> (D) make</button>
+    </div>
+    <button class="check-btn" id="p5q5-btn" onclick="check('p5q5','B','p5q5-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q5-exp">
+      <strong>正解: (B) take</strong><br>
+      "take advantage of ～" = ～を活用する・利用する（固定コロケーション）。<br>
+      <strong>重要コロケーション（900点必須）:</strong><br>
+      take part in / take place / take effect / make a decision / make progress / pay attention to
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-block" id="p5q6">
+    <div class="q-num">Q6 ／ 関係代名詞</div>
+    <div class="q-text">
+      The proposal <span class="blank">______</span> the committee approved will be implemented next quarter.
+    </div>
+    <div class="choices" id="p5q6-choices">
+      <button class="choice-btn" onclick="select('p5q6',this,'A')"> (A) who</button>
+      <button class="choice-btn" onclick="select('p5q6',this,'B')"> (B) whose</button>
+      <button class="choice-btn" onclick="select('p5q6',this,'C')"> (C) which</button>
+      <button class="choice-btn" onclick="select('p5q6',this,'D')"> (D) what</button>
+    </div>
+    <button class="check-btn" id="p5q6-btn" onclick="check('p5q6','C','p5q6-exp')">答え合わせ</button>
+    <div class="explanation" id="p5q6-exp">
+      <strong>正解: (C) which</strong><br>
+      先行詞が物（the proposal）かつ関係詞節内で目的語の役割 → <em>which</em>（または that）。<br>
+      who は人、whose は所有格、what は先行詞を含む（= the thing that）。<br>
+      <strong>構造:</strong> The proposal [which the committee approved] will be implemented...
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PART 6 TAB ═══════════════ -->
+<div id="tab-part6" class="tab-content">
+  <div class="part-header">
+    <h2>Part 6 — 長文穴埋め（Text Completion）</h2>
+    <p>4問セット×4 = 16問。文脈・論理展開を読む「文挿入問題」がカギ</p>
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Questions 1–4 ／ Email</div>
+    <div class="passage">
+      <strong>To:</strong> All Department Heads<br>
+      <strong>Subject:</strong> Annual Budget Review<br><br>
+      As we approach the end of the fiscal year, it is <strong>[1]</strong> that each department submits
+      a detailed budget report by November 30. The Finance team will <strong>[2]</strong> the reports
+      and compile a summary for the board meeting in December.<br><br>
+      Please ensure that all expenditures are <strong>[3]</strong> with receipts and invoices.
+      Incomplete submissions will cause delays in the approval process.<br><br>
+      <strong>[4]</strong> Should you have any questions, please contact the Finance Department directly.
+    </div>
+
+    <div id="p6q1" class="question-block" style="border-color:#2a3a5c; margin-bottom:8px;">
+      <div class="q-num">Q1</div>
+      <div class="choices" id="p6q1-choices">
+        <button class="choice-btn" onclick="select('p6q1',this,'A')">(A) imagined</button>
+        <button class="choice-btn" onclick="select('p6q1',this,'B')">(B) imperative</button>
+        <button class="choice-btn" onclick="select('p6q1',this,'C')">(C) optional</button>
+        <button class="choice-btn" onclick="select('p6q1',this,'D')">(D) unlikely</button>
+      </div>
+      <button class="check-btn" id="p6q1-btn" onclick="check('p6q1','B','p6q1-exp')">答え合わせ</button>
+      <div class="explanation" id="p6q1-exp">
+        <strong>正解: (B) imperative</strong><br>
+        It is imperative that S + 原形動詞 = 「〜することが不可欠だ」（仮定法現在）<br>
+        文脈: 期限付き提出依頼 → 強い義務を表す imperative が自然。
+      </div>
+    </div>
+
+    <div id="p6q2" class="question-block" style="border-color:#2a3a5c; margin-bottom:8px;">
+      <div class="q-num">Q2</div>
+      <div class="choices" id="p6q2-choices">
+        <button class="choice-btn" onclick="select('p6q2',this,'A')">(A) review</button>
+        <button class="choice-btn" onclick="select('p6q2',this,'B')">(B) reviewing</button>
+        <button class="choice-btn" onclick="select('p6q2',this,'C')">(C) reviewed</button>
+        <button class="choice-btn" onclick="select('p6q2',this,'D')">(D) be reviewing</button>
+      </div>
+      <button class="check-btn" id="p6q2-btn" onclick="check('p6q2','A','p6q2-exp')">答え合わせ</button>
+      <div class="explanation" id="p6q2-exp">
+        <strong>正解: (A) review</strong><br>
+        will + 動詞の原形。助動詞 will の後は原形不定詞。<br>
+        "The Finance team will review the reports" — 単純未来。
+      </div>
+    </div>
+
+    <div id="p6q3" class="question-block" style="border-color:#2a3a5c; margin-bottom:8px;">
+      <div class="q-num">Q3</div>
+      <div class="choices" id="p6q3-choices">
+        <button class="choice-btn" onclick="select('p6q3',this,'A')">(A) supplemented</button>
+        <button class="choice-btn" onclick="select('p6q3',this,'B')">(B) allocated</button>
+        <button class="choice-btn" onclick="select('p6q3',this,'C')">(C) documented</button>
+        <button class="choice-btn" onclick="select('p6q3',this,'D')">(D) submitted</button>
+      </div>
+      <button class="check-btn" id="p6q3-btn" onclick="check('p6q3','C','p6q3-exp')">答え合わせ</button>
+      <div class="explanation" id="p6q3-exp">
+        <strong>正解: (C) documented</strong><br>
+        "expenditures are documented with receipts and invoices" = 経費がレシートや請求書で文書化される。<br>
+        documented は「記録された・証拠付きの」の意味で会計文書に頻出。
+      </div>
+    </div>
+
+    <div id="p6q4" class="question-block" style="border-color:#2a3a5c;">
+      <div class="q-num">Q4 ／ 文挿入問題</div>
+      <div class="choices" id="p6q4-choices">
+        <button class="choice-btn" onclick="select('p6q4',this,'A')">(A) We appreciate your cooperation in this matter.</button>
+        <button class="choice-btn" onclick="select('p6q4',this,'B')">(B) The budget for next year will be significantly reduced.</button>
+        <button class="choice-btn" onclick="select('p6q4',this,'C')">(C) Your department has exceeded spending limits this quarter.</button>
+        <button class="choice-btn" onclick="select('p6q4',this,'D')">(D) New employees should complete orientation first.</button>
+      </div>
+      <button class="check-btn" id="p6q4-btn" onclick="check('p6q4','A','p6q4-exp')">答え合わせ</button>
+      <div class="explanation" id="p6q4-exp">
+        <strong>正解: (A) We appreciate your cooperation in this matter.</strong><br>
+        メール末尾（連絡先案内の直前）に置かれる定型の結びの一文。<br>
+        <strong>文挿入問題のコツ:</strong> ①接続詞・指示語（this/these/the）で前後とつながるか確認 ②文脈のトーンが一致するか確認
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PART 7 TAB ═══════════════ -->
+<div id="tab-part7" class="tab-content">
+  <div class="part-header">
+    <h2>Part 7 — 読解（Reading Comprehension）</h2>
+    <p>54問・75分が目安。設問先読み → 本文スキャン → 該当箇所精読の順で解く</p>
+  </div>
+
+  <div class="tip-block">
+    <strong>900点の速読術:</strong> 設問を先に読む（キーワードをメモ）→ 本文は設問のキーワード周辺だけ精読。全文を読もうとしない。
+    NOT問題・推測問題・意図問題は最後に回す。
+  </div>
+
+  <div class="question-block">
+    <div class="q-num">Questions 1–3 ／ Notice (Single Passage)</div>
+    <div class="passage">
+      <strong>NOTICE TO ALL TENANTS — Meridian Tower</strong><br><br>
+      Scheduled maintenance of the building's elevator systems will take place on
+      <strong>Thursday, September 12, from 7:00 A.M. to 3:00 P.M.</strong> During this period,
+      Elevator B will be temporarily out of service. Elevator A will remain operational
+      but may experience brief delays.<br><br>
+      Tenants who require accessibility accommodations are advised to contact the
+      building management office at <em>management@meridiantower.com</em> by
+      <strong>September 10</strong> so that alternative arrangements can be made.<br><br>
+      We apologize for any inconvenience this may cause and thank you for your patience.
+      For urgent matters, please call the front desk at <strong>555-0193</strong>.
+    </div>
+
+    <div id="p7q1" class="question-block" style="border-color:#2a3a5c; margin-bottom:8px;">
+      <div class="q-num">Q1: What is the purpose of this notice?</div>
+      <div class="choices" id="p7q1-choices">
+        <button class="choice-btn" onclick="select('p7q1',this,'A')">(A) To announce new elevator installation</button>
+        <button class="choice-btn" onclick="select('p7q1',this,'B')">(B) To inform tenants of planned maintenance</button>
+        <button class="choice-btn" onclick="select('p7q1',this,'C')">(C) To report an emergency elevator breakdown</button>
+        <button class="choice-btn" onclick="select('p7q1',this,'D')">(D) To request feedback from residents</button>
+      </div>
+      <button class="check-btn" id="p7q1-btn" onclick="check('p7q1','B','p7q1-exp')">答え合わせ</button>
+      <div class="explanation" id="p7q1-exp">
+        <strong>正解: (B) To inform tenants of planned maintenance</strong><br>
+        冒頭の "Scheduled maintenance ... will take place on..." が目的。<br>
+        (A) 新設ではなくメンテナンス。(C) 緊急ではなく計画的。(D) フィードバック要求なし。
+      </div>
+    </div>
+
+    <div id="p7q2" class="question-block" style="border-color:#2a3a5c; margin-bottom:8px;">
+      <div class="q-num">Q2: By when should tenants needing assistance contact management?</div>
+      <div class="choices" id="p7q2-choices">
+        <button class="choice-btn" onclick="select('p7q2',this,'A')">(A) September 10</button>
+        <button class="choice-btn" onclick="select('p7q2',this,'B')">(B) September 12 at 7:00 A.M.</button>
+        <button class="choice-btn" onclick="select('p7q2',this,'C')">(C) September 12 at 3:00 P.M.</button>
+        <button class="choice-btn" onclick="select('p7q2',this,'D')">(D) Any time before maintenance</button>
+      </div>
+      <button class="check-btn" id="p7q2-btn" onclick="check('p7q2','A','p7q2-exp')">答え合わせ</button>
+      <div class="explanation" id="p7q2-exp">
+        <strong>正解: (A) September 10</strong><br>
+        "contact the building management office ... by <u>September 10</u>"と明記。<br>
+        工事日（9/12）の2日前が締切。数字・日付問題は本文に必ず根拠がある。
+      </div>
+    </div>
+
+    <div id="p7q3" class="question-block" style="border-color:#2a3a5c;">
+      <div class="q-num">Q3: What is indicated about Elevator A?</div>
+      <div class="choices" id="p7q3-choices">
+        <button class="choice-btn" onclick="select('p7q3',this,'A')">(A) It will be completely shut down.</button>
+        <button class="choice-btn" onclick="select('p7q3',this,'B')">(B) It will operate but may be slower than usual.</button>
+        <button class="choice-btn" onclick="select('p7q3',this,'C')">(C) It is exclusively for disabled tenants.</button>
+        <button class="choice-btn" onclick="select('p7q3',this,'D')">(D) It will be replaced with a new model.</button>
+      </div>
+      <button class="check-btn" id="p7q3-btn" onclick="check('p7q3','B','p7q3-exp')">答え合わせ</button>
+      <div class="explanation" id="p7q3-exp">
+        <strong>正解: (B) It will operate but may be slower than usual.</strong><br>
+        "Elevator A will remain operational but may experience brief delays" → 稼働するが遅延が生じる可能性。<br>
+        <strong>900点の罠:</strong> (A) 運休するのはElevator B。本文をきちんとスキャンしないと混同する。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ LISTENING TAB ═══════════════ -->
+<div id="tab-listening" class="tab-content">
+  <div class="part-header">
+    <h2>リスニング対策（Part 1–4）</h2>
+    <p>スクリプトなしで聞いて答える練習。引っかけパターンと先読み技術が最重要</p>
+  </div>
+
+  <div class="strategy-grid">
+    <div class="card">
+      <h3>Part 2 ― 引っかけパターン TOP5</h3>
+      <ul>
+        <li><strong style="color:#f87171;">同音異義語:</strong> <em>hear / here, right / write</em></li>
+        <li><strong style="color:#f87171;">連想語:</strong> 質問に関連する単語を含む誤答</li>
+        <li><strong style="color:#f87171;">Yes/No 回避:</strong> 間接的な答え（Neither do I など）</li>
+        <li><strong style="color:#f87171;">時制ずらし:</strong> 未来を聞かれて過去形の答え</li>
+        <li><strong style="color:#f87171;">否定疑問文:</strong> Isn't it...? → Yes/No の意味が逆</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Part 3/4 ― 先読みのコツ</h3>
+      <ul>
+        <li>音声の指示中に3設問を素早く確認</li>
+        <li>WHY / WHAT / WHERE の疑問詞に下線</li>
+        <li>固有名詞・数字・時間に注目</li>
+        <li>意図問題: "What does the man mean?" → 行間を読む</li>
+        <li>図表問題: 選択肢に番号・名称が並ぶ → 先に図を見る</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>シャドーイング手順（毎日15分）</h3>
+      <ul>
+        <li>1周目: スクリプトなしで聞く（内容把握）</li>
+        <li>2周目: スクリプトを見ながら音読</li>
+        <li>3周目: スクリプトを隠してシャドーイング</li>
+        <li>4周目: 録音して比較・修正</li>
+        <li><strong style="color:#f59e0b;">公式TOEIC問題集のPart 3/4 音源が最適</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>900点向け 音声特徴</h3>
+      <ul>
+        <li>アメリカ英語: 母音変化・フラップT（water→wader）</li>
+        <li>イギリス英語: 非ロール R・riseしない語尾</li>
+        <li>オーストラリア英語: day→die 的な母音変化</li>
+        <li>リンキング: "Pick it up" → "pickit up"</li>
+        <li>リダクション: "want to" → "wanna"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip-block" style="margin-top:16px;">
+    <strong>Part 2 練習問題 — 音声なし版（文字で確認）</strong><br><br>
+    <strong>Q:</strong> "Why hasn't the shipment arrived yet?"<br>
+    <strong>(A)</strong> There was a delay at customs. ✅ <em>←正解: 直接的な理由</em><br>
+    <strong>(B)</strong> The ship is very large. ❌ <em>← "ship" で引っかける連想語罠</em><br>
+    <strong>(C)</strong> Yes, it arrived this morning. ❌ <em>← Why疑問文にYes/Noは不自然</em><br><br>
+    <strong>Q:</strong> "Would you like me to reschedule the meeting?"<br>
+    <strong>(A)</strong> The schedule looks fine. ❌ <em>← "schedule" 連想語罠</em><br>
+    <strong>(B)</strong> That would be very helpful. ✅ <em>←正解: 間接的な同意</em><br>
+    <strong>(C)</strong> I'll meet you there. ❌ <em>← "meet" 連想語罠</em>
+  </div>
+</div>
+
+<!-- ═══════════════ VOCAB TAB ═══════════════ -->
+<div id="tab-vocab" class="tab-content">
+  <div class="part-header">
+    <h2>TOEIC 900点 頻出語彙・表現</h2>
+    <p>ビジネス頻出コロケーションと難単語を分野別に整理</p>
+  </div>
+
+  <div id="vocab-quiz">
+    <div class="q-num">語彙クイズ — 意味を選べ</div>
+  </div>
+
+  <div id="vq1" class="question-block">
+    <div class="q-text"><strong>expedite</strong></div>
+    <div class="choices" id="vq1-choices">
+      <button class="choice-btn" onclick="select('vq1',this,'A')">(A) 輸出する</button>
+      <button class="choice-btn" onclick="select('vq1',this,'B')">(B) 〜を早める・迅速に処理する</button>
+      <button class="choice-btn" onclick="select('vq1',this,'C')">(C) 期待する</button>
+      <button class="choice-btn" onclick="select('vq1',this,'D')">(D) 調査する</button>
+    </div>
+    <button class="check-btn" id="vq1-btn" onclick="check('vq1','B','vq1-exp')">答え合わせ</button>
+    <div class="explanation" id="vq1-exp">
+      <strong>expedite = 〜を迅速に処理する、促進する</strong><br>
+      例: "We need to expedite the approval process." (承認プロセスを早める必要がある)<br>
+      関連語: expedient（便宜的な）、expedition（遠征）
+    </div>
+  </div>
+
+  <div id="vq2" class="question-block">
+    <div class="q-text"><strong>remuneration</strong></div>
+    <div class="choices" id="vq2-choices">
+      <button class="choice-btn" onclick="select('vq2',this,'A')">(A) 評判・名声</button>
+      <button class="choice-btn" onclick="select('vq2',this,'B')">(B) 返金・払い戻し</button>
+      <button class="choice-btn" onclick="select('vq2',this,'C')">(C) 報酬・給与</button>
+      <button class="choice-btn" onclick="select('vq2',this,'D')">(D) 更新・刷新</button>
+    </div>
+    <button class="check-btn" id="vq2-btn" onclick="check('vq2','C','vq2-exp')">答え合わせ</button>
+    <div class="explanation" id="vq2-exp">
+      <strong>remuneration = 報酬、給与（compensation の上位語）</strong><br>
+      例: "The position offers competitive remuneration." (競争力のある報酬を提供する)<br>
+      関連語: reimburse（払い戻す）、remunerate（報酬を与える）
+    </div>
+  </div>
+
+  <div id="vq3" class="question-block">
+    <div class="q-text"><strong>contingent on</strong></div>
+    <div class="choices" id="vq3-choices">
+      <button class="choice-btn" onclick="select('vq3',this,'A')">(A) 〜にもかかわらず</button>
+      <button class="choice-btn" onclick="select('vq3',this,'B')">(B) 〜次第で・〜を条件として</button>
+      <button class="choice-btn" onclick="select('vq3',this,'C')">(C) 〜に加えて</button>
+      <button class="choice-btn" onclick="select('vq3',this,'D')">(D) 〜の間に</button>
+    </div>
+    <button class="check-btn" id="vq3-btn" onclick="check('vq3','B','vq3-exp')">答え合わせ</button>
+    <div class="explanation" id="vq3-exp">
+      <strong>contingent on = 〜次第で、〜を条件とする</strong><br>
+      例: "The deal is contingent on board approval." (その取引は取締役会の承認次第だ)<br>
+      同義: dependent on / subject to / conditional on
+    </div>
+  </div>
+
+  <div id="vq4" class="question-block">
+    <div class="q-text"><strong>procurement</strong></div>
+    <div class="choices" id="vq4-choices">
+      <button class="choice-btn" onclick="select('vq4',this,'A')">(A) 宣伝・販促</button>
+      <button class="choice-btn" onclick="select('vq4',this,'B')">(B) 業績・成果</button>
+      <button class="choice-btn" onclick="select('vq4',this,'C')">(C) 調達・購買</button>
+      <button class="choice-btn" onclick="select('vq4',this,'D')">(D) 廃棄・処分</button>
+    </div>
+    <button class="check-btn" id="vq4-btn" onclick="check('vq4','C','vq4-exp')">答え合わせ</button>
+    <div class="explanation" id="vq4-exp">
+      <strong>procurement = 調達、購買（企業の購買部門 = procurement department）</strong><br>
+      例: "The procurement team negotiates with suppliers." (調達チームがサプライヤーと交渉する)<br>
+      動詞: procure（調達する）
+    </div>
+  </div>
+
+  <div style="background:#1a2010; border:1px solid #365214; border-radius:10px; padding:20px; margin-top:20px;">
+    <h3 style="color:#86efac; margin-bottom:14px;">900点必須 フレーズ集</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.84rem;">
+      <div><span style="color:#fbbf24">in conjunction with</span> — 〜と連携して</div>
+      <div><span style="color:#fbbf24">pursuant to</span> — 〜に従って</div>
+      <div><span style="color:#fbbf24">on behalf of</span> — 〜を代表して</div>
+      <div><span style="color:#fbbf24">in lieu of</span> — 〜の代わりに</div>
+      <div><span style="color:#fbbf24">with regard to</span> — 〜に関して</div>
+      <div><span style="color:#fbbf24">as per</span> — 〜に従って</div>
+      <div><span style="color:#fbbf24">be subject to</span> — 〜の対象となる</div>
+      <div><span style="color:#fbbf24">draw up</span> — （書類を）作成する</div>
+      <div><span style="color:#fbbf24">put forward</span> — 提案する</div>
+      <div><span style="color:#fbbf24">carry out</span> — 実行する</div>
+      <div><span style="color:#fbbf24">look into</span> — 調査する</div>
+      <div><span style="color:#fbbf24">set aside</span> — 取っておく・確保する</div>
+    </div>
+  </div>
+</div>
+
+<!-- Score tracker -->
+<div id="score-display">
+  正答: <span id="correct-count">0</span> / <span id="total-count">0</span>
+</div>
+
+<script>
+  const answers = {};
+  const correctAnswers = {};
+  let correct = 0, total = 0;
+
+  function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function select(qId, btn, choice) {
+    if (answers[qId] !== undefined) return; // locked after answer
+    const parent = document.getElementById(qId + '-choices');
+    if (!parent) return;
+    parent.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    answers[qId] = choice;
+  }
+
+  function check(qId, correct_ans, expId) {
+    if (answers[qId] === undefined) {
+      alert('選択肢を選んでください。');
+      return;
+    }
+    correctAnswers[qId] = correct_ans;
+    const parent = document.getElementById(qId + '-choices');
+    if (!parent) return;
+    const btn = document.getElementById(qId + '-btn');
+    btn.disabled = true;
+
+    total++;
+    if (answers[qId] === correct_ans) correct++;
+    document.getElementById('correct-count').textContent = correct;
+    document.getElementById('total-count').textContent = total;
+
+    parent.querySelectorAll('.choice-btn').forEach(b => {
+      b.classList.add('locked');
+      const letter = b.textContent.trim().charAt(1);
+      if (letter === correct_ans) b.classList.add('correct');
+      else if (b.classList.contains('selected')) b.classList.add('wrong');
+    });
+
+    const exp = document.getElementById(expId);
+    if (exp) exp.classList.add('show');
+  }
+</script>
+</body>
+</html>
