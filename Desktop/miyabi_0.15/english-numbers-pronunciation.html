@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英語数字発音練習 20-60 - Numbers Pronunciation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffd89b 0%, #ff9a56 50%, #ff6b9d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.25);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            color: #ff6b9d;
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #ff9a56;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            padding: 12px 28px;
+            border: 2px solid #ff9a56;
+            background: white;
+            color: #ff9a56;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn:hover {
+            background: #fff0e6;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* Learning Mode */
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .number-card {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe6dc 100%);
+            border: 2px solid #ffd9c4;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .number-card:hover {
+            border-color: #ff9a56;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .number-card.selected {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .number-card .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 8px;
+        }
+
+        .number-card.selected .number {
+            color: white;
+        }
+
+        .number-card .english {
+            font-size: 14px;
+            color: #ff9a56;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .number-card.selected .english {
+            color: white;
+        }
+
+        .number-card .speaker {
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
+        .number-card.selected .speaker {
+            opacity: 1;
+        }
+
+        /* Pronunciation Points */
+        .pronunciation-guide {
+            background: linear-gradient(135deg, #fffacd 0%, #fff8dc 100%);
+            border-left: 4px solid #ffd89b;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .pronunciation-guide h3 {
+            color: #ff9a56;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .pronunciation-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .point {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 3px solid #ff9a56;
+        }
+
+        .point strong {
+            color: #ff6b9d;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .point span {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Practice Mode */
+        .practice-section {
+            text-align: center;
+        }
+
+        .practice-question {
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe6dc 100%);
+            padding: 40px 30px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            border: 2px solid #ffd9c4;
+        }
+
+        .practice-question h2 {
+            color: #ff6b9d;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .practice-number {
+            font-size: 64px;
+            font-weight: bold;
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .practice-english {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .practice-english.hidden {
+            opacity: 0;
+        }
+
+        .practice-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .btn-secondary {
+            background: #fff5f0;
+            color: #ff9a56;
+            border: 2px solid #ffd9c4;
+        }
+
+        .btn-secondary:hover {
+            background: #ffd9c4;
+            border-color: #ff9a56;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        /* Multiple Choice */
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .choice-btn {
+            padding: 15px;
+            border: 2px solid #ffd9c4;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #ff9a56;
+        }
+
+        .choice-btn:hover {
+            border-color: #ff9a56;
+            background: linear-gradient(135deg, #fff5f0 0%, #ffe6dc 100%);
+            transform: translateY(-2px);
+        }
+
+        .choice-btn.correct {
+            background: linear-gradient(135deg, #82d77d 0%, #4caf50 100%);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .choice-btn.incorrect {
+            background: linear-gradient(135deg, #ef5350 0%, #d32f2f 100%);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, #ffe6dc 0%, #fff5f0 100%);
+            border: 2px solid #ffd9c4;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff6b9d;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #ff9a56;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Listening Mode */
+        .listening-section {
+            text-align: center;
+        }
+
+        .play-button {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 40px;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .play-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Range Selector */
+        .range-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .range-tab {
+            padding: 10px 22px;
+            border: 2px solid #ffd9c4;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #ff9a56;
+        }
+
+        .range-tab:hover {
+            border-color: #ff9a56;
+            background: #fff5f0;
+        }
+
+        .range-tab.active {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b9d 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Feedback */
+        .feedback {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            color: #1b5e20;
+            border: 1px solid #81c784;
+            font-size: 18px;
+        }
+
+        .feedback.incorrect {
+            background: linear-gradient(135deg, #ffcccc 0%, #ffb3b3 100%);
+            color: #b71c1c;
+            border: 1px solid #ef5350;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .learning-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .practice-number {
+                font-size: 48px;
+            }
+
+            .choice-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔊 英語数字発音練習</h1>
+            <p>Numbers 20-60 Pronunciation</p>
+            <p class="subtitle">「-ty」の発音が難しい範囲を集中練習</p>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <button class="mode-btn active" onclick="switchMode('learning')">📚 発音練習</button>
+            <button class="mode-btn" onclick="switchMode('practice')">✏️ 練習問題</button>
+        </div>
+
+        <!-- Learning Mode -->
+        <div id="learning" class="content active">
+            <div class="pronunciation-guide">
+                <h3>📌 発音のポイント</h3>
+                <div class="pronunciation-points">
+                    <div class="point">
+                        <strong>20-39: twenty ~ thirty-nine</strong>
+                        <span>「TW-en-ty」「THIR-ty」など、最初の音に強勢。TEEN より「ティ」に近い音。</span>
+                    </div>
+                    <div class="point">
+                        <strong>40-49: forty ~ forty-nine</strong>
+                        <span>「FORティ」 - Rをハッキリ発音すること。日本語の「フォーティー」より舌を巻いた「R」が大事。</span>
+                    </div>
+                    <div class="point">
+                        <strong>50-60: fifty ~ sixty</strong>
+                        <span>「FIF-ty」「SIX-ty」 - 最初の音がはっきり違う。「F」と「S」の音の違いに注意。</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="range-tabs">
+                <button class="range-tab active" onclick="selectRange('10-19')">10-19</button>
+                <button class="range-tab" onclick="selectRange('20-29')">20-29</button>
+                <button class="range-tab" onclick="selectRange('30-39')">30-39</button>
+                <button class="range-tab" onclick="selectRange('40-49')">40-49</button>
+                <button class="range-tab" onclick="selectRange('50-59')">50-59</button>
+                <button class="range-tab" onclick="selectRange('all')">すべて</button>
+            </div>
+
+            <div class="learning-grid" id="learningGrid"></div>
+        </div>
+
+
+        <!-- Practice Mode -->
+        <div id="practice" class="content">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div class="stat-label">正解</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">合計問題数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="accuracy">0%</div>
+                    <div class="stat-label">正答率</div>
+                </div>
+            </div>
+
+            <div class="practice-section">
+                <div class="practice-question">
+                    <h2>🎧 聞こえる数字はどちらでしょう？</h2>
+                    <button class="play-button" onclick="playPracticeNumber()" style="width: 70px; height: 70px; font-size: 30px;">▶</button>
+                </div>
+
+                <div class="choice-grid" id="practiceChoices"></div>
+
+                <div class="practice-buttons">
+                    <button class="btn btn-secondary" onclick="resetPractice()">リセット</button>
+                    <button class="btn btn-primary" onclick="nextPracticeQuestion()">次の問題</button>
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Cache for audio elements
+        const audioCache = {};
+        
+        // Utility to play audio using Google Translate TTS (higher quality)
+        function playAudioFromGoogle(text) {
+            // Use Google Translate TTS API for natural pronunciation
+            const encodedText = encodeURIComponent(text);
+            const audioUrl = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
+            
+            // Alternative: Use direct TTS via Google Translate
+            const ttsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en-US&q=${encodedText}`;
+            
+            // Create audio element
+            const audio = new Audio(ttsUrl);
+            audio.volume = 1.0;
+            audio.playbackRate = 0.9; // Slightly slower for clarity
+            
+            // Handle errors gracefully - fallback to Web Speech API
+            audio.onerror = () => {
+                console.log('Falling back to Web Speech API');
+                playWebSpeechAudio(text);
+            };
+            
+            // Play the audio
+            audio.play().catch(err => {
+                console.log('Audio playback error, using Web Speech API:', err);
+                playWebSpeechAudio(text);
+            });
+            
+            return audio;
+        }
+        
+        // Fallback to Web Speech API with improved settings
+        function playWebSpeechAudio(text) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85; // Slightly slower for clarity
+            utterance.pitch = 1.2; // Natural female pitch
+            utterance.volume = 1.0;
+            
+            // Try to select a high-quality female voice
+            const voices = window.speechSynthesis.getVoices();
+            
+            // Priority: Look for female voices with quality indicators
+            const femaleVoice = voices.find(voice => 
+                voice.lang.includes('en-US') && 
+                (
+                    voice.name.includes('female') || 
+                    voice.name.includes('Female') || 
+                    voice.name.includes('woman') ||
+                    voice.name.includes('Victoria') ||
+                    voice.name.includes('Moira') ||
+                    voice.name.includes('Samantha') ||
+                    voice.name.includes('Karen')
+                )
+            ) || voices.find(voice => voice.lang.includes('en-US'));
+            
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        // Main play function - tries Google first, fallback to Web Speech
+        function createNumberAudio(number) {
+            const text = number.toString();
+            playAudioFromGoogle(text);
+        }
+
+        // Utility to get English number text
+        function getEnglishNumber(number) {
+            const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty'];
+
+            if (number < 10) return ones[number];
+            if (number < 20) return teens[number - 10];
+            
+            const ten = Math.floor(number / 10);
+            const one = number % 10;
+            return one === 0 ? tens[ten] : tens[ten] + '-' + ones[one];
+        }
+
+        // Generate number range
+        function getNumberRange(range) {
+            if (range === '10-19') return Array.from({length: 10}, (_, i) => 10 + i);
+            if (range === '20-29') return Array.from({length: 10}, (_, i) => 20 + i);
+            if (range === '30-39') return Array.from({length: 10}, (_, i) => 30 + i);
+            if (range === '40-49') return Array.from({length: 10}, (_, i) => 40 + i);
+            if (range === '50-59') return Array.from({length: 10}, (_, i) => 50 + i);
+            // 'all' - include all ranges
+            const all = [];
+            all.push(...Array.from({length: 10}, (_, i) => 10 + i));
+            all.push(...Array.from({length: 10}, (_, i) => 20 + i));
+            all.push(...Array.from({length: 10}, (_, i) => 30 + i));
+            all.push(...Array.from({length: 10}, (_, i) => 40 + i));
+            all.push(...Array.from({length: 10}, (_, i) => 50 + i));
+            return all;
+        }
+
+        // Current state
+        let currentMode = 'learning';
+        let currentRange = '10-19';
+        let currentListenRange = '20-40';
+        let currentNumber = 20;
+        let practiceStats = { correct: 0, total: 0 };
+        let listenShowAnswer = false;
+
+        // Mode switching
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            document.getElementById(mode).classList.add('active');
+            document.querySelectorAll('.mode-btn').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (mode === 'practice') {
+                initPractice();
+            }
+        }
+
+        // Learning Mode
+        function selectRange(range) {
+            currentRange = range;
+            renderLearningGrid();
+            document.querySelectorAll('.range-tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function renderLearningGrid() {
+            const numbers = getNumberRange(currentRange);
+            const grid = document.getElementById('learningGrid');
+            grid.innerHTML = numbers.map(num => `
+                <div class="number-card" onclick="playNumber(${num})">
+                    <div class="number">${num}</div>
+                    <div class="english">${getEnglishNumber(num)}</div>
+                    <div class="speaker">🔊</div>
+                </div>
+            `).join('');
+        }
+
+        function playNumber(number) {
+            createNumberAudio(number);
+        }
+
+
+        // Practice Mode
+        function initPractice() {
+            practiceStats = { correct: 0, total: 0 };
+            const range = getNumberRange('all');
+            currentNumber = range[Math.floor(Math.random() * range.length)];
+            renderPracticeQuestion();
+        }
+
+        function renderPracticeQuestion() {
+            const choices = generatePracticeChoices();
+            const choicesHtml = choices.map((num, idx) => `
+                <button class="choice-btn" onclick="checkPracticeAnswer(${num}, this)">${num}</button>
+            `).join('');
+            document.getElementById('practiceChoices').innerHTML = choicesHtml;
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+        }
+
+        function generatePracticeChoices() {
+            const range = getNumberRange('all');
+            const choices = new Set([currentNumber]);
+            while (choices.size < 2) {
+                choices.add(range[Math.floor(Math.random() * range.length)]);
+            }
+            return Array.from(choices).sort(() => Math.random() - 0.5);
+        }
+
+        function playPracticeNumber() {
+            playNumber(currentNumber);
+        }
+
+        function checkPracticeAnswer(selected, button) {
+            practiceStats.total++;
+            const isCorrect = selected === currentNumber;
+            if (isCorrect) {
+                practiceStats.correct++;
+                button.classList.add('correct');
+                showFeedback('正解です！🎉', 'correct');
+            } else {
+                button.classList.add('incorrect');
+                showFeedback(`不正解です。正解は ${currentNumber} (${getEnglishNumber(currentNumber)}) です。`, 'incorrect');
+            }
+            updatePracticeStats();
+            document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+        }
+
+        function updatePracticeStats() {
+            document.getElementById('correctCount').textContent = practiceStats.correct;
+            document.getElementById('totalCount').textContent = practiceStats.total;
+            const accuracy = practiceStats.total === 0 ? 0 : Math.round((practiceStats.correct / practiceStats.total) * 100);
+            document.getElementById('accuracy').textContent = accuracy + '%';
+        }
+
+        function nextPracticeQuestion() {
+            const range = getNumberRange('all');
+            currentNumber = range[Math.floor(Math.random() * range.length)];
+            renderPracticeQuestion();
+            // 自動再生
+            setTimeout(() => playPracticeNumber(), 500);
+        }
+
+        function resetPractice() {
+            initPractice();
+            updatePracticeStats();
+        }
+
+        function showFeedback(message, type) {
+            const fb = document.getElementById('feedback');
+            fb.textContent = message;
+            fb.classList.add('show', type);
+        }
+
+        // Initialize
+        renderLearningGrid();
+    </script>
+</body>
+</html>
