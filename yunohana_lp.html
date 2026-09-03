@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yunohana-so — Shiobara Onsen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:   #c4a46b;
+    --gold-d: #9a7b4f;
+    --indigo: #2b3d5c;
+    --ink:    #1a1208;
+    --cream:  #f8f4ed;
+    --paper:  #fdf9f3;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    height: 64px;
+    background: rgba(27,18,8,.82);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #c4a46b30;
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: .3em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: #d6cfc6;
+    text-decoration: none;
+    transition: color .25s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background .25s;
+  }
+
+  .nav-cta:hover { background: var(--gold-d); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('ryokan_imgs/img_entrance.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    transform: scale(1.04);
+    transition: transform 8s ease-out;
+  }
+
+  .hero-bg.loaded { transform: scale(1); }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,6,2,.55) 0%,
+      rgba(10,6,2,.35) 40%,
+      rgba(10,6,2,.65) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    padding: 0 24px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: .65em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 22px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(54px, 8vw, 88px);
+    letter-spacing: .12em;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #d6cfc6;
+    letter-spacing: .15em;
+    margin-top: 16px;
+  }
+
+  .hero-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: #c8bfb2;
+    letter-spacing: .07em;
+    line-height: 1.9;
+    max-width: 480px;
+    margin: 0 auto 36px;
+  }
+
+  .hero-btn {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: .4em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 16px 44px;
+    text-decoration: none;
+    transition: background .25s, transform .2s;
+  }
+
+  .hero-btn:hover { background: var(--gold-d); transform: translateY(-1px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #9a8a78;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: .4em;
+  }
+
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%,100% { opacity: .3; transform: scaleY(1); }
+    50%      { opacity: 1;  transform: scaleY(1.1); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 0; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: .55em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: var(--gold-d);
+    opacity: .5;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 300;
+    color: var(--indigo);
+    letter-spacing: .05em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .section-body {
+    font-size: 15.5px;
+    line-height: 2;
+    color: #4a3c28;
+    max-width: 600px;
+  }
+
+  /* ── WELCOME ── */
+  #welcome {
+    background: var(--paper);
+  }
+
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .welcome-img {
+    position: relative;
+  }
+
+  .welcome-img img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .welcome-img::before {
+    content: '';
+    position: absolute;
+    top: -14px; left: -14px;
+    right: 14px; bottom: 14px;
+    border: 1px solid var(--gold);
+    opacity: .4;
+    pointer-events: none;
+  }
+
+  /* ── AFTER BATH ── */
+  #after-bath {
+    background: #f0ebe0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .feature-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+  }
+
+  .feature-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
+  }
+
+  .feature-card:hover img { transform: scale(1.05); }
+
+  .feature-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,6,2,.78) 0%, rgba(10,6,2,.1) 55%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px 28px;
+    color: #fff;
+  }
+
+  .feature-num {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: .5em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: .06em;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .feature-desc {
+    font-size: 12.5px;
+    color: #b8b0a4;
+    line-height: 1.7;
+  }
+
+  /* ── DINNER ── */
+  #dinner {
+    background: var(--indigo);
+    color: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #dinner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('ryokan_imgs/img_dining1.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: .12;
+  }
+
+  #dinner .container { position: relative; }
+
+  #dinner .section-title { color: var(--cream); }
+
+  #dinner .section-body { color: #a8a098; max-width: 100%; }
+
+  .dinner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+    align-items: start;
+  }
+
+  .dinner-img img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .dinner-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .dinner-list li {
+    padding-bottom: 28px;
+    border-bottom: 1px solid #ffffff18;
+  }
+
+  .dinner-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dinner-list li h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: .05em;
+  }
+
+  .dinner-list li p {
+    font-size: 13.5px;
+    color: #9a9088;
+    line-height: 1.85;
+  }
+
+  .kanpai-band {
+    background: var(--gold);
+    color: var(--ink);
+    text-align: center;
+    padding: 22px 40px;
+    margin-top: 60px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    letter-spacing: .1em;
+  }
+
+  /* ── BREAKFAST ── */
+  #breakfast {
+    background: var(--paper);
+  }
+
+  .breakfast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .breakfast-img img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .time-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 30px 0;
+  }
+
+  .time-opt {
+    border: 1px solid var(--gold);
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .time-opt .t-lbl {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: .4em;
+    color: var(--gold-d);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .time-opt .t-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--indigo);
+  }
+
+  .time-opt p {
+    font-size: 12px;
+    color: #7a6a54;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  .allergy-note {
+    background: #f0ebe0;
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.85;
+    color: #4a3c28;
+  }
+
+  .allergy-note strong {
+    font-family: 'Cinzel', serif;
+    font-size: 9.5px;
+    letter-spacing: .3em;
+    color: var(--indigo);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ── STAFF PHOTO FULL WIDTH ── */
+  .staff-banner {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+  }
+
+  .staff-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(.85);
+  }
+
+  .staff-banner-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    background: rgba(10,6,2,.38);
+  }
+
+  .staff-banner-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: .12em;
+    margin-bottom: 12px;
+  }
+
+  .staff-banner-text p {
+    font-size: 14px;
+    color: #c8bfb2;
+    letter-spacing: .1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0e0b06;
+    color: #7a6a54;
+    text-align: center;
+    padding: 60px 40px 48px;
+    border-top: 1px solid #c4a46b22;
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    letter-spacing: .3em;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #5a5040;
+    letter-spacing: .15em;
+    margin-bottom: 32px;
+  }
+
+  .footer-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-d);
+    margin: 0 auto 28px;
+    opacity: .4;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: #3a3028;
+    letter-spacing: .12em;
+  }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Yunohana-so</a>
+  <ul class="nav-links">
+    <li><a href="#welcome">Welcome</a></li>
+    <li><a href="#after-bath">Amenities</a></li>
+    <li><a href="#dinner">Dining</a></li>
+    <li><a href="#breakfast">Breakfast</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Reserve</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Shiobara Onsen · Tochigi, Japan</span>
+    <h1 class="hero-title">Yunohana-so</h1>
+    <p class="hero-sub">House of Hot Spring Blossoms</p>
+    <div class="hero-rule"></div>
+    <p class="hero-desc">
+      A sanctuary of warmth and quiet elegance, nestled among<br>
+      the mountains and hot springs of Shiobara.
+    </p>
+    <a href="#welcome" class="hero-btn">Begin Your Stay</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</div>
+
+<!-- WELCOME -->
+<section id="welcome">
+  <div class="container">
+    <div class="welcome-grid">
+      <div class="welcome-img fade-in">
+        <img src="ryokan_imgs/img_lobby.jpg" alt="Lobby">
+      </div>
+      <div class="fade-in">
+        <p class="section-label">Welcome</p>
+        <h2 class="section-title">We are delighted<br>to have you with us.</h2>
+        <p class="section-body">
+          We hope you have enjoyed the onsen manju and our house-grown round shiitake mushrooms prepared for your arrival.<br><br>
+          Please relax and rest completely until check-out tomorrow at <strong>11:00 am</strong>. The hot springs, the lobby, and our staff are here for you whenever you wish.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFTER BATH -->
+<section id="after-bath">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">After the Bath</p>
+      <h2 class="section-title">Refresh &amp; Unwind</h2>
+      <p class="section-body">Three ways to make the most of your evening at Yunohana-so.</p>
+    </div>
+    <div class="features-grid fade-in">
+      <div class="feature-card">
+        <img src="ryokan_imgs/img_entrance.jpg" alt="Entrance">
+        <div class="feature-overlay">
+          <span class="feature-num">01</span>
+          <h3 class="feature-title">Stroll in Yukata</h3>
+          <p class="feature-desc">Explore the charming streets of Shiobara Onsen town in your yukata. Area maps at the front desk.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="ryokan_imgs/img_lounge.jpg" alt="Lounge">
+        <div class="feature-overlay">
+          <span class="feature-num">02</span>
+          <h3 class="feature-title">Rest &amp; Nap</h3>
+          <p class="feature-desc">A nap pillow awaits any guest wishing to rest. Futon bedding can be arranged on request.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <img src="ryokan_imgs/img_staff.jpg" alt="Staff">
+        <div class="feature-overlay">
+          <span class="feature-num">03</span>
+          <h3 class="feature-title">Lobby Lounge</h3>
+          <p class="feature-desc">Freshly ground espresso · Black tea · 100% fruit juices — served in our lobby until 18:00.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DINNER -->
+<section id="dinner">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label" style="color:var(--gold);">Evening Dining</p>
+      <h2 class="section-title">Dinner is Served</h2>
+      <p class="section-body">
+        Chilled beer · Local sake · Fine wine — let the evening begin.
+      </p>
+    </div>
+    <div class="dinner-grid fade-in">
+      <div class="dinner-img">
+        <img src="ryokan_imgs/img_dining2.jpg" alt="Private dining">
+      </div>
+      <ul class="dinner-list">
+        <li>
+          <h3>Seasonally Changing Kaiseki</h3>
+          <p>Our menu is renewed every month to reflect the finest seasonal ingredients. Each visit offers a wholly new taste of the region.</p>
+        </li>
+        <li>
+          <h3>Prepared to Order</h3>
+          <p>Every course is crafted fresh as you dine. Please allow approximately two hours to savour the full experience. For a quicker pace, let your attendant know.</p>
+        </li>
+        <li>
+          <h3>Dietary Preferences</h3>
+          <p>If there are any ingredients you are unable to eat, please inform a member of staff before dinner begins and we will prepare an alternative with care.</p>
+        </li>
+      </ul>
+    </div>
+    <div class="kanpai-band fade-in">
+      "Chilled beer · Local sake · Fine wine ···  Kanpai"
+    </div>
+  </div>
+</section>
+
+<!-- BREAKFAST -->
+<section id="breakfast">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Morning</p>
+      <h2 class="section-title">Breakfast</h2>
+    </div>
+    <div class="breakfast-grid fade-in">
+      <div class="breakfast-img">
+        <img src="ryokan_imgs/img_tea.jpg" alt="Morning tea">
+      </div>
+      <div>
+        <p class="section-body">
+          Please choose your preferred breakfast time. Our staff will confirm your selection this evening.
+        </p>
+        <div class="time-options">
+          <div class="time-opt">
+            <span class="t-lbl">Option A</span>
+            <div class="t-val">8:00</div>
+            <p>Eight o'clock</p>
+          </div>
+          <div class="time-opt">
+            <span class="t-lbl">Option B</span>
+            <div class="t-val">8:30</div>
+            <p>Half past eight</p>
+          </div>
+        </div>
+        <div class="allergy-note">
+          <strong>Early Tee Times</strong>
+          Guests with an early golf tee time are welcome to arrange an alternative breakfast time with our staff.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF BANNER -->
+<div class="staff-banner">
+  <img src="ryokan_imgs/img_chef.jpg" alt="Head chef">
+  <div class="staff-banner-text">
+    <h2>Crafted with intention.<br>Served with warmth.</h2>
+    <p>Our kitchen team works with the finest seasonal ingredients of Shiobara.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Yunohana-so</span>
+  <p class="footer-sub">House of Hot Spring Blossoms · Shiobara Onsen</p>
+  <div class="footer-rule"></div>
+  <p class="footer-copy">© Yunohana-so · Shiobara Onsen, Tochigi, Japan</p>
+</footer>
+
+<script>
+  // Hero ken-burns
+  window.addEventListener('load', () => {
+    document.getElementById('heroBg').classList.add('loaded');
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
